@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
-
+s3_bucket = boto3.resource('s3').Bucket(os.environ['S3_BUCKET'])
 
 class Sync(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -22,8 +22,8 @@ class Sync(db.Model):
 
 	def upload_to_s3(self):
 		with open(self.local, 'r') as data:
-			boto3.resource('s3').Bucket(os.environ['S3_BUCKET']).put_object(Key=str(self.id), Body=data)
-			# TODO delete local file
+			s3_bucket.put_object(Key=str(self.id), Body=data)
+			os.remove(self.local)
 
 	def copy_to_redshift(self):
 		with psycopg2.connect(
@@ -41,7 +41,7 @@ class Sync(db.Model):
 					os.environ['AWS_ACCESS_KEY_ID'],
 					os.environ['AWS_SECRET_ACCESS_KEY'])
 				curs.execute(sql)
-				# TODO delete s3 object
+				s3_bucket.delete_objects(Delete={'Objects': [{'Key': str(self.id)}]})
 				self.completed = True
 
 	def with_redshift(self):
