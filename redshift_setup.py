@@ -1,5 +1,6 @@
 import os
 
+import psycopg2
 from sqlalchemy.schema import CreateTable
 
 from app import Page
