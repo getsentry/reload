@@ -7,7 +7,4 @@ develop:
 	source .env; python -c "from app import db; db.create_all()"
 
 dev:
-	export FLASK_DEBUG=1
-	export FLASK_APP=app.py
-	source .env
-	flask run
+	export FLASK_DEBUG=1 export FLASK_APP=app.py; source .env; flask run

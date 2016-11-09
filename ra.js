@@ -51,7 +51,7 @@ const page = extraData => {
 
   const xhr = new XMLHttpRequest()
   xhr.open("POST", _endpoint+ "page/")
-  xhr.setRequestHeader("Content-Type", "application/jsoncharset=UTF-8")
+  xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
   xhr.send(JSON.stringify(data))
 }
 

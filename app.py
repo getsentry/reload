@@ -9,7 +9,7 @@ from sqlalchemy.sql import func
 import psycopg2
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
@@ -95,17 +95,19 @@ class Page(db.Model):
 		return sync
 
 
-@app.route('/page', methods=['POST'])
+@app.route('/api/page/', methods=['POST'])
 @cross_origin()
 def index():
 	"""Events endpoint
 	"""
 	data = request.get_json()
+	print(data)
 	data['context_ip'] = request.headers.get('x-forwarded-for') or request.remote_addr
 
 	page = Page()
-	for column in Page.__table__.columns.values():
-		setattr(page, column.name, data[column.name])
+	for key in data:
+		if key in [column.name for column in Page.__table__.columns.values()]:
+			setattr(page, column.name, data[column.name])
 	db.session.add(page)
 	db.session.commit()
 	return ''
