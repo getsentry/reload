@@ -1,0 +1,5 @@
+Makefile
+.git
+.dockerignore
+.gitignore
+README.md
