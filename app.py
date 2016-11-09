@@ -3,11 +3,13 @@ from time import time
 
 import boto3
 from flask import Flask, request
+from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 import psycopg2
 
 app = Flask(__name__)
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
@@ -93,7 +95,8 @@ class Page(db.Model):
 		return sync
 
 
-@app.route('/page', methods=['GET', 'POST'])
+@app.route('/page', methods=['POST'])
+@cross_origin()
 def index():
 	"""Events endpoint
 	"""
