@@ -2,7 +2,7 @@ import os
 from time import time
 
 import boto3
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 import psycopg2
@@ -55,22 +55,24 @@ class Sync(db.Model):
 class Page(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	received_at = db.Column(db.DateTime, default=func.now())
-
-	anonymous_id = db.Column(db.String(128))
-	user_id = db.Column(db.Integer)
 	sent_at = db.Column(db.DateTime)
 	url = db.Column(db.Text)
-
+	referrer = db.Column(db.Text)
+	title = db.Column(db.Text)
 	path = db.Column(db.Text)
 	search = db.Column(db.Text)
-	campaign_source = db.Column(db.Text)
-	campaign_name = db.Column(db.Text)
-	campaign_term = db.Column(db.Text)
-	campaign_medium = db.Column(db.Text)
-	user_agent = db.Column(db.Text)
-	referrer = db.Column(db.Text)
-	ip = db.Column(db.Text)
-	title = db.Column(db.Text)
+
+	anonymous_id = db.Column(db.String(128))
+	user_id = db.Column(db.Text)
+
+	context_ip = db.Column(db.Text)
+	context_user_agent = db.Column(db.Text)
+	context_campaign_source = db.Column(db.Text)
+	context_campaign_name = db.Column(db.Text)
+	context_campaign_term = db.Column(db.Text)
+	context_campaign_medium = db.Column(db.Text)
+	context_campaign_content = db.Column(db.Text)
+	context_user_agent = db.Column(db.Text)
 
 	@classmethod
 	def prep_for_sync(cls):
@@ -91,10 +93,18 @@ class Page(db.Model):
 		return sync
 
 
-@app.route('/page', methods=['POST'])
+@app.route('/page', methods=['GET', 'POST'])
 def index():
 	"""Events endpoint
 	"""
+	data = request.get_json()
+	data['context_ip'] = request.headers.get('x-forwarded-for') or request.remote_addr
+
+	page = Page()
+	for column in Page.__table__.columns.values():
+		setattr(page, column.name, data[column.name])
+	db.session.add(page)
+	db.session.commit()
 	return ''
 
 
