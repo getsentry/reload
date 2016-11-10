@@ -1,11 +1,11 @@
 import os
-from time import time
 
-import boto3
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+from sets import Set
+from datetime import datetime
 import psycopg2
 
 app = Flask(__name__)
@@ -36,37 +36,28 @@ class Page(db.Model):
     context_campaign_content = db.Column(db.Text)
     context_user_agent = db.Column(db.Text)
 
-    @classmethod
-    def prep_for_sync(cls):
-        fpath = '/tmp/%d.csv' % int(time())
-        with open(fpath, 'w') as f:
-            with psycopg2.connect(
-                database=os.environ['PG_DATABASE'],
-                user=os.environ['PG_USER']) as conn:
+columns = Set([column.name for column in Page.__table__.columns.values()])
 
-                with conn.cursor() as curs:
-                    curs.copy_to(f, cls.__tablename__, sep=',')
-                    curs.execute("DELETE FROM %s;" % cls.__tablename__)
-
-        sync = Sync()
-        sync.local = fpath
-        db.session.add(sync)
-        db.session.commit()
-        return sync
-
-
-@app.route('/api/page/', methods=['POST'])
+@app.route('/page/', methods=['POST'])
 @cross_origin()
 def index():
     """Events endpoint
     """
     data = request.get_json()
-    data['context_ip'] = request.headers.get('x-forwarded-for') or request.remote_addr
+
+    data['sent_at'] = datetime.fromtimestamp(int(data['sent_at'])/1000)
+
+    forwarded_for = request.headers.get('x-forwarded-for')
+    if forwarded_for:
+        context_ip = forwarded_for.split(',')[0]
+    else:
+        context_ip = request.remote_addr
+    data['context_ip']  = context_ip
 
     page = Page()
     for key in data:
-        if key in [column.name for column in Page.__table__.columns.values()]:
-            setattr(page, column.name, data[column.name])
+        if key in columns:
+            setattr(page, key, data[key])
     db.session.add(page)
     db.session.commit()
     return ''

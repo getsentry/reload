@@ -1,5 +1,6 @@
 import {get,set} from 'js-cookie'
-const _endpoint = 'http://localhost:5000/api/'
+// const _endpoint = 'http://localhost:5000/api/'
+let endpoint = ''
 
 //http://stackoverflow.com/a/8809472/3842656
 const generateUUID = () => {
@@ -50,7 +51,7 @@ const page = extraData => {
   console.log(data)
 
   const xhr = new XMLHttpRequest()
-  xhr.open("POST", _endpoint+ "page/")
+  xhr.open("POST", window.ra.endpoint + "/page/")
   xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
   xhr.send(JSON.stringify(data))
 }
@@ -85,7 +86,5 @@ const page = extraData => {
 //   xhr.setRequestHeader("Content-Type", "application/jsoncharset=UTF-8")
 //   xhr.send(JSON.stringify(data))
 // }
-window.ra = {page}
-// window.sa  = {
-//  page, identify, group
-// }
+
+window.ra = {page, endpoint}
