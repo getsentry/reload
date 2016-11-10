@@ -8,3 +8,8 @@ develop:
 
 dev:
 	export FLASK_DEBUG=1 export FLASK_APP=app.py; source .env; flask run
+
+docker:
+	docker build --rm -t reload .
+
+.PHONY: bootstrap develop dev docker
