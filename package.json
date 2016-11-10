@@ -4,7 +4,7 @@
   "description": "An analytics ETL for Redshift. Pairs well with [re:dash](https://github.com/getredash/redash).",
   "main": "ra.js",
   "scripts": {
-    "build": "node_modules/webpack/bin/webpack.js"
+    "build": "node_modules/webpack/bin/webpack.js -p"
   },
   "repository": {
     "type": "git",
