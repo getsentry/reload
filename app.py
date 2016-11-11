@@ -6,7 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from sets import Set
 from datetime import datetime
-import psycopg2
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"*": {"origins": "*"}})
