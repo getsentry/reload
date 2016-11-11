@@ -4,7 +4,6 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
-from sets import Set
 from datetime import datetime
 
 app = Flask(__name__)
@@ -35,7 +34,7 @@ class Page(db.Model):
     context_campaign_content = db.Column(db.Text)
     context_user_agent = db.Column(db.Text)
 
-columns = Set([column.name for column in Page.__table__.columns.values()])
+columns = {column.name for column in Page.__table__.columns.values()}
 
 @app.route('/page/', methods=['POST'])
 @cross_origin()

@@ -1,8 +1,8 @@
 
 module.exports = {
-  entry: "./ra.js",
+  entry: "./client/ra.js",
   output: {
-   filename:"./ra.min.js",
+   filename:"./client/ra.min.js",
  },
 module: {
   loaders: [{
