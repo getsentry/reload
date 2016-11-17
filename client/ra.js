@@ -56,6 +56,9 @@ const page = extraData => {
   xhr.send(JSON.stringify(data))
 }
 
+const identify = gsID => {
+  set('gsID', gsID)
+}
 // const identify = gsId => {
 //   set('gsId', gsId)
 //
@@ -87,4 +90,4 @@ const page = extraData => {
 //   xhr.send(JSON.stringify(data))
 // }
 
-window.ra = {page, endpoint}
+window.ra = {page, endpoint, identify}
