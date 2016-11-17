@@ -48,7 +48,7 @@ const page = extraData => {
   Object.assign(data, getContext())
   Object.assign(data, extraData)
 
-  console.log(data)
+  // console.log(data)
 
   const xhr = new XMLHttpRequest()
   xhr.open("POST", window.ra.endpoint + "/page/")
