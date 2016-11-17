@@ -59,35 +59,6 @@ const page = extraData => {
 const identify = gsID => {
   set('gsID', gsID)
 }
-// const identify = gsId => {
-//   set('gsId', gsId)
-//
-//   let data = {
-//     gsId,
-//     anonId: getAnonId()
-//   }
-//
-//   console.log(data)
-//
-//   const xhr = new XMLHttpRequest()
-//   xhr.open("POST", _endpoint+ "identify/")
-//   xhr.setRequestHeader("Content-Type", "application/jsoncharset=UTF-8")
-//   xhr.send(JSON.stringify(data))
-// }
-//
-// const group = orgId => {
-//   let data = {
-//     orgId,
-//     gsId:get('gsId'),
-//     anonId: getAnonId(),
-//   }
-//
-//   console.log(data)
-//
-//   const xhr = new XMLHttpRequest()
-//   xhr.open("POST", endpoint+ "group/")
-//   xhr.setRequestHeader("Content-Type", "application/jsoncharset=UTF-8")
-//   xhr.send(JSON.stringify(data))
-// }
+
 
 window.ra = {page, endpoint, identify}
