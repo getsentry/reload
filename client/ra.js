@@ -37,7 +37,7 @@ const getContext = () => ({
 
 const page = extraData => {
 
-  const user_id = get('gsId')
+  const user_id = get('gsID')
   const anonymous_id = getAnonId()
 
   let data = {
@@ -45,10 +45,7 @@ const page = extraData => {
     anonymous_id,
   }
 
-  Object.assign(data, getContext())
-  Object.assign(data, extraData)
-
-  // console.log(data)
+  Object.assign(data, getContext(), extraData)
 
   const xhr = new XMLHttpRequest()
   xhr.open("POST", window.ra.endpoint + "/page/")
@@ -56,8 +53,8 @@ const page = extraData => {
   xhr.send(JSON.stringify(data))
 }
 
-const identify = gsId => {
-  set('gsId', gsId)
+const identify = gsID => {
+  set('gsID', gsID)
 }
 
 
