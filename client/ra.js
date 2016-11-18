@@ -56,8 +56,8 @@ const page = extraData => {
   xhr.send(JSON.stringify(data))
 }
 
-const identify = gsID => {
-  set('gsID', gsID)
+const identify = gsId => {
+  set('gsId', gsId)
 }
 
 
