@@ -1,10 +1,11 @@
 import os
+from datetime import datetime
 
-from flask import Flask, request
+from flask import Flask, json, request
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
-from datetime import datetime
+
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"*": {"origins": os.environ.get('RELOAD_ORIGINS', '*')}})
@@ -59,3 +60,22 @@ def index():
     db.session.add(page)
     db.session.commit()
     return ''
+
+@app.route('/api/30day_active_users', methods=['GET'])
+def users():
+    if request.args.get('date'):
+        date = datetime.strptime(request.args.get('date'), '%Y-%m-%d')
+        result = db.engine.execute("""
+            select distinct user_id
+            from page
+            where received_at > '%s'
+                and user_id is not null and user_id != ''
+            """ % date.strftime('%Y-%m-%d'))
+    else:
+        result = db.engine.execute("""
+            select distinct user_id
+            from page
+            where received_at > now() - interval '30 days'
+                and user_id is not null and user_id != ''
+            """)
+    return json.jsonify([int(user_id) for user_id, in result])
