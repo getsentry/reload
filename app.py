@@ -78,4 +78,4 @@ def users():
             where received_at > now() - interval '30 days'
                 and user_id is not null and user_id != ''
             """)
-    return json.jsonify([int(user_id) for user_id, in result])
+    return json.jsonify([{'user_id': int(user_id)} for user_id, in result])
