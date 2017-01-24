@@ -5,6 +5,7 @@ from flask import Flask, json, request
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+from raven.contrib.flask import Sentry
 
 
 app = Flask(__name__)
@@ -12,6 +13,7 @@ cors = CORS(app, resources={r"*": {"origins": os.environ.get('RELOAD_ORIGINS', '
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+sentry = Sentry(app)
 
 class Page(db.Model):
     id = db.Column(db.Integer, primary_key=True)
