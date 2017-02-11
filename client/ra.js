@@ -35,12 +35,21 @@ const assign = Object.assign || function (target) {
   return output;
 };
 
+const getTLD = () => {
+  var parts = location.hostname.split('.');
+  if(parts.length == 2){
+    var subdomain = parts.shift();
+  }
+  var upperleveldomain = parts.join('.');
+  return upperleveldomain
+}
 
 const getAnonId = () => {
   let anonId = get('anonId')
   if(!anonId){
     anonId = generateUUID()
-    set('anonId', anonId)
+
+    set('anonId', anonId, { domain: getTLD() })
   }
   return anonId
 }
@@ -73,7 +82,8 @@ const page = extraData => {
 }
 
 const identify = gsID => {
-  set('gsID', gsID)
+
+  set('gsID', gsID, { domain: getTLD() })
 }
 
 
