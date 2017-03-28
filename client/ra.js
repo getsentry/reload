@@ -37,7 +37,7 @@ const assign = Object.assign || function (target) {
 
 const getTLD = () => {
   var parts = location.hostname.split('.');
-  if(parts.length == 2){
+  if(parts.length > 2){
     var subdomain = parts.shift();
   }
   var upperleveldomain = parts.join('.');
