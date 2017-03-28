@@ -44,7 +44,7 @@ columns = {column.name for column in Page.__table__.columns.values()}
 def index():
     """Events endpoint
     """
-    data = request.get_json()
+    data = request.get_json(force=True)
 
     data['sent_at'] = datetime.fromtimestamp(int(data['sent_at'])/1000)
 
