@@ -1,0 +1,96 @@
+[
+    {
+        "mode": "REQUIRED",
+        "name": "id",
+        "type": "STRING"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "received_at",
+        "type": "DATETIME"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "sent_at",
+        "type": "DATETIME"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "url",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "referrer",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "title",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "path",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "search",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "anonymous_id",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
+        "name": "user_id",
+        "type": "STRING"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "context",
+        "type": "RECORD",
+        "fields": [
+            {
+                "mode": "REQUIRED",
+                "name": "ip",
+                "type": "STRING"
+            },
+            {
+                "mode": "REQUIRED",
+                "name": "user_agent",
+                "type": "STRING"
+            },
+            {
+                "mode": "NULLABLE",
+                "name": "campaign",
+                "type": "RECORD",
+                "fields": [
+                    {
+                        "mode": "NULLABLE",
+                        "name": "source",
+                        "type": "STRING"
+                    },
+                    {
+                        "mode": "NULLABLE",
+                        "name": "term",
+                        "type": "STRING"
+                    },
+                    {
+                        "mode": "NULLABLE",
+                        "name": "medium",
+                        "type": "STRING"
+                    },
+                    {
+                        "mode": "NULLABLE",
+                        "name": "content",
+                        "type": "STRING"
+                    }
+                ]
+            }
+        ]
+    }
+]
