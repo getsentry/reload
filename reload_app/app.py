@@ -71,7 +71,9 @@ class App(Router):
             row['context']['campaign'] = campaign
 
         self.worker.queue(row)
-        return Response(status=201)
+        return Response(status=201, headers=(
+            ('Access-Control-Allow-Origin', '*'),
+        ))
 
 
 def make_app_from_environ():
