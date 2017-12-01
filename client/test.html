@@ -5,8 +5,9 @@
     <title>title</title>
     <script src="ra.min.js"></script>
     <script type="text/javascript">
-    ra.endpoint = 'http://localhost:5000'
+    ra.endpoint = 'http://localhost:8080'
     ra.page()
+    ra.event('click', {'extra_key': 'xyz'})
     </script>
   </head>
   <body>

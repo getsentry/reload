@@ -11,4 +11,5 @@ run_simple(
     make_app_from_environ(),
     use_debugger=True,
     use_reloader=True,
+    static_files={'/client': 'client'},
 )
