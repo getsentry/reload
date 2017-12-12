@@ -2,4 +2,4 @@ language: python
 install:
   - make requirements
 script:
-  - pytest reload_app
+  - pytest reload_app/tests.py
