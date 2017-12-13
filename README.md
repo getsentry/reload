@@ -2,19 +2,17 @@
 
 An analytics ETL for Redshift. Pairs well with [re:dash](https://github.com/getredash/redash).
 
-## Setup
+## Run Server
 
-```sh
-make bootstrap
-make develop
+`make dev`
+
+## Rebuild `ra.min.js`
+
+```
+npm install
+npm run build
 ```
 
-## Run
+## Integration testing
 
-`make run`
-
-Run sync on a cron
-
-## Rebuild the `ra.min.js`
-
-`npm run build`
+Start the server and point your browser to `localhost:port/client/test.html`. Check that no javascript errors were thrown.
