@@ -38,7 +38,7 @@ const assign = Object.assign || function (target) {
 const getTLD = () => {
   var parts = location.hostname.split('.');
   if(parts.length > 2){
-    var subdomain = parts.shift();
+    parts.shift();
   }
   var upperleveldomain = parts.join('.');
   return upperleveldomain
@@ -59,15 +59,12 @@ const getContext = () => ({
     path: window.location.pathname,
     referrer: document.referrer,
     title: document.title,
-    context_user_agent: navigator.userAgent,
     sent_at: Date.now().toString(),
 })
 
-const page = extraData => {
-
+const send = (path, extraData) => {
   const user_id = get('gsID')
   const anonymous_id = getAnonId()
-
   let data = {
     user_id,
     anonymous_id,
@@ -76,14 +73,22 @@ const page = extraData => {
   assign(data, getContext(), extraData)
 
   const xhr = new XMLHttpRequest()
-  xhr.open("POST", window.ra.endpoint + "/page/")
+  xhr.open("POST", window.ra.endpoint + path)
   xhr.send(JSON.stringify(data))
 }
 
-const identify = gsID => {
+const event = (name, extraData) => {
+  let data = {'event_name': name}
+  assign(data, extraData)
+  send('/event/', data)
+}
 
+const page = extraData => {
+  send('/page/', extraData)
+}
+
+const identify = gsID => {
   set('gsID', gsID, { domain: getTLD() })
 }
 
-
-window.ra = {page, endpoint, identify}
+window.ra = {page, event, endpoint, identify}

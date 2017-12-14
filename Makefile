@@ -2,7 +2,7 @@ requirements:
 	pip install -r requirements.txt
 
 dev: requirements
-	python ./run.py
+	PORT=8080 python ./run.py
 
 docker:
 	docker build --rm -t reload .
