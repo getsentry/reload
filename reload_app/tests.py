@@ -1,4 +1,6 @@
 import json
+from base64 import b64decode
+from uuid import UUID, uuid1
 from unittest import TestCase
 from mock import patch, Mock
 from werkzeug.test import Client
@@ -35,7 +37,9 @@ class AppTests(TestCase):
         assert resp.status_code == 201
         assert mock_publisher.publish.call_count == 1
         row = mock_publisher.publish.call_args[1]['data']
-        for key in ('uuid', 'timestamp', 'type', 'data'):
+        # Make sure the UUID format is valid.
+        UUID(bytes=b64decode(row['uuid']))
+        for key in ('timestamp', 'type', 'data'):
             assert key in row
         data = row['data']
         for key in sent_data.keys() + ['received_at', 'context', 'sent_at']:

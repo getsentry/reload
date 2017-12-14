@@ -1,6 +1,7 @@
 import os
 import time
 
+from base64 import b64encode
 from datetime import datetime
 from google.cloud import pubsub_v1
 from json import load
@@ -20,20 +21,24 @@ VALID_EVENT_NAMES = ('click', )
 # Prefix event names to avoid collisions with events from Sentry backend.
 EVENT_NAME_TEMPLATE = 'reload.%s'
 
-BQ_PROJECT = 'internal-sentry'
-BQ_TOPIC = 'analytics-events'
-
 class App(Router):
     routes = {
         '/page/': 'page_view',
         '/event/': 'event',
     }
 
-    def __init__(self, dataset, table, publisher, topic):
+    def __init__(self, dataset, table, pubsub_project, pubsub_topic):
         super(App, self).__init__()
+
         self.worker = BigQueryWorker(dataset, table, flush_interval=1)
-        self.publisher = publisher
-        self.topic = topic
+
+        batch_settings = pubsub_v1.types.BatchSettings(
+            max_bytes=1024*1024*5,
+            max_latency=0.05,
+            max_messages=1000,
+        )
+        self.publisher = pubsub_v1.PublisherClient(batch_settings)
+        self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
 
     # TODO(adhiraj): Put pageviews in the events table.
     def page_view(self, request):
@@ -112,8 +117,9 @@ class App(Router):
             except KeyError:
                 pass
 
+        # Conforms to super-big-data.analytics.events schema.
         row = {
-            'uuid': uuid1().hex,
+            'uuid': b64encode(uuid1().bytes),
             'timestamp': time.time(),
             'type': EVENT_NAME_TEMPLATE % data['event_name'],
             'data': clean_data,
@@ -126,17 +132,9 @@ class App(Router):
 
 
 def make_app_from_environ():
-    settings = pubsub_v1.types.BatchSettings(
-        max_bytes=1024 * 1024 * 5,
-        max_latency=0.05,
-        max_messages=1000,
-    )
-    publisher = pubsub_v1.PublisherClient(settings)
-    topic = publisher.topic_path(BQ_PROJECT, BQ_TOPIC)
-
     return App(
         dataset=os.environ.get('BIGQUERY_DATASET', 'reload'),
         table=os.environ.get('BIGQUERY_TABLE', 'page'),
-        publisher=publisher,
-        topic=topic,
+        pubsub_project=os.environ.get('PUBSUB_PROJECT', 'internal-sentry'),
+        pubsub_topic=os.environ.get('PUBSUB_TOPIC', 'analytics-events'),
     )
