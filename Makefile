@@ -1,10 +1,13 @@
 requirements:
 	pip install -r requirements.txt
 
-dev: requirements
+requirements-test: requirements
+	pip install -r requirements-test.txt
+
+dev: requirements-test
 	PORT=8080 python ./run.py
 
 docker:
 	docker build --rm -t reload .
 
-.PHONY: requirements dev docker
+.PHONY: requirements requirements-test dev docker

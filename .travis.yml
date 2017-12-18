@@ -1,0 +1,5 @@
+language: python
+install:
+  - make requirements-test
+script:
+  - pytest reload_app/tests.py
