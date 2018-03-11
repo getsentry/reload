@@ -1,6 +1,6 @@
 # **_re:load_**
 
-An analytics ETL for Redshift. Pairs well with [re:dash](https://github.com/getredash/redash).
+An analytics ETL for BigQuery. Pairs well with [Redash](https://github.com/getredash/redash).
 
 ## Run Server
 
