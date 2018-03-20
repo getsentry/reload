@@ -71,6 +71,13 @@ class App(Router):
             row['sent_at'] = row['received_at']
 
         for field in NULLABLE_FIELDS:
+            if field == 'user_id':
+                uid = data.get(field)
+                if uid not in (None, 'undefined'):
+                    try:
+                        int(uid)
+                    except ValueError:
+                        return Response('bad request\n', status=400)
             try:
                 row[field] = data[field]
             except KeyError:
