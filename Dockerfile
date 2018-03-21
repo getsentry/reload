@@ -47,7 +47,6 @@ COPY reload_app /usr/src/reload/reload_app
 COPY docker-entrypoint.sh /usr/src/reload
 
 ENV PORT=8000 \
-    SENTRY_DSN=https://353b7b64726a450b8729dca3f2010c75:d4db3420e73e465fb2fedd28a5e30c0a@sentry.io/133215
     UWSGI_MASTER=true \
     UWSGI_MODULE=reload_app.wsgi:application \
     UWSGI_DIE_ON_TERM=true \
