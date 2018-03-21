@@ -5,9 +5,11 @@ from base64 import b64encode
 from datetime import datetime
 from google.cloud import pubsub_v1
 from json import load
+from raven.middleware import Sentry
 from werkzeug.wrappers import Response
 from uuid import uuid1
 
+from .raven_client import client
 from .router import Router
 from .worker import BigQueryWorker
 from .utils import format_datetime, ip_from_request
@@ -77,6 +79,7 @@ class App(Router):
                     try:
                         int(uid)
                     except ValueError:
+                        client.captureException()
                         return Response('bad request\n', status=400)
             try:
                 row[field] = data[field]
@@ -139,9 +142,10 @@ class App(Router):
 
 
 def make_app_from_environ():
-    return App(
+    app = App(
         dataset=os.environ.get('BIGQUERY_DATASET', 'reload'),
         table=os.environ.get('BIGQUERY_TABLE', 'page'),
         pubsub_project=os.environ.get('PUBSUB_PROJECT', 'internal-sentry'),
         pubsub_topic=os.environ.get('PUBSUB_TOPIC', 'analytics-events'),
     )
+    return Sentry(app, client)
