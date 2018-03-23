@@ -10,4 +10,7 @@ dev: requirements-test
 docker:
 	docker build --rm -t reload .
 
+test:
+	py.test reload_app/tests.py
+
 .PHONY: requirements requirements-test dev docker

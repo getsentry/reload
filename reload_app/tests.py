@@ -20,10 +20,14 @@ class AppTests(TestCase):
         sent_data = {
             'url': '/url/',
             'referrer': '/referrer/',
-            'user_id': 1,
+            'user_id': '10;',
         }
 
-        # /page/ endpoint.
+        # bad input.
+        resp = c.post('/page/', data=json.dumps(sent_data))
+        assert resp.status_code == 400
+
+        sent_data['user_id'] = 10
         resp = c.post('/page/', data=json.dumps(sent_data))
         assert resp.status_code == 201
         assert mock_worker.queue.call_count == 1
