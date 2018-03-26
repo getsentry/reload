@@ -40,7 +40,7 @@ class AppTests(TestCase):
         resp = c.post('/event/', data=json.dumps(sent_data))
         assert resp.status_code == 201
         assert mock_publisher.publish.call_count == 1
-        row = mock_publisher.publish.call_args[1]['data']
+        row = json.loads(mock_publisher.publish.call_args[1]['data'])
         # Make sure the UUID format is valid.
         UUID(bytes=b64decode(row['uuid']))
         for key in ('timestamp', 'type', 'data'):

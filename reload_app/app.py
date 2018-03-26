@@ -4,7 +4,7 @@ import time
 from base64 import b64encode
 from datetime import datetime
 from google.cloud import pubsub_v1
-from json import load
+from json import load, dumps
 from raven.middleware import Sentry
 from werkzeug.wrappers import Response
 from uuid import uuid1
@@ -134,7 +134,7 @@ class App(Router):
             'type': EVENT_NAME_TEMPLATE % data['event_name'],
             'data': clean_data,
         }
-        self.publisher.publish(self.topic, data=row)
+        self.publisher.publish(self.topic, data=dumps(row))
 
         return Response(status=201, headers=(
             ('Access-Control-Allow-Origin', '*'),
