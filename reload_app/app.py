@@ -18,7 +18,8 @@ NULLABLE_FIELDS = (
     'url', 'referrer', 'title', 'path', 'search',
     'anonymous_id', 'user_id',
 )
-VALID_EVENT_NAMES = ('click', 'assistant.search')
+VALID_EVENT_NAMES = ('click', 'assistant.search', 'assistant.guide_cued', 'assistant.guide_opened',
+    'assistant.guide_dismissed', 'assistant.guide_next', 'assistant.guide_closed')
 
 # Prefix event names to avoid collisions with events from Sentry backend.
 EVENT_NAME_TEMPLATE = 'reload.%s'
