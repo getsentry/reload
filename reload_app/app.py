@@ -36,6 +36,9 @@ VALID_EVENTS = {
         'guide': int,
         'useful': bool,
     },
+    'assistant.support': {
+        'subject': str,
+    },
     'issue.search': {
         'query': str,
     },
