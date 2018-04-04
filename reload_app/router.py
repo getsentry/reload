@@ -6,16 +6,17 @@ class Router(object):
 
     def __init__(self):
         # Validate and resolve our routes
+        self.actions = {}
         for k, v in self.routes.iteritems():
             try:
-                self.routes[k] = getattr(self, v)
+                self.actions[k] = getattr(self, v)
             except AttributeError:
                 raise Exception('bad route: %s' % k)
 
     def __call__(self, environ, start_response):
         request = Request(environ)
         try:
-            view = self.routes[request.path]
+            view = self.actions[request.path]
         except KeyError:
             response = Response('page not found\n', status=404)
         else:
