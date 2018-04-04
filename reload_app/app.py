@@ -14,15 +14,46 @@ from .router import Router
 from .worker import BigQueryWorker
 from .utils import format_datetime, ip_from_request
 
-NULLABLE_FIELDS = (
-    'url', 'referrer', 'title', 'path', 'search',
-    'anonymous_id', 'user_id',
-)
-VALID_EVENT_NAMES = ('click', 'assistant.search', 'assistant.guide_cued', 'assistant.guide_opened',
-    'assistant.guide_dismissed', 'assistant.guide_next', 'assistant.guide_finished', 'issue.search')
+COMMON_FIELDS = ('url', 'referrer', 'title', 'path', 'search', 'anonymous_id', 'user_id')
+
+# Poor man's validation.
+VALID_EVENTS = {
+    'assistant.search': {
+        'query': str,
+    },
+    'assistant.guide_cued': {
+        'guide': int,
+        'cue': str,
+    },
+    'assistant.guide_opened': {
+        'guide': int,
+    },
+    'assistant.guide_dismissed': {
+        'guide': int,
+        'step': int,
+    },
+    'assistant.guide_finished': {
+        'guide': int,
+        'useful': bool,
+    },
+    'issue.search': {
+        'query': str,
+    },
+}
 
 # Prefix event names to avoid collisions with events from Sentry backend.
 EVENT_NAME_TEMPLATE = 'reload.%s'
+
+
+def validate_user_id(uid):
+    if uid not in (None, 'undefined'):
+        try:
+            int(uid)
+        except ValueError:
+            client.captureException()
+            return False
+    return True
+
 
 class App(Router):
     routes = {
@@ -73,15 +104,9 @@ class App(Router):
             # I dunno, maybe KeyError or it's not an integer
             row['sent_at'] = row['received_at']
 
-        for field in NULLABLE_FIELDS:
-            if field == 'user_id':
-                uid = data.get(field)
-                if uid not in (None, 'undefined'):
-                    try:
-                        int(uid)
-                    except ValueError:
-                        client.captureException()
-                        return Response('bad request\n', status=400)
+        for field in COMMON_FIELDS:
+            if field == 'user_id' and not validate_user_id(data.get(field)):
+                return Response('bad request\n', status=400)
             try:
                 row[field] = data[field]
             except KeyError:
@@ -104,7 +129,7 @@ class App(Router):
         except Exception:
             return Response('bad request\n', status=400)
 
-        if data.get('event_name') not in VALID_EVENT_NAMES:
+        if data.get('event_name') not in VALID_EVENTS:
             return Response('bad request\n', status=400)
 
         clean_data = {
@@ -122,11 +147,23 @@ class App(Router):
             # I dunno, maybe KeyError or it's not an integer
             clean_data['sent_at'] = clean_data['received_at']
 
-        for field in NULLABLE_FIELDS:
+        for field in COMMON_FIELDS:
+            if field == 'user_id' and not validate_user_id(data.get(field)):
+                return Response('bad request\n', status=400)
             try:
                 clean_data[field] = data[field]
             except KeyError:
                 pass
+
+        for field, typ in VALID_EVENTS[data['event_name']].items():
+            if field not in data:
+                continue
+            try:
+                typ(data[field])
+            except ValueError:
+                client.captureException()
+                return Response('bad request\n', status=400)
+            clean_data[field] = data[field]
 
         # Conforms to super-big-data.analytics.events schema.
         row = {
