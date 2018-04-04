@@ -38,7 +38,6 @@ VALID_EVENTS = {
     },
     'issue.search': {
         'query': str,
-        'useful': int,
     },
 }
 
@@ -157,7 +156,6 @@ class App(Router):
                 pass
 
         for field, typ in VALID_EVENTS[data['event_name']].items():
-            print field, typ, data
             if field not in data:
                 continue
             try:

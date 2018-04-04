@@ -58,6 +58,7 @@ class AppTests(TestCase):
         for key in sent_data.keys() + ['received_at', 'context', 'sent_at']:
             if key not in ('event_name', 'unknown_field'):
                 assert key in data
+        assert 'unknown_field' not in data
 
     def test_bad_input(self):
         sent_data = {
