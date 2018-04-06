@@ -42,6 +42,10 @@ VALID_EVENTS = {
     'issue.search': {
         'query': str,
     },
+    'platformpicker.search': {
+        'query': str,
+        'num_results': int,
+    },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
