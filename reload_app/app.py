@@ -46,6 +46,14 @@ VALID_EVENTS = {
         'query': str,
         'num_results': int,
     },
+    'platformpicker.create_project': {
+    },
+    'platformpicker.select_platform': {
+        'platform': str,
+    },
+    'platformpicker.select_tab': {
+        'tab': str,
+    },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
