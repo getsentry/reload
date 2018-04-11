@@ -54,6 +54,9 @@ VALID_EVENTS = {
     'platformpicker.select_tab': {
         'tab': str,
     },
+    'onboarding.complete': {
+        'project': str,
+    },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
