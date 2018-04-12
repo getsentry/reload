@@ -57,6 +57,9 @@ VALID_EVENTS = {
     'onboarding.complete': {
         'project': str,
     },
+    'onboarding.show_instructions': {
+        'project': str,
+    },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
