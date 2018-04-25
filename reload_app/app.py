@@ -60,6 +60,12 @@ VALID_EVENTS = {
     'onboarding.show_instructions': {
         'project': str,
     },
+    'orgdash.resources_shown': {
+    },
+    'orgdash.resource_clicked': {
+        'link': str,
+        'title': str,
+    },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
