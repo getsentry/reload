@@ -54,6 +54,9 @@ VALID_EVENTS = {
     'platformpicker.select_tab': {
         'tab': str,
     },
+    'omnisearch.query': {
+        'query': str,
+    },
     'onboarding.complete': {
         'project': str,
     },
