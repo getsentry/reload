@@ -28,7 +28,7 @@ class AppTests(TestCase):
 
     def test_good_input(self):
         sent_data = {
-            'url': '/url/',
+            'url': 'https://sentry.io/',
             'referrer': '/referrer/',
             'user_id': '10',
         }
@@ -46,6 +46,14 @@ class AppTests(TestCase):
             step='6',
             unknown_field='something',
         )
+
+        # Make sure events from dev clients aren't accepted.
+        sent_data['url'] = 'dev.getsentry.net:8000/'
+        resp = self.client.post('/event/', data=json.dumps(sent_data))
+        assert resp.status_code == 201
+        assert self.mock_publisher.publish.call_count == 0
+        sent_data['url'] = 'https://blog.sentry.io/'
+
         resp = self.client.post('/event/', data=json.dumps(sent_data))
         assert resp.status_code == 201
         assert self.mock_publisher.publish.call_count == 1
