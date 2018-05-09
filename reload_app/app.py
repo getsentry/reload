@@ -1,4 +1,5 @@
 import os
+import re
 import time
 
 from base64 import b64encode
@@ -74,6 +75,14 @@ VALID_EVENTS = {
 # Prefix event names to avoid collisions with events from Sentry backend.
 EVENT_NAME_TEMPLATE = 'reload.%s'
 
+URL_FILTER_REGEX = r'(https?://)?(localhost|dev.getsentry.net)'
+
+
+def ok_response():
+    return Response(status=201, headers=(
+        ('Access-Control-Allow-Origin', '*'),
+    ))
+
 
 def validate_user_id(uid):
     if uid not in (None, 'undefined'):
@@ -105,6 +114,7 @@ class App(Router):
         self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
 
     # TODO(adhiraj): Put pageviews in the events table.
+    # TODO(adhiraj): This really needs a refactoring.
     def page_view(self, request):
         # Make sure we only get POST requests
         if request.method != 'POST':
@@ -137,15 +147,16 @@ class App(Router):
         for field in COMMON_FIELDS:
             if field == 'user_id' and not validate_user_id(data.get(field)):
                 return Response('bad request\n', status=400)
+            if field == 'url' and re.match(URL_FILTER_REGEX, data.get(field, '')):
+                return ok_response()
             try:
                 row[field] = data[field]
             except KeyError:
                 pass
 
         self.worker.queue(row)
-        return Response(status=201, headers=(
-            ('Access-Control-Allow-Origin', '*'),
-        ))
+
+        return ok_response()
 
     def event(self, request):
         # Make sure we only get POST requests
@@ -180,6 +191,8 @@ class App(Router):
         for field in COMMON_FIELDS:
             if field == 'user_id' and not validate_user_id(data.get(field)):
                 return Response('bad request\n', status=400)
+            if field == 'url' and re.match(URL_FILTER_REGEX, data.get(field, '')):
+                return ok_response()
             try:
                 clean_data[field] = data[field]
             except KeyError:
@@ -204,9 +217,7 @@ class App(Router):
         }
         self.publisher.publish(self.topic, data=dumps(row))
 
-        return Response(status=201, headers=(
-            ('Access-Control-Allow-Origin', '*'),
-        ))
+        return ok_response()
 
 
 def make_app_from_environ():
