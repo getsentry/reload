@@ -42,6 +42,7 @@ VALID_EVENTS = {
     },
     'experiment.installation_instructions': {
         'integration': str,
+        'variant': str,
     },
     'issue.search': {
         'query': str,
