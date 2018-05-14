@@ -40,6 +40,10 @@ VALID_EVENTS = {
     'assistant.support': {
         'subject': str,
     },
+    'experiment.installation_instructions': {
+        'integration': str,
+        'experiment': bool,
+    },
     'issue.search': {
         'query': str,
     },
