@@ -74,6 +74,12 @@ VALID_EVENTS = {
         'link': str,
         'title': str,
     },
+    'sourcemap.sourcemap_error': {
+       'organization': str,
+       'user': str,
+       'group': str,
+       'type': str,
+   },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
