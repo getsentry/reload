@@ -1,7 +1,6 @@
 import {get,set} from 'js-cookie'
 // const _endpoint = 'http://localhost:5000/api/'
 let endpoint = ''
-let devMode = ['127.0.0.1', '0.0.0.0', 'localhost'].includes(location.hostname);
 
 //http://stackoverflow.com/a/8809472/3842656
 const generateUUID = () => {
@@ -38,7 +37,7 @@ const assign = Object.assign || function (target) {
 
 const getTLD = () => {
   // For development environments
-  if (devMode) {
+  if (['127.0.0.1', '0.0.0.0', 'localhost'].includes(location.hostname)) {
     return location.host;
   }
 
@@ -78,13 +77,9 @@ const send = (path, extraData) => {
 
   assign(data, getContext(), extraData)
 
-  if (devMode) {
-    console.log(path, data)
-  } else {
-    const xhr = new XMLHttpRequest()
-    xhr.open("POST", window.ra.endpoint + path)
-    xhr.send(JSON.stringify(data))
-  }
+  const xhr = new XMLHttpRequest()
+  xhr.open("POST", window.ra.endpoint + path)
+  xhr.send(JSON.stringify(data))
 }
 
 const event = (name, extraData) => {
