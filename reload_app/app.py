@@ -78,7 +78,7 @@ VALID_EVENTS = {
        'organization': str,
        'user': str,
        'group': str,
-       'type': str,
+       'type': object,
    },
 }
 
