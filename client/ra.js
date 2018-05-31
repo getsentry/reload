@@ -1,6 +1,7 @@
 import {get,set} from 'js-cookie'
 // const _endpoint = 'http://localhost:5000/api/'
 let endpoint = ''
+let devMode = ['127.0.0.1', '0.0.0.0', 'localhost'].includes(location.hostname);
 
 //http://stackoverflow.com/a/8809472/3842656
 const generateUUID = () => {
@@ -36,6 +37,11 @@ const assign = Object.assign || function (target) {
 };
 
 const getTLD = () => {
+  // For development environments
+  if (devMode) {
+    return location.host;
+  }
+
   var parts = location.hostname.split('.');
   if(parts.length > 2){
     parts.shift();
@@ -72,9 +78,13 @@ const send = (path, extraData) => {
 
   assign(data, getContext(), extraData)
 
-  const xhr = new XMLHttpRequest()
-  xhr.open("POST", window.ra.endpoint + path)
-  xhr.send(JSON.stringify(data))
+  if (devMode) {
+    console.log(path, data)
+  } else {
+    const xhr = new XMLHttpRequest()
+    xhr.open("POST", window.ra.endpoint + path)
+    xhr.send(JSON.stringify(data))
+  }
 }
 
 const event = (name, extraData) => {
@@ -91,4 +101,4 @@ const identify = gsID => {
   set('gsID', gsID, { domain: getTLD() })
 }
 
-window.ra = {page, event, endpoint, identify}
+window.ra = {page, event, endpoint, identify, getAnonId}
