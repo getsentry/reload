@@ -181,7 +181,7 @@ class App(Router):
             return Response('bad request\n', status=400)
 
         if data.get('event_name') not in VALID_EVENTS:
-            return Response('bad request\n', status=400)
+            return Response('bad request\n check if valid event name\n', status=400)
 
         clean_data = {
             'received_at': format_datetime(start),
@@ -215,7 +215,7 @@ class App(Router):
                 typ(data[field])
             except ValueError:
                 client.captureException()
-                return Response('bad request\n', status=400)
+                return Response('bad request\n maybe check field type\n', status=400)
             clean_data[field] = data[field]
 
         # Conforms to super-big-data.analytics.events schema.
