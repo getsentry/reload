@@ -135,7 +135,7 @@ class App(Router):
         try:
             data = load(request.stream)
         except Exception:
-            return Response('bad request\n', status=400)
+            return Response('bad request expecting json\n', status=400)
 
         row = {
             'id': uuid1().hex,
@@ -156,7 +156,7 @@ class App(Router):
 
         for field in COMMON_FIELDS:
             if field == 'user_id' and not validate_user_id(data.get(field)):
-                return Response('bad request\n', status=400)
+                return Response('bad request user id not valid\n', status=400)
             if field == 'url' and re.match(URL_FILTER_REGEX, data.get(field, '')):
                 return ok_response()
             try:
@@ -178,10 +178,10 @@ class App(Router):
         try:
             data = load(request.stream)
         except Exception:
-            return Response('bad request\n', status=400)
+            return Response('bad request expecting json\n', status=400)
 
         if data.get('event_name') not in VALID_EVENTS:
-            return Response('bad request\n check if valid event name\n', status=400)
+            return Response('bad request check if valid event name\n', status=400)
 
         clean_data = {
             'received_at': format_datetime(start),
@@ -200,7 +200,7 @@ class App(Router):
 
         for field in COMMON_FIELDS:
             if field == 'user_id' and not validate_user_id(data.get(field)):
-                return Response('bad request\n', status=400)
+                return Response('bad request user id not valid\n', status=400)
             if field == 'url' and re.match(URL_FILTER_REGEX, data.get(field, '')):
                 return ok_response()
             try:
@@ -215,7 +215,7 @@ class App(Router):
                 typ(data[field])
             except ValueError:
                 client.captureException()
-                return Response('bad request\n maybe check field type\n', status=400)
+                return Response('bad request maybe check field type\n', status=400)
             clean_data[field] = data[field]
 
         # Conforms to super-big-data.analytics.events schema.
