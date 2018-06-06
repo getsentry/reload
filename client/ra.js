@@ -36,6 +36,11 @@ const assign = Object.assign || function (target) {
 };
 
 const getTLD = () => {
+  // For development environments
+  if (['127.0.0.1', '0.0.0.0', 'localhost'].includes(location.hostname)) {
+    return location.host;
+  }
+
   var parts = location.hostname.split('.');
   if(parts.length > 2){
     parts.shift();
@@ -91,4 +96,4 @@ const identify = gsID => {
   set('gsID', gsID, { domain: getTLD() })
 }
 
-window.ra = {page, event, endpoint, identify}
+window.ra = {page, event, endpoint, identify, getAnonId}
