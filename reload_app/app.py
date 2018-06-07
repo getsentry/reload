@@ -67,6 +67,8 @@ VALID_EVENTS = {
     },
     'onboarding.wizard_opened': {
     },
+    'onboarding.wizard_closed': {
+    },
     'onboarding.wizard_clicked': {
         'todo': str,
         'type': str,
