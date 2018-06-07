@@ -66,10 +66,13 @@ VALID_EVENTS = {
         'project': str,
     },
     'onboarding.wizard_opened': {
+        'organization': str,
     },
     'onboarding.wizard_closed': {
+        'organization': str,
     },
     'onboarding.wizard_clicked': {
+        'organization': str,
         'todo': str,
         'type': str,
     },
