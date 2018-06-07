@@ -76,9 +76,8 @@ VALID_EVENTS = {
     },
     'sourcemap.sourcemap_error': {
        'organization': str,
-       'user': str,
        'group': str,
-       'type': object,
+       'error_type': list,
    },
 }
 
