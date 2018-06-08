@@ -65,6 +65,18 @@ VALID_EVENTS = {
     'onboarding.complete': {
         'project': str,
     },
+    'onboarding.wizard_opened': {
+        'org_id': int,
+    },
+    'onboarding.wizard_closed': {
+        'org_id': int,
+    },
+    'onboarding.wizard_clicked': {
+        'org_id': int,
+        'todo_id': int,
+        'todo_title': str,
+        'action': str,
+    },
     'onboarding.show_instructions': {
         'project': str,
     },
