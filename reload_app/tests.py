@@ -43,7 +43,7 @@ class AppTests(TestCase):
         sent_data.update(
             event_name='assistant.guide_dismissed',
             guide=5,
-            step='6',
+            step=6,
             unknown_field='something',
         )
 
@@ -67,6 +67,27 @@ class AppTests(TestCase):
             if key not in ('event_name', 'unknown_field'):
                 assert key in data
         assert 'unknown_field' not in data
+
+    def test_bad_field_input(self):
+        sent_data = {
+            'url': 'https://sentry.io/',
+            'referrer': '/referrer/',
+            'user_id': '11',
+        }
+        resp = self.client.post('/page/', data=json.dumps(sent_data))
+        assert resp.status_code == 201
+
+        # /events/ endpoint.
+        sent_data.update(
+            event_name='assistant.guide_dismissed',
+            guide=5,
+            step='6',
+            unknown_field='something',
+        )
+
+        # make sure if field type doesn't match that we reject
+        resp = self.client.post('/event/', data=json.dumps(sent_data))
+        assert resp.status_code == 400
 
     def test_bad_input(self):
         sent_data = {
