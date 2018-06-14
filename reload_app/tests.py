@@ -81,12 +81,6 @@ class AppTests(TestCase):
         resp = self.client.post('/event/', data=json.dumps(sent_data))
         assert resp.status_code == 400
 
-        # bad type - can't coerce into prespecified
         sent_data.update(event_name='assistant.guide_dismissed', step='bad type')
-        resp = self.client.post('/event/', data=json.dumps(sent_data))
-        assert resp.status_code == 400
-
-        # bad type - can coerce but doesn't match prespecified
-        sent_data.update(event_name='assistant.guide_dismissed', step='6')
         resp = self.client.post('/event/', data=json.dumps(sent_data))
         assert resp.status_code == 400

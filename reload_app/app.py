@@ -230,6 +230,7 @@ class App(Router):
 
             if type(data[field]) != typ:
                 return client.captureMessage('field type does not match whitelisted type', level='warning')
+
             clean_data[field] = data[field]
 
         # Conforms to super-big-data.analytics.events schema.
