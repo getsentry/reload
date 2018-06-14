@@ -229,7 +229,7 @@ class App(Router):
                 return Response('bad request maybe check field type\n', status=400)
 
             if type(data[field]) != typ:
-                return client.captureMessage('field type does not match whitelisted type', level='warning')
+                client.captureMessage('field type does not match whitelisted type', level='warning')
 
             clean_data[field] = data[field]
 
