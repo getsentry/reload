@@ -227,8 +227,9 @@ class App(Router):
             except ValueError:
                 client.captureException()
                 return Response('bad request maybe check field type\n', status=400)
+
             if type(data[field]) != typ:
-                return Response('bad request maybe check field type\n', status=400)
+                return client.captureMessage('field type does not match whitelisted type', level='warning')
             clean_data[field] = data[field]
 
         # Conforms to super-big-data.analytics.events schema.
