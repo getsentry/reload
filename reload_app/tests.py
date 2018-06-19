@@ -43,7 +43,7 @@ class AppTests(TestCase):
         sent_data.update(
             event_name='assistant.guide_dismissed',
             guide=5,
-            step='6',
+            step=6,
             unknown_field='something',
         )
 
