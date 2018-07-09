@@ -105,7 +105,7 @@ VALID_EVENTS = {
     },
     'sso_paywall.upgrade_clicked': {
        'org_id': int,
-       'plan': str,
+       'current_plan': str,
    },
 }
 
