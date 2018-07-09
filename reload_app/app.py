@@ -47,6 +47,13 @@ VALID_EVENTS = {
     'issue.search': {
         'query': str,
     },
+    'issue_error_banner.viewed': {
+       'org_id': int,
+       'platform': str,
+       'group': str,
+       'error_type': list,
+       'error_message': str,
+    },
     'platformpicker.search': {
         'query': str,
         'num_results': int,
@@ -90,7 +97,7 @@ VALID_EVENTS = {
        'org_id': int,
        'group': str,
        'error_type': list,
-   },
+    },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
