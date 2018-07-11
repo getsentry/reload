@@ -66,6 +66,11 @@ VALID_EVENTS = {
     'platformpicker.select_tab': {
         'tab': str,
     },
+    'omnisearch.open': {
+    },
+    'omnisearch.select': {
+        'query': str,
+    },
     'omnisearch.query': {
         'query': str,
     },
