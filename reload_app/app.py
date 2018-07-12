@@ -98,6 +98,10 @@ VALID_EVENTS = {
         'link': str,
         'title': str,
     },
+    'sample_event.created': {
+        'org_id': int,
+        'project_id': int,
+    },
     'sourcemap.sourcemap_error': {
        'org_id': int,
        'group': str,
