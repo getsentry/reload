@@ -103,6 +103,10 @@ VALID_EVENTS = {
        'group': str,
        'error_type': list,
     },
+    'sso_paywall.upgrade_clicked': {
+       'org_id': int,
+       'current_plan': str,
+   },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
