@@ -40,6 +40,14 @@ VALID_EVENTS = {
     'assistant.support': {
         'subject': str,
     },
+    'command_palette.open': {
+    },
+    'command_palette.select': {
+        'query': str,
+    },
+    'command_palette.query': {
+        'query': str,
+    },
     'experiment.installation_instructions': {
         'integration': str,
         'experiment': bool,
@@ -101,6 +109,14 @@ VALID_EVENTS = {
     'sample_event.created': {
         'org_id': int,
         'project_id': int,
+    },
+    'settings_search.open': {
+    },
+    'settings_search.select': {
+        'query': str,
+    },
+    'settings_search.query': {
+        'query': str,
     },
     'sourcemap.sourcemap_error': {
        'org_id': int,
