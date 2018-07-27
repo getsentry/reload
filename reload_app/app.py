@@ -109,6 +109,7 @@ VALID_EVENTS = {
     'sample_event.created': {
         'org_id': int,
         'project_id': int,
+        'source': str,
     },
     'settings_search.open': {
     },
