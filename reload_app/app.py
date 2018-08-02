@@ -48,7 +48,7 @@ VALID_EVENTS = {
     'command_palette.query': {
         'query': str,
     },
-    'docs.feedback-sent':{
+    'docs.feedback-sent': {
         'useful': bool,
     },
     'experiment.installation_instructions': {
