@@ -49,7 +49,7 @@ VALID_EVENTS = {
         'query': str,
     },
     'docs.feedback-sent': {
-        'useful': bool,
+        'useful': int,
     },
     'experiment.installation_instructions': {
         'integration': str,
