@@ -63,7 +63,7 @@ VALID_EVENTS = {
        'platform': str,
        'group': str,
        'error_type': list,
-       'error_message': str,
+       'error_message': list,
     },
     'platformpicker.search': {
         'query': str,
