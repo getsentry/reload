@@ -6,7 +6,6 @@ from base64 import b64encode
 from datetime import datetime
 from google.cloud import pubsub_v1
 from json import load, dumps
-from raven.middleware import Sentry
 from werkzeug.wrappers import Response
 from uuid import uuid1
 
@@ -59,11 +58,11 @@ VALID_EVENTS = {
         'query': str,
     },
     'issue_error_banner.viewed': {
-       'org_id': int,
-       'platform': str,
-       'group': str,
-       'error_type': list,
-       'error_message': list,
+        'org_id': int,
+        'platform': str,
+        'group': str,
+        'error_type': list,
+        'error_message': list,
     },
     'platformpicker.search': {
         'query': str,
@@ -123,14 +122,14 @@ VALID_EVENTS = {
         'query': str,
     },
     'sourcemap.sourcemap_error': {
-       'org_id': int,
-       'group': str,
-       'error_type': list,
+        'org_id': int,
+        'group': str,
+        'error_type': list,
     },
     'sso_paywall.upgrade_clicked': {
-       'org_id': int,
-       'current_plan': str,
-   },
+        'org_id': int,
+        'current_plan': str,
+    },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
@@ -296,10 +295,12 @@ class App(Router):
 
 
 def make_app_from_environ():
+    from werkzeug.contrib.fixers import ProxyFix
+    from raven.middleware import Sentry
     app = App(
         dataset=os.environ.get('BIGQUERY_DATASET', 'reload'),
         table=os.environ.get('BIGQUERY_TABLE', 'page'),
         pubsub_project=os.environ.get('PUBSUB_PROJECT', 'internal-sentry'),
         pubsub_topic=os.environ.get('PUBSUB_TOPIC', 'analytics-events'),
     )
-    return Sentry(app, client)
+    return ProxyFix(Sentry(app, client))
