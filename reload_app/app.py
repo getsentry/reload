@@ -130,6 +130,9 @@ VALID_EVENTS = {
         'org_id': int,
         'current_plan': str,
     },
+    'sso_paywall.viewed': {
+        'org_id': int,
+    },
 }
 
 # Prefix event names to avoid collisions with events from Sentry backend.
