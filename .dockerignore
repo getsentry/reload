@@ -3,3 +3,4 @@ Makefile
 .dockerignore
 .gitignore
 README.md
+cloudbuild.yaml
