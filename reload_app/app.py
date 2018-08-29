@@ -121,6 +121,9 @@ VALID_EVENTS = {
     'settings_search.query': {
         'query': str,
     },
+    'sidebar_help.query': {
+        'query': str,
+    },
     'sourcemap.sourcemap_error': {
         'org_id': int,
         'group': str,
