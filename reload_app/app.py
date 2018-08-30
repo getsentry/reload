@@ -121,6 +121,8 @@ VALID_EVENTS = {
     'settings_search.query': {
         'query': str,
     },
+    'sidebar_help.open': {
+    },
     'sidebar_help.query': {
         'query': str,
     },
