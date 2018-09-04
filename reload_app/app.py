@@ -24,6 +24,7 @@ VALID_EVENTS = {
     'assistant.guide_cued': {
         'guide': int,
         'cue': str,
+        'org_id': int,
     },
     'assistant.guide_opened': {
         'guide': int,
