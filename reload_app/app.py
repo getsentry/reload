@@ -48,6 +48,15 @@ VALID_EVENTS = {
     'command_palette.query': {
         'query': str,
     },
+    'discover.query': {
+        'org_id': int,
+        'projects': list,
+        'fields': list,
+        'conditions': list,
+        'aggregations': list,
+        'orderby': str,
+        'limit': int,
+    },
     'docs.feedback-sent': {
         'useful': int,
     },
