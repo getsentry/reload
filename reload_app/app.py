@@ -292,14 +292,13 @@ class App(Router):
             if type_expected != type_received and not (
                     type_received is unicode and type_expected is str):
                 client.captureMessage(
-                    'field type does not match whitelisted type',
+                    'expected %s, received %s for field %s of event %s' % (
+                        type_expected,
+                        type_received,
+                        field,
+                        data['event_name'],
+                    ),
                     level='warning',
-                    extra={
-                        'event_name': data.get('event_name'),
-                        'field': field,
-                        'type_expected': type_expected,
-                        'type_received': type_received,
-                    },
                 )
             clean_data[field] = data[field]
 
