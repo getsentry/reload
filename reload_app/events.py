@@ -58,6 +58,7 @@ VALID_EVENTS = {
     'issue_page.viewed': {
         'group_id': int,
         'org_id': int,
+        'project_id': int,
     },
     'platformpicker.search': {
         'query': str,
