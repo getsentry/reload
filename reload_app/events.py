@@ -137,4 +137,15 @@ VALID_EVENTS = {
         'current_plan': str,
         'exposed': int,
     },
+    'integrations.index_viewed': {
+        'org_id': int,
+    },
+    'integrations.install_modal_opened': {
+        'org_id': int,
+        'integration': str,
+    },
+    'integrations.details_viewed': {
+        'org_id': int,
+        'integration': str,
+    },
 }
