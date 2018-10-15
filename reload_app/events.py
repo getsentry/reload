@@ -137,16 +137,6 @@ VALID_EVENTS = {
         'group': str,
         'error_type': list,
     },
-    'sso_paywall.upgrade_clicked': {
-        'org_id': int,
-        'current_plan': str,
-        'exposed': int,
-    },
-    'sso_paywall.viewed': {
-        'org_id': int,
-        'current_plan': str,
-        'exposed': int,
-    },
     'integrations.index_viewed': {
         'org_id': int,
     },
