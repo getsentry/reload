@@ -148,7 +148,7 @@ VALID_EVENTS = {
         'org_id': int,
         'integration': str,
     },
-    'integrations.integrations.upgrade_clicked': {
+    'integrations.upgrade_clicked': {
         'integration': str,
         'org_id': int,
         'feature': str,
