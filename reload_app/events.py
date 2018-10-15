@@ -104,6 +104,12 @@ VALID_EVENTS = {
         'link': str,
         'title': str,
     },
+    'releases.landing_card_clicked': {
+        'org_id': int,
+        'project_id': int,
+        'step_id': int,
+        'step_title': str,
+    },
     'sample_event.created': {
         'org_id': int,
         'project_id': int,
