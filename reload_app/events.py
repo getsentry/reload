@@ -110,6 +110,10 @@ VALID_EVENTS = {
         'step_id': int,
         'step_title': str,
     },
+    'releases.tab_viewed': {
+        'org_id': int,
+        'project_id': int,
+    },
     'sample_event.created': {
         'org_id': int,
         'project_id': int,
