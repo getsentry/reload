@@ -110,6 +110,15 @@ VALID_EVENTS = {
         'step_id': int,
         'step_title': str,
     },
+    'releases.landing_card_viewed': {
+        'org_id': int,
+        'project_id': int,
+    },
+    'releases.progress_bar_viewed': {
+        'org_id': int,
+        'project_id': int,
+        'steps': list,
+    },
     'releases.tab_viewed': {
         'org_id': int,
         'project_id': int,
