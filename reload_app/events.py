@@ -29,6 +29,13 @@ VALID_EVENTS = {
     'command_palette.query': {
         'query': str,
     },
+    'dateselector.utc': {
+        'utc': bool,
+    },
+    'dateselector.change_time': {
+        'start': str,
+        'end': str,
+    },
     'discover.query': {
         'org_id': int,
         'projects': list,
