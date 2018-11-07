@@ -29,10 +29,10 @@ VALID_EVENTS = {
     'command_palette.query': {
         'query': str,
     },
-    'dateselector.utc': {
+    'dateselector.utc_changed': {
         'utc': bool,
     },
-    'dateselector.change_time': {
+    'dateselector.time_changed': {
         'start': str,
         'end': str,
     },
