@@ -22,6 +22,11 @@ class AppTests(TestCase):
         self.mock_publisher = publisher_cls.return_value = Mock()
         self.addCleanup(patcher.stop)
 
+        patcher = patch('reload_app.app.DogStatsdMetrics')
+        dogstatsd_cls = patcher.start()
+        self.mock_dogstatsd = dogstatsd_cls.return_value = Mock()
+        self.addCleanup(patcher.stop)
+
         if not getattr(self, 'client', None):
             app = make_app_from_environ()
             self.client = Client(app, BaseResponse)
@@ -67,6 +72,47 @@ class AppTests(TestCase):
             if key not in ('event_name', 'unknown_field'):
                 assert key in data
         assert 'unknown_field' not in data
+
+    def test_metric_increment(self):
+        metric_data = {
+            "type": "increment",
+            "metric_name": "component.render",
+            "tags": {
+                "name": "Main",
+            }
+        }
+        resp = self.client.post('/metric/', data=json.dumps(metric_data))
+        assert resp.status_code == 201
+        assert self.mock_dogstatsd.increment.call_count == 1
+
+    def test_metric_gauge(self):
+        metric_data = {
+            "type": "gauge",
+            "value": 123,
+            "metric_name": "initial_load",
+        }
+        resp = self.client.post('/metric/', data=json.dumps(metric_data))
+        assert resp.status_code == 201
+        assert self.mock_dogstatsd.gauge.call_count == 1
+
+    def test_invalid_metric_name(self):
+        metric_data = {
+            "type": "increment",
+            "value": 123,
+            "metric_name": "invalid_metric_name",
+        }
+        resp = self.client.post('/metric/', data=json.dumps(metric_data))
+        assert resp.status_code == 400
+
+    def test_invalid_metric_type(self):
+        metric_data = {
+            "type": "invalid",
+            "value": 123,
+            "metric_name": "initial_load",
+        }
+        resp = self.client.post('/metric/', data=json.dumps(metric_data))
+        assert resp.status_code == 400
+
 
     def test_bad_input(self):
         sent_data = {

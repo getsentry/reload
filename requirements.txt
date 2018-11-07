@@ -1,4 +1,5 @@
 Werkzeug==0.12.2
+atadog==0.23.0
 google-cloud-bigquery==0.24.0
 google-cloud-pubsub==0.29.4
 raven==6.6.0

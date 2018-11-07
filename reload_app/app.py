@@ -10,6 +10,8 @@ from werkzeug.wrappers import Response
 from uuid import uuid1
 
 from .events import VALID_EVENTS
+from .metrics import VALID_METRICS
+from .metrics.dogstatsd import DogStatsdMetrics
 from .raven_client import client
 from .router import Router
 from .worker import BigQueryWorker
@@ -43,9 +45,10 @@ class App(Router):
     routes = {
         '/page/': 'page_view',
         '/event/': 'event',
+        '/metric/': 'metric',
     }
 
-    def __init__(self, dataset, table, pubsub_project, pubsub_topic):
+    def __init__(self, dataset, table, pubsub_project, pubsub_topic, datadog_host, datadog_port):
         super(App, self).__init__()
 
         self.worker = BigQueryWorker(dataset, table, flush_interval=1)
@@ -55,8 +58,10 @@ class App(Router):
             max_latency=0.05,
             max_messages=1000,
         )
-        self.publisher = pubsub_v1.PublisherClient(batch_settings)
-        self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
+        # self.publisher = pubsub_v1.PublisherClient(batch_settings)
+        # self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
+        self.datadog_client = DogStatsdMetrics('test-id', host=datadog_host, port=datadog_port)
+        self.datadog_client.setup()
 
     # TODO(adhiraj): Put pageviews in the events table.
     # TODO(adhiraj): This really needs a refactoring.
@@ -177,6 +182,60 @@ class App(Router):
 
         return ok_response()
 
+    def metric(self, request):
+        # Make sure we only get POST requests
+        if request.method != 'POST':
+            return Response('method not allowed\n', status=405)
+
+        start = datetime.utcnow()
+
+        try:
+            data = load(request.stream)
+        except Exception:
+            return Response('bad request expecting json\n', status=400)
+
+        # allowed list of metric names
+        if data.get('metric_name') not in VALID_METRICS:
+            return Response('bad request check if valid metric name\n', status=400)
+
+        # validate tags
+        for field, type_expected in VALID_METRICS[data['metric_name']].items():
+            if field not in data:
+                continue
+            try:
+                type_expected(data[field])
+            except ValueError:
+                client.captureException()
+                return Response('bad request maybe check tags field type\n', status=400)
+
+            type_received = type(data[field])
+            if type_expected != type_received and not (
+                    type_received is unicode and type_expected is str):
+                client.captureMessage(
+                    'expected %s, received %s for tag %s of metric %s' % (
+                        type_expected,
+                        type_received,
+                        field,
+                        data['metric_name'],
+                    ),
+                    level='warning',
+                )
+            clean_data[field] = data[field]
+
+        try:
+            if data['type'] == 'gauge':
+                self.datadog_client.gauge(data['metric_name'], data['value'], tags=data.get('tags'))
+            elif data['type'] == 'increment':
+                self.datadog_client.increment(data['metric_name'], data.get('value', 1), tags=data.get('tags'))
+            else:
+                return Response('bad request check if valid metric type\n', status=400)
+
+        except Exception as e:
+            print(str(e))
+            return Response('failed request to metrics server', status=400)
+
+        return ok_response()
+
 
 def make_app_from_environ():
     from werkzeug.contrib.fixers import ProxyFix
@@ -186,5 +245,7 @@ def make_app_from_environ():
         table=os.environ.get('BIGQUERY_TABLE', 'page'),
         pubsub_project=os.environ.get('PUBSUB_PROJECT', 'internal-sentry'),
         pubsub_topic=os.environ.get('PUBSUB_TOPIC', 'analytics-events'),
+        datadog_host=os.environ.get('DATADOG_HOST', '127.0.0.1'),
+        datadog_port=os.environ.get('DATADOG_PORT', 8125),
     )
     return ProxyFix(Sentry(app, client))
