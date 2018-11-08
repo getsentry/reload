@@ -1,8 +1,7 @@
 VALID_METRICS = {
-    'component.render': {
-        'name': str,
-    },
-    'initial_load': {
-        'name': str,
-    },
+    'component.render': [
+        # component name
+        'name'
+    ],
+    'initial_load': [],
 }

@@ -48,7 +48,7 @@ class App(Router):
         '/metric/': 'metric',
     }
 
-    def __init__(self, dataset, table, pubsub_project, pubsub_topic, datadog_host, datadog_port):
+    def __init__(self, dataset, table, pubsub_project, pubsub_topic, datadog_prefix, datadog_host, datadog_port):
         super(App, self).__init__()
 
         self.worker = BigQueryWorker(dataset, table, flush_interval=1)
@@ -58,9 +58,9 @@ class App(Router):
             max_latency=0.05,
             max_messages=1000,
         )
-        # self.publisher = pubsub_v1.PublisherClient(batch_settings)
-        # self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
-        self.datadog_client = DogStatsdMetrics('test-id', host=datadog_host, port=datadog_port)
+        self.publisher = pubsub_v1.PublisherClient(batch_settings)
+        self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
+        self.datadog_client = DogStatsdMetrics('test-id', prefix=datadog_prefix, host=datadog_host, port=datadog_port)
         self.datadog_client.setup()
 
     # TODO(adhiraj): Put pageviews in the events table.
@@ -187,51 +187,38 @@ class App(Router):
         if request.method != 'POST':
             return Response('method not allowed\n', status=405)
 
-        start = datetime.utcnow()
-
         try:
             data = load(request.stream)
         except Exception:
             return Response('bad request expecting json\n', status=400)
 
+        metric_name = data.get('metric_name')
+        metric_type = data.get('type')
+        tags = data.get('tags', {})
+
         # allowed list of metric names
-        if data.get('metric_name') not in VALID_METRICS:
+        if metric_name not in VALID_METRICS:
             return Response('bad request check if valid metric name\n', status=400)
 
         # validate tags
-        for field, type_expected in VALID_METRICS[data['metric_name']].items():
-            if field not in data:
-                continue
-            try:
-                type_expected(data[field])
-            except ValueError:
-                client.captureException()
-                return Response('bad request maybe check tags field type\n', status=400)
-
-            type_received = type(data[field])
-            if type_expected != type_received and not (
-                    type_received is unicode and type_expected is str):
-                client.captureMessage(
-                    'expected %s, received %s for tag %s of metric %s' % (
-                        type_expected,
-                        type_received,
-                        field,
-                        data['metric_name'],
-                    ),
-                    level='warning',
-                )
-            clean_data[field] = data[field]
+        for tag in tags.keys():
+            if tag not in VALID_METRICS[metric_name]:
+                return Response('bad request check if valid tag name\n', status=400)
 
         try:
-            if data['type'] == 'gauge':
-                self.datadog_client.gauge(data['metric_name'], data['value'], tags=data.get('tags'))
-            elif data['type'] == 'increment':
-                self.datadog_client.increment(data['metric_name'], data.get('value', 1), tags=data.get('tags'))
+            value = data['value']
+        except KeyError as e:
+            # Allow default value for increment only
+            if metric_type == 'increment':
+                value = 1
             else:
-                return Response('bad request check if valid metric type\n', status=400)
+                return Response('bad request check if valid value for metric\n', status=400)
 
+        try:
+            getattr(self.datadog_client, metric_type)(metric_name, value, tags=tags)
+        except AttributeError:
+            return Response('bad request check if valid metric type\n', status=400)
         except Exception as e:
-            print(str(e))
             return Response('failed request to metrics server', status=400)
 
         return ok_response()
@@ -245,6 +232,7 @@ def make_app_from_environ():
         table=os.environ.get('BIGQUERY_TABLE', 'page'),
         pubsub_project=os.environ.get('PUBSUB_PROJECT', 'internal-sentry'),
         pubsub_topic=os.environ.get('PUBSUB_TOPIC', 'analytics-events'),
+        datadog_prefix=os.environ.get('DATADOG_PREFIX', ''),
         datadog_host=os.environ.get('DATADOG_HOST', '127.0.0.1'),
         datadog_port=os.environ.get('DATADOG_PORT', 8125),
     )

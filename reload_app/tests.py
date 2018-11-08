@@ -24,7 +24,7 @@ class AppTests(TestCase):
 
         patcher = patch('reload_app.app.DogStatsdMetrics')
         dogstatsd_cls = patcher.start()
-        self.mock_dogstatsd = dogstatsd_cls.return_value = Mock()
+        self.mock_dogstatsd = dogstatsd_cls.return_value = Mock(spec=['setup', 'increment', 'gauge'])
         self.addCleanup(patcher.stop)
 
         if not getattr(self, 'client', None):
@@ -84,6 +84,8 @@ class AppTests(TestCase):
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 201
         assert self.mock_dogstatsd.increment.call_count == 1
+        assert self.mock_dogstatsd.increment.call_args[0] == ("component.render", 1)
+        assert self.mock_dogstatsd.increment.call_args[1] == {'tags': {'name': 'Main'}}
 
     def test_metric_gauge(self):
         metric_data = {
@@ -94,6 +96,8 @@ class AppTests(TestCase):
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 201
         assert self.mock_dogstatsd.gauge.call_count == 1
+        assert self.mock_dogstatsd.gauge.call_args[0] == ("initial_load", 123)
+        assert self.mock_dogstatsd.gauge.call_args[1] == {'tags': {}}
 
     def test_invalid_metric_name(self):
         metric_data = {
@@ -103,6 +107,7 @@ class AppTests(TestCase):
         }
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 400
+        assert resp.data == 'bad request check if valid metric name\n'
 
     def test_invalid_metric_type(self):
         metric_data = {
@@ -112,6 +117,20 @@ class AppTests(TestCase):
         }
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 400
+        assert resp.data == 'bad request check if valid metric type\n'
+
+    def test_invalid_metric_tags(self):
+        metric_data = {
+            "type": "increment",
+            "value": 123,
+            "metric_name": "initial_load",
+            "tags": {
+                "invalid": "Invalid",
+            }
+        }
+        resp = self.client.post('/metric/', data=json.dumps(metric_data))
+        assert resp.status_code == 400
+        assert resp.data == 'bad request check if valid tag name\n'
 
 
     def test_bad_input(self):
