@@ -33,8 +33,8 @@ VALID_EVENTS = {
         'utc': bool,
     },
     'dateselector.time_changed': {
-        'start': str,
-        'end': str,
+        'time': str,
+        'field_changed': str,
     },
     'discover.query': {
         'org_id': int,
