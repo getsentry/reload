@@ -60,7 +60,7 @@ class App(Router):
         )
         self.publisher = pubsub_v1.PublisherClient(batch_settings)
         self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
-        self.datadog_client = DogStatsdMetrics('test-id', prefix=datadog_prefix, host=datadog_host, port=datadog_port)
+        self.datadog_client = DogStatsdMetrics(datadog_prefix, prefix=datadog_prefix, host=datadog_host, port=datadog_port)
         self.datadog_client.setup()
 
     # TODO(adhiraj): Put pageviews in the events table.
