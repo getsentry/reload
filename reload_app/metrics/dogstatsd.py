@@ -29,36 +29,3 @@ class DogStatsdMetrics(Metrics):
             sample_rate=sample_rate,
             tags=self._get_tags(tags),
         )
-
-    def decrement(self, metric, value=1, tags=None, sample_rate=1):
-        self.client.decrement(
-            self._get_key(metric),
-            value,
-            sample_rate=sample_rate,
-            tags=self._get_tags(tags),
-        )
-
-    def histogram(self, metric, value, tags=None, sample_rate=1):
-        self.client.histogram(
-            self._get_key(metric),
-            value,
-            sample_rate=sample_rate,
-            tags=self._get_tags(tags),
-        )
-
-    def timing(self, metric, value, tags=None, sample_rate=1):
-        self.client.timing(
-            self._get_key(metric),
-            value,
-            sample_rate=sample_rate,
-            tags=self._get_tags(tags),
-        )
-
-    def timed(self, metric, tags=None, sample_rate=1, use_ms=None):
-        self.client.timed(
-            self._get_key(metric),
-            sample_rate=sample_rate,
-            tags=self._get_tags(tags),
-            use_ms=use_ms,
-        )
-
