@@ -119,6 +119,16 @@ VALID_EVENTS = {
         'project_id': int,
         'steps': list,
     },
+    'releases.progress_bar_clicked_next': {
+        'org_id': int,
+        'project_id': int,
+        'cta': str,
+    },
+    'releases.progress_bar_closed': {
+        'org_id': int,
+        'project_id': int,
+        'action': str,
+    },
     'releases.tab_viewed': {
         'org_id': int,
         'project_id': int,
