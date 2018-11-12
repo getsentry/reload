@@ -9,6 +9,8 @@
     ra.page()
     ra.getAnonId()
     ra.event('click', {'extra_key': 'xyz'})
+    ra.metric.increment('component.render', {name: 'Main'})
+    ra.metric.gauge('initial_load', 123, {name: 'Main'})
     </script>
   </head>
   <body>

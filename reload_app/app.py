@@ -10,6 +10,8 @@ from werkzeug.wrappers import Response
 from uuid import uuid1
 
 from .events import VALID_EVENTS
+from .metrics import VALID_METRICS, VALID_METRIC_TYPES
+from .metrics.dogstatsd import DogStatsdMetrics
 from .raven_client import client
 from .router import Router
 from .worker import BigQueryWorker
@@ -43,9 +45,10 @@ class App(Router):
     routes = {
         '/page/': 'page_view',
         '/event/': 'event',
+        '/metric/': 'metric',
     }
 
-    def __init__(self, dataset, table, pubsub_project, pubsub_topic):
+    def __init__(self, dataset, table, pubsub_project, pubsub_topic, datadog_prefix, datadog_host, datadog_port):
         super(App, self).__init__()
 
         self.worker = BigQueryWorker(dataset, table, flush_interval=1)
@@ -57,6 +60,8 @@ class App(Router):
         )
         self.publisher = pubsub_v1.PublisherClient(batch_settings)
         self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
+        self.datadog_client = DogStatsdMetrics(datadog_prefix, prefix=datadog_prefix, host=datadog_host, port=datadog_port)
+        self.datadog_client.setup()
 
     # TODO(adhiraj): Put pageviews in the events table.
     # TODO(adhiraj): This really needs a refactoring.
@@ -177,6 +182,50 @@ class App(Router):
 
         return ok_response()
 
+    def metric(self, request):
+        # Make sure we only get POST requests
+        if request.method != 'POST':
+            return Response('method not allowed\n', status=405)
+
+        try:
+            data = load(request.stream)
+        except Exception:
+            return Response('bad request expecting json\n', status=400)
+
+        metric_name = data.get('metric_name')
+        metric_type = data.get('type')
+        tags = data.get('tags', {})
+
+
+        # allowed/supported list of metric types
+        if metric_type not in VALID_METRIC_TYPES:
+            return Response('bad request check if valid metric type\n', status=400)
+
+        # allowed list of metric names
+        if metric_name not in VALID_METRICS:
+            return Response('bad request check if valid metric name\n', status=400)
+
+        # validate tags
+        for tag in tags.keys():
+            if tag not in VALID_METRICS[metric_name]:
+                return Response('bad request check if valid tag name\n', status=400)
+
+        try:
+            value = data['value']
+        except KeyError as e:
+            # Allow default value for increment only
+            if metric_type == 'increment':
+                value = 1
+            else:
+                return Response('bad request check if valid value for metric\n', status=400)
+
+        try:
+            getattr(self.datadog_client, metric_type)(metric_name, value, tags=tags)
+        except Exception as e:
+            return Response('failed request to metrics server', status=400)
+
+        return ok_response()
+
 
 def make_app_from_environ():
     from werkzeug.contrib.fixers import ProxyFix
@@ -186,5 +235,8 @@ def make_app_from_environ():
         table=os.environ.get('BIGQUERY_TABLE', 'page'),
         pubsub_project=os.environ.get('PUBSUB_PROJECT', 'internal-sentry'),
         pubsub_topic=os.environ.get('PUBSUB_TOPIC', 'analytics-events'),
+        datadog_prefix=os.environ.get('DATADOG_PREFIX', ''),
+        datadog_host=os.environ.get('DATADOG_HOST', '127.0.0.1'),
+        datadog_port=int(os.environ.get('DATADOG_PORT', 8125)),
     )
     return ProxyFix(Sentry(app, client))

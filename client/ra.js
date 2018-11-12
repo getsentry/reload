@@ -96,4 +96,25 @@ const identify = gsID => {
   set('gsID', gsID, { domain: getTLD() })
 }
 
-window.ra = {page, event, endpoint, identify, getAnonId}
+const metric = {
+    increment: (name, tags) => {
+          send('/metric/', {
+                  metric_name: name,
+                  value: 1,
+                  type: 'increment',
+                  tags: tags,
+                });
+        },
+
+    gauge: (name, value, tags) => {
+          send('/metric/', {
+                  metric_name: name,
+                  type: 'gauge',
+                  value: value,
+                  tags: tags,
+                });
+        },
+};
+
+window.ra = {page, event, endpoint, identify, getAnonId, metric};
+
