@@ -145,6 +145,14 @@ VALID_EVENTS = {
         'project_id': int,
         'source': str,
     },
+    'sample_event.button_viewed': {
+        'org_id': int,
+        'project_id': int,
+        'source': str,
+    },
+    'sample_event.banner_viewed': {
+        'org_id': int,
+    },
     'settings_search.open': {
     },
     'settings_search.select': {
