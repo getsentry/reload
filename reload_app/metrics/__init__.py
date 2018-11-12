@@ -5,3 +5,5 @@ VALID_METRICS = {
     ],
     'initial_load': [],
 }
+
+VALID_METRIC_TYPES = set(['increment', 'gauge'])

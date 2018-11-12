@@ -10,7 +10,7 @@ from werkzeug.wrappers import Response
 from uuid import uuid1
 
 from .events import VALID_EVENTS
-from .metrics import VALID_METRICS
+from .metrics import VALID_METRICS, VALID_METRIC_TYPES
 from .metrics.dogstatsd import DogStatsdMetrics
 from .raven_client import client
 from .router import Router
@@ -196,6 +196,11 @@ class App(Router):
         metric_type = data.get('type')
         tags = data.get('tags', {})
 
+
+        # allowed/supported list of metric types
+        if metric_type not in VALID_METRIC_TYPES:
+            return Response('bad request check if valid metric type\n', status=400)
+
         # allowed list of metric names
         if metric_name not in VALID_METRICS:
             return Response('bad request check if valid metric name\n', status=400)
@@ -216,8 +221,6 @@ class App(Router):
 
         try:
             getattr(self.datadog_client, metric_type)(metric_name, value, tags=tags)
-        except AttributeError:
-            return Response('bad request check if valid metric type\n', status=400)
         except Exception as e:
             return Response('failed request to metrics server', status=400)
 
