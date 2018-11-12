@@ -237,6 +237,6 @@ def make_app_from_environ():
         pubsub_topic=os.environ.get('PUBSUB_TOPIC', 'analytics-events'),
         datadog_prefix=os.environ.get('DATADOG_PREFIX', ''),
         datadog_host=os.environ.get('DATADOG_HOST', '127.0.0.1'),
-        datadog_port=os.environ.get('DATADOG_PORT', 8125),
+        datadog_port=int(os.environ.get('DATADOG_PORT', 8125)),
     )
     return ProxyFix(Sentry(app, client))
