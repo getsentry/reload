@@ -76,7 +76,7 @@ class AppTests(TestCase):
     def test_metric_increment(self):
         metric_data = {
             "type": "increment",
-            "metric_name": "component.render",
+            "metric_name": "app.component.render",
             "tags": {
                 "name": "Main",
             }
@@ -84,19 +84,19 @@ class AppTests(TestCase):
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 201
         assert self.mock_dogstatsd.increment.call_count == 1
-        assert self.mock_dogstatsd.increment.call_args[0] == ("component.render", 1)
+        assert self.mock_dogstatsd.increment.call_args[0] == ("app.component.render", 1)
         assert self.mock_dogstatsd.increment.call_args[1] == {'tags': {'name': 'Main'}}
 
     def test_metric_gauge(self):
         metric_data = {
             "type": "gauge",
             "value": 123,
-            "metric_name": "initial_load",
+            "metric_name": "app.page.body-load",
         }
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 201
         assert self.mock_dogstatsd.gauge.call_count == 1
-        assert self.mock_dogstatsd.gauge.call_args[0] == ("initial_load", 123)
+        assert self.mock_dogstatsd.gauge.call_args[0] == ("app.page.body-load", 123)
         assert self.mock_dogstatsd.gauge.call_args[1] == {'tags': {}}
 
     def test_invalid_metric_name(self):
@@ -113,7 +113,7 @@ class AppTests(TestCase):
         metric_data = {
             "type": "invalid",
             "value": 123,
-            "metric_name": "initial_load",
+            "metric_name": "app.page.body-load",
         }
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 400
@@ -123,7 +123,7 @@ class AppTests(TestCase):
         metric_data = {
             "type": "increment",
             "value": 123,
-            "metric_name": "initial_load",
+            "metric_name": "app.page.body-load",
             "tags": {
                 "invalid": "Invalid",
             }

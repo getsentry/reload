@@ -1,10 +1,10 @@
 VALID_METRICS = {
     ### metrics that occur inside of the React application ###
+    'app.component.render': [
+       # component name
+       'name'
+    ],
     # TODO:
-    #  'app.component.render': [
-    #     # component name
-    #     'name'
-    #  ],
     #  'app.component.api': [],
     #  'app.component.dynamic-import-fail': [],
 
