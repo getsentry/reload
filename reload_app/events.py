@@ -145,7 +145,7 @@ VALID_EVENTS = {
         'project_id': int,
         'source': str,
     },
-    'install_prompt.button_viewed': {
+    'sample_event.button_viewed': {
         'org_id': int,
         'project_id': int,
         'source': str,
