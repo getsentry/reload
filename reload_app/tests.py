@@ -24,7 +24,7 @@ class AppTests(TestCase):
 
         patcher = patch('reload_app.app.DogStatsdMetrics')
         dogstatsd_cls = patcher.start()
-        self.mock_dogstatsd = dogstatsd_cls.return_value = Mock(spec=['setup', 'increment', 'gauge'])
+        self.mock_dogstatsd = dogstatsd_cls.return_value = Mock(spec=['setup', 'gauge', 'increment', 'decrement', 'histogram', 'timing', 'timed',])
         self.addCleanup(patcher.stop)
 
         if not getattr(self, 'client', None):
@@ -75,33 +75,39 @@ class AppTests(TestCase):
 
     def test_metric_increment(self):
         metric_data = {
-            "type": "increment",
+            "metric_name": "app.page.bundle-load-fail",
+        }
+        resp = self.client.post('/metric/', data=json.dumps(metric_data))
+        assert resp.status_code == 201
+        assert self.mock_dogstatsd.increment.call_count == 1
+        assert self.mock_dogstatsd.increment.call_args[0] == ("app.page.bundle-load-fail", 1)
+
+    def test_metric_valid_tags(self):
+        metric_data = {
             "metric_name": "app.component.render",
+            "value": 123,
             "tags": {
                 "name": "Main",
             }
         }
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 201
-        assert self.mock_dogstatsd.increment.call_count == 1
-        assert self.mock_dogstatsd.increment.call_args[0] == ("app.component.render", 1)
-        assert self.mock_dogstatsd.increment.call_args[1] == {'tags': {'name': 'Main'}}
+        assert self.mock_dogstatsd.timing.call_count == 1
+        assert self.mock_dogstatsd.timing.call_args[0] == ("app.component.render", 123)
+        assert self.mock_dogstatsd.timing.call_args[1] == {'tags': {'name': 'Main'}}
 
-    def test_metric_gauge(self):
+    def test_metric_timing(self):
         metric_data = {
-            "type": "gauge",
             "value": 123,
             "metric_name": "app.page.body-load",
         }
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 201
-        assert self.mock_dogstatsd.gauge.call_count == 1
-        assert self.mock_dogstatsd.gauge.call_args[0] == ("app.page.body-load", 123)
-        assert self.mock_dogstatsd.gauge.call_args[1] == {'tags': {}}
+        assert self.mock_dogstatsd.timing.call_count == 1
+        assert self.mock_dogstatsd.timing.call_args[0] == ("app.page.body-load", 123)
 
     def test_invalid_metric_name(self):
         metric_data = {
-            "type": "increment",
             "value": 123,
             "metric_name": "invalid_metric_name",
         }
@@ -109,19 +115,8 @@ class AppTests(TestCase):
         assert resp.status_code == 400
         assert resp.data == 'bad request check if valid metric name\n'
 
-    def test_invalid_metric_type(self):
-        metric_data = {
-            "type": "invalid",
-            "value": 123,
-            "metric_name": "app.page.body-load",
-        }
-        resp = self.client.post('/metric/', data=json.dumps(metric_data))
-        assert resp.status_code == 400
-        assert resp.data == 'bad request check if valid metric type\n'
-
     def test_invalid_metric_tags(self):
         metric_data = {
-            "type": "increment",
             "value": 123,
             "metric_name": "app.page.body-load",
             "tags": {

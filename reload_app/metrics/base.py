@@ -26,3 +26,15 @@ class Metrics(object):
 
     def increment(self, metric, value=1, tags=None, sample_rate=1):
         pass
+
+    def decrement(self, metric, value=1, tags=None, sample_rate=1):
+        pass
+
+    def histogram(self, metric, value, tags=None, sample_rate=1):
+        pass
+
+    def timing(self, metric, value, tags=None, sample_rate=1):
+        pass
+
+    def timed(self, metric, tags=None, sample_rate=1, use_ms=None):
+        pass

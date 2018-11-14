@@ -193,21 +193,22 @@ class App(Router):
             return Response('bad request expecting json\n', status=400)
 
         metric_name = data.get('metric_name')
-        metric_type = data.get('type')
         tags = data.get('tags', {})
 
-
-        # allowed/supported list of metric types
-        if metric_type not in VALID_METRIC_TYPES:
-            return Response('bad request check if valid metric type\n', status=400)
 
         # allowed list of metric names
         if metric_name not in VALID_METRICS:
             return Response('bad request check if valid metric name\n', status=400)
 
+        (metric_type, valid_tags,) = VALID_METRICS[metric_name]
+
+        # allowed/supported list of metric types
+        if metric_type not in VALID_METRIC_TYPES:
+            return Response('bad request check if valid metric type\n', status=400)
+
         # validate tags
         for tag in tags.keys():
-            if tag not in VALID_METRICS[metric_name]:
+            if tag not in valid_tags:
                 return Response('bad request check if valid tag name\n', status=400)
 
         try:

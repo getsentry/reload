@@ -1,9 +1,7 @@
 VALID_METRICS = {
     ### metrics that occur inside of the React application ###
-    'app.component.render': [
-       # component name
-       'name'
-    ],
+    'app.component.render': ('timing', ['name'],),
+
     # TODO:
     #  'app.component.api': [],
     #  'app.component.dynamic-import-fail': [],
@@ -11,16 +9,22 @@ VALID_METRICS = {
     ### metrics related to page/script loads ###
 
     # time it takes to load scripts in <head>
-    'app.page.head-load': [],
+    'app.page.head-load': (
+        'timing',
+        [],
+    ),
 
     # time it takes to load everything at the end of <body>
-    'app.page.body-load': [],
+    'app.page.body-load': (
+        'timing',
+        [],
+    ),
 
     # time it takes to fetch, parse, and execute main js app
-    'app.page.bundle-load': [],
+    'app.page.bundle-load': ('timing', []),
 
     # when the main js bundle fails to load
-    'app.page.bundle-load-fail': [],
+    'app.page.bundle-load-fail': ('increment', []),
 }
 
-VALID_METRIC_TYPES = set(['increment', 'gauge'])
+VALID_METRIC_TYPES = set(['gauge', 'increment', 'decrement', 'histogram', 'timing', 'timed'])
