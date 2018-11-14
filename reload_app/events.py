@@ -205,7 +205,7 @@ VALID_EVENTS = {
     'feature.custom_inbound_filters.upgrade_clicked': {
         'org_id': int,
     },
-    'feature.disabled_auth_provider.upgrade_clicked': {
+    'feature.auth_provider.upgrade_clicked': {
         'org_id': int,
         'provider': str,
     },
