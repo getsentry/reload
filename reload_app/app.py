@@ -10,7 +10,7 @@ from werkzeug.wrappers import Response
 from uuid import uuid1
 
 from .events import VALID_EVENTS
-from .metrics import VALID_METRICS, VALID_METRIC_TYPES
+from .metrics import VALID_METRICS
 from .metrics.dogstatsd import DogStatsdMetrics
 from .raven_client import client
 from .router import Router
@@ -193,21 +193,18 @@ class App(Router):
             return Response('bad request expecting json\n', status=400)
 
         metric_name = data.get('metric_name')
-        metric_type = data.get('type')
         tags = data.get('tags', {})
 
-
-        # allowed/supported list of metric types
-        if metric_type not in VALID_METRIC_TYPES:
-            return Response('bad request check if valid metric type\n', status=400)
 
         # allowed list of metric names
         if metric_name not in VALID_METRICS:
             return Response('bad request check if valid metric name\n', status=400)
 
+        (metric_type, valid_tags,) = VALID_METRICS[metric_name]
+
         # validate tags
         for tag in tags.keys():
-            if tag not in VALID_METRICS[metric_name]:
+            if tag not in valid_tags:
                 return Response('bad request check if valid tag name\n', status=400)
 
         try:
