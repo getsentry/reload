@@ -10,7 +10,7 @@ from werkzeug.wrappers import Response
 from uuid import uuid1
 
 from .events import VALID_EVENTS
-from .metrics import VALID_METRICS, VALID_METRIC_TYPES
+from .metrics import VALID_METRICS
 from .metrics.dogstatsd import DogStatsdMetrics
 from .raven_client import client
 from .router import Router
@@ -201,10 +201,6 @@ class App(Router):
             return Response('bad request check if valid metric name\n', status=400)
 
         (metric_type, valid_tags,) = VALID_METRICS[metric_name]
-
-        # allowed/supported list of metric types
-        if metric_type not in VALID_METRIC_TYPES:
-            return Response('bad request check if valid metric type\n', status=400)
 
         # validate tags
         for tag in tags.keys():
