@@ -100,7 +100,7 @@ const identify = gsID => {
   set("gsID", gsID, { domain: getTLD() });
 };
 
-const metric = (name, { value, tags } = {}) => {
+const metric = (name, value, tags) => {
   send("/metric/", {
     metric_name: name,
     value,
