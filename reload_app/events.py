@@ -150,6 +150,11 @@ VALID_EVENTS = {
         'project_id': int,
         'source': str,
     },
+    'sample_event.button_viewed2': {
+        'org_id': int,
+        'project_slug': str,
+        'source': str,
+    },
     'install_prompt.banner_viewed': {
         'org_id': int,
         'page': str,
