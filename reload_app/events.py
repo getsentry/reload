@@ -198,4 +198,20 @@ VALID_EVENTS = {
         'feature': str,
         'plan': str,
     },
+    'feature.rate_limits.upgrade_clicked': {
+        'org_id': int,
+    },
+    'feature.data_forwarding.upgrade_clicked': {
+        'org_id': int,
+    },
+    'feature.discard_group.upgrade_clicked': {
+        'org_id': int,
+    },
+    'feature.custom_inbound_filters.upgrade_clicked': {
+        'org_id': int,
+    },
+    'feature.auth_provider.upgrade_clicked': {
+        'org_id': int,
+        'provider': str,
+    },
 }
