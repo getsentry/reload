@@ -214,4 +214,7 @@ VALID_EVENTS = {
         'org_id': int,
         'provider': str,
     },
+    'membership_limit.upgrade_clicked': {
+        'org_id': int,
+    },
 }
