@@ -26,3 +26,7 @@ VALID_METRICS = {
     # when the main js bundle fails to load
     'app.page.bundle-load-fail': ('increment', []),
 }
+
+VALID_GLOBAL_TAGS = [
+    'release',
+]

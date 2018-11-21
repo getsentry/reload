@@ -10,7 +10,7 @@ from werkzeug.wrappers import Response
 from uuid import uuid1
 
 from .events import VALID_EVENTS
-from .metrics import VALID_METRICS
+from .metrics import VALID_METRICS, VALID_GLOBAL_TAGS
 from .metrics.dogstatsd import DogStatsdMetrics
 from .raven_client import client
 from .router import Router
@@ -204,7 +204,7 @@ class App(Router):
 
         # validate tags
         for tag in tags.keys():
-            if tag not in valid_tags:
+            if tag not in valid_tags and tag not in VALID_GLOBAL_TAGS:
                 return Response('bad request check if valid tag name\n', status=400)
 
         try:
