@@ -52,6 +52,47 @@ VALID_EVENTS = {
         'integration': str,
         'experiment': bool,
     },
+    'feature.rate_limits.upgrade_clicked': {
+        'org_id': int,
+    },
+    'feature.data_forwarding.upgrade_clicked': {
+        'org_id': int,
+    },
+    'feature.discard_group.upgrade_clicked': {
+        'org_id': int,
+    },
+    'feature.custom_inbound_filters.upgrade_clicked': {
+        'org_id': int,
+    },
+    'feature.auth_provider.upgrade_clicked': {
+        'org_id': int,
+        'provider': str,
+    },
+    'integrations.index_viewed': {
+        'org_id': int,
+    },
+    'integrations.install_modal_opened': {
+        'org_id': int,
+        'integration': str,
+    },
+    'integrations.details_viewed': {
+        'org_id': int,
+        'integration': str,
+    },
+    'integrations.upgrade_clicked': {
+        'integration': str,
+        'org_id': int,
+        'feature': str,
+        'plan': str,
+    },
+    'install_prompt.banner_viewed': {
+        'org_id': int,
+        'page': str,
+    },
+    'install_prompt.banner_clicked': {
+        'org_id': int,
+        'page': str,
+    },
     'issue.search': {
         'query': str,
     },
@@ -67,17 +108,8 @@ VALID_EVENTS = {
         'org_id': int,
         'project_id': int,
     },
-    'platformpicker.search': {
-        'query': str,
-        'num_results': int,
-    },
-    'platformpicker.create_project': {
-    },
-    'platformpicker.select_platform': {
-        'platform': str,
-    },
-    'platformpicker.select_tab': {
-        'tab': str,
+    'membership_limit.upgrade_clicked': {
+        'org_id': int,
     },
     'omnisearch.open': {
     },
@@ -110,6 +142,18 @@ VALID_EVENTS = {
     'orgdash.resource_clicked': {
         'link': str,
         'title': str,
+    },
+    'platformpicker.search': {
+        'query': str,
+        'num_results': int,
+    },
+    'platformpicker.create_project': {
+    },
+    'platformpicker.select_platform': {
+        'platform': str,
+    },
+    'platformpicker.select_tab': {
+        'tab': str,
     },
     'releases.landing_card_clicked': {
         'org_id': int,
@@ -155,14 +199,6 @@ VALID_EVENTS = {
         'project_slug': str,
         'source': str,
     },
-    'install_prompt.banner_viewed': {
-        'org_id': int,
-        'page': str,
-    },
-    'install_prompt.banner_clicked': {
-        'org_id': int,
-        'page': str,
-    },
     'settings_search.open': {
     },
     'settings_search.select': {
@@ -181,40 +217,7 @@ VALID_EVENTS = {
         'group': str,
         'error_type': list,
     },
-    'integrations.index_viewed': {
-        'org_id': int,
-    },
-    'integrations.install_modal_opened': {
-        'org_id': int,
-        'integration': str,
-    },
-    'integrations.details_viewed': {
-        'org_id': int,
-        'integration': str,
-    },
-    'integrations.upgrade_clicked': {
-        'integration': str,
-        'org_id': int,
-        'feature': str,
-        'plan': str,
-    },
-    'feature.rate_limits.upgrade_clicked': {
-        'org_id': int,
-    },
-    'feature.data_forwarding.upgrade_clicked': {
-        'org_id': int,
-    },
-    'feature.discard_group.upgrade_clicked': {
-        'org_id': int,
-    },
-    'feature.custom_inbound_filters.upgrade_clicked': {
-        'org_id': int,
-    },
-    'feature.auth_provider.upgrade_clicked': {
-        'org_id': int,
-        'provider': str,
-    },
-    'membership_limit.upgrade_clicked': {
+    'trial.banner_clicked': {
         'org_id': int,
     },
 }
