@@ -25,6 +25,10 @@ VALID_METRICS = {
 
     # when the main js bundle fails to load
     'app.page.bundle-load-fail': ('increment', []),
+
+    'app.api.request-success': ('timing', ['path', 'status']),
+    'app.api.request-fail': ('timing', ['path', 'status']),
+    'app.api.request-abort': ('increment', []),
 }
 
 VALID_GLOBAL_TAGS = [
