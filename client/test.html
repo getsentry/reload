@@ -5,12 +5,24 @@
     <title>title</title>
     <script src="ra.min.js"></script>
     <script type="text/javascript">
-    ra.endpoint = 'http://localhost:8080'
-    ra.page()
-    ra.getAnonId()
-    ra.event('click', {'extra_key': 'xyz'})
-    ra.metric('app.page.bundle-load-fail', 1);
-    ra.metric('app.component.render', 123, {name: 'Main'})
+      ra.endpoint = 'http://localhost:8080'
+      ra.page()
+      ra.getAnonId()
+      ra.event('click', {'extra_key': 'xyz'})
+      ra.metric('app.page.bundle-load-fail', 1);
+      ra.metric('app.component.render', 123, {name: 'Main'})
+      setTimeout(function() {
+        ra.metric('app.page.bundle-load-fail', 1);
+        setTimeout(function() {
+          ra.metric('app.page.bundle-load-fail', 1);
+          setTimeout(function() {
+            ra.metric('app.page.bundle-load-fail', 1);
+            setTimeout(function() {
+              ra.metric('app.page.bundle-load-fail', 1);
+            }, 500);
+          }, 500);
+        }, 500);
+      }, 500);
     </script>
   </head>
   <body>

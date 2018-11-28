@@ -77,12 +77,14 @@ const performXhrSend = (endpoint, data) => {
   xhr.send(JSON.stringify(data));
 };
 
-let _batchDebounceId = null;
+let _batchThrottleId = null;
 const performBatchSend = () => {
-  if (_batchDebounceId) {
-    clearTimeout(_batchDebounceId);
+  if (_batchThrottleId) {
+    return;
   }
-  _batchDebounceId = setTimeout(() => {
+
+  // Batch/throttle requests into 1 second interval
+  _batchThrottleId = setTimeout(() => {
     // Clear _batchedData
     for (let key in _batchedData) {
       if (!_batchedData.hasOwnProperty(key)) {
@@ -93,6 +95,7 @@ const performBatchSend = () => {
       performXhrSend(key, _batchedData[key]);
       _batchedData[key] = [];
     }
+    _batchThrottleId = null;
   }, 1000);
 };
 
