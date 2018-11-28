@@ -127,6 +127,19 @@ class AppTests(TestCase):
         assert resp.status_code == 400
         assert resp.data == 'bad request check if valid tag name\n'
 
+    def test_globally_allowed_tags(self):
+        metric_data = {
+            "value": 123,
+            "metric_name": "app.page.body-load",
+            "tags": {
+                "release": "release-name",
+            }
+        }
+        resp = self.client.post('/metric/', data=json.dumps(metric_data))
+        assert resp.status_code == 201
+        assert self.mock_dogstatsd.timing.call_count == 1
+        assert self.mock_dogstatsd.timing.call_args[0] == ("app.page.body-load", 123 )
+        assert self.mock_dogstatsd.timing.call_args[1] == {"tags": {"release": "release-name"}}
 
     def test_bad_input(self):
         sent_data = {
