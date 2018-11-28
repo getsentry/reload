@@ -2,7 +2,7 @@ import json
 from base64 import b64decode
 from uuid import UUID, uuid1
 from unittest import TestCase
-from mock import patch, Mock
+from mock import patch, Mock, call
 from werkzeug.test import Client
 from werkzeug.wrappers import BaseResponse
 
@@ -113,7 +113,7 @@ class AppTests(TestCase):
         }
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 400
-        assert resp.data == 'bad request check if valid metric name\n'
+        assert resp.data == 'invalid_metric_name: bad request check if valid metric name'
 
     def test_invalid_metric_tags(self):
         metric_data = {
@@ -125,7 +125,7 @@ class AppTests(TestCase):
         }
         resp = self.client.post('/metric/', data=json.dumps(metric_data))
         assert resp.status_code == 400
-        assert resp.data == 'bad request check if valid tag name\n'
+        assert resp.data == 'app.page.body-load: bad request check if valid tag name'
 
     def test_globally_allowed_tags(self):
         metric_data = {
@@ -140,6 +140,50 @@ class AppTests(TestCase):
         assert self.mock_dogstatsd.timing.call_count == 1
         assert self.mock_dogstatsd.timing.call_args[0] == ("app.page.body-load", 123 )
         assert self.mock_dogstatsd.timing.call_args[1] == {"tags": {"release": "release-name"}}
+
+    def test_batch_metrics_with_valid_and_invalid_metrics(self):
+        data = json.dumps([{
+            "value": 123,
+            "metric_name": "invalid_metric_name",
+        },
+        {
+            "value": 123,
+            "metric_name": "app.page.body-load",
+            "tags": {
+                "invalid": "Invalid",
+            }
+        },
+        {
+            "value": 123,
+            "metric_name": "app.page.body-load",
+        }])
+
+        resp = self.client.post('/metric/', data=data)
+        assert resp.status_code == 400
+
+        assert self.mock_dogstatsd.timing.call_count == 1
+        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={})
+        assert resp.data == 'invalid_metric_name: bad request check if valid metric name\napp.page.body-load: bad request check if valid tag name'
+
+    def test_batch_metrics(self):
+        data = json.dumps([{
+            "value": 123,
+            "metric_name": "app.page.body-load",
+        },
+        {
+            "metric_name": "app.component.render",
+            "value": 123,
+            "tags": {
+                "name": "Main",
+            }
+        }])
+
+        resp = self.client.post('/metric/', data=data)
+        assert resp.status_code == 201
+
+        assert self.mock_dogstatsd.timing.call_count == 2
+        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={})
+        assert self.mock_dogstatsd.timing.mock_calls[1] == call("app.component.render", 123, tags={'name': 'Main'})
 
     def test_bad_input(self):
         sent_data = {
