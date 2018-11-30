@@ -123,12 +123,12 @@ VALID_EVENTS = {
         'project': str,
     },
     'onboarding.configure_viewed': {
-        'org_id', int,
+        'org_id': int,
         'project': str,
         'platform': str,
     },
     'onboarding.create_project_viewed': {
-        'org_id', int,
+        'org_id': int,
     },
     'onboarding.wizard_opened': {
         'org_id': int,
