@@ -182,6 +182,38 @@ class App(Router):
 
         return ok_response()
 
+    def track_single_metric(self, data):
+        metric_name = data.get('metric_name')
+        tags = data.get('tags', {})
+
+        # allowed list of metric names
+        if metric_name not in VALID_METRICS:
+            return '%s: bad request check if valid metric name' % metric_name
+
+        (metric_type, valid_tags,) = VALID_METRICS[metric_name]
+
+        # validate tags
+        for tag in tags.keys():
+            if tag not in valid_tags and tag not in VALID_GLOBAL_TAGS:
+                return '%s: bad request check if valid tag name' % metric_name
+
+        try:
+            value = data['value']
+        except KeyError as e:
+            # Allow default value for increment only
+            if metric_type == 'increment':
+                value = 1
+            else:
+                return '%s: bad request check if valid value for metric' % metric_name
+
+        try:
+            getattr(self.datadog_client, metric_type)(metric_name, value, tags=tags)
+        except Exception as e:
+            return '%s: failed request to metrics server' % metric_name
+
+        return None
+
+
     def metric(self, request):
         # Make sure we only get POST requests
         if request.method != 'POST':
@@ -192,34 +224,16 @@ class App(Router):
         except Exception:
             return Response('bad request expecting json\n', status=400)
 
-        metric_name = data.get('metric_name')
-        tags = data.get('tags', {})
+        metric_objects = data if isinstance(data, list) else [data]
 
+        errors = []
+        for metric_object in metric_objects:
+            error = self.track_single_metric(metric_object)
+            if error is not None:
+                errors.append(error)
 
-        # allowed list of metric names
-        if metric_name not in VALID_METRICS:
-            return Response('bad request check if valid metric name\n', status=400)
-
-        (metric_type, valid_tags,) = VALID_METRICS[metric_name]
-
-        # validate tags
-        for tag in tags.keys():
-            if tag not in valid_tags and tag not in VALID_GLOBAL_TAGS:
-                return Response('bad request check if valid tag name\n', status=400)
-
-        try:
-            value = data['value']
-        except KeyError as e:
-            # Allow default value for increment only
-            if metric_type == 'increment':
-                value = 1
-            else:
-                return Response('bad request check if valid value for metric\n', status=400)
-
-        try:
-            getattr(self.datadog_client, metric_type)(metric_name, value, tags=tags)
-        except Exception as e:
-            return Response('failed request to metrics server', status=400)
+        if errors:
+            return Response("\n".join(errors), status=400);
 
         return ok_response()
 

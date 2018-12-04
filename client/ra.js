@@ -71,7 +71,46 @@ const getContext = () => ({
   sent_at: Date.now().toString()
 });
 
-const send = (path, extraData) => {
+const performXhrSend = (endpoint, data) => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", endpoint);
+  xhr.send(JSON.stringify(data));
+};
+
+let _batchThrottleId = null;
+const performBatchSend = () => {
+  if (_batchThrottleId) {
+    return;
+  }
+
+  // Batch/throttle requests into 1 second interval
+  _batchThrottleId = setTimeout(() => {
+    // Clear _batchedData
+    for (let key in _batchedData) {
+      if (!_batchedData.hasOwnProperty(key)) {
+        return;
+      }
+
+      // Currently can only batch by endpoint (and only /metrics/)
+      performXhrSend(key, _batchedData[key]);
+      _batchedData[key] = [];
+    }
+    _batchThrottleId = null;
+  }, 1000);
+};
+
+const _batchedData = {};
+
+const batchSend = (endpoint, data) => {
+  if (!_batchedData[endpoint]) {
+    _batchedData[endpoint] = [];
+  }
+
+  _batchedData[endpoint].push(data);
+  performBatchSend();
+};
+
+const send = (path, extraData, batch) => {
   const user_id = get("gsID");
   const anonymous_id = getAnonId();
   let data = {
@@ -81,9 +120,8 @@ const send = (path, extraData) => {
 
   assign(data, getContext(), extraData);
 
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", window.ra.endpoint + path);
-  xhr.send(JSON.stringify(data));
+  const sendFunc = !batch ? performXhrSend : batchSend;
+  sendFunc(window.ra.endpoint + path, data);
 };
 
 const event = (name, extraData) => {
@@ -101,11 +139,15 @@ const identify = gsID => {
 };
 
 const metric = (name, value, tags) => {
-  send("/metric/", {
-    metric_name: name,
-    value,
-    tags
-  });
+  send(
+    "/metric/",
+    {
+      metric_name: name,
+      value,
+      tags
+    },
+    true
+  );
 };
 
 window.ra = { page, event, endpoint, identify, getAnonId, metric };
