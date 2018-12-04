@@ -1,4 +1,11 @@
 language: python
+
+addons:
+  apt:
+    update: true
+    packages:
+      - libgeoip-dev
+
 install:
   - make requirements-test
 script:
