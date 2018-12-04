@@ -2,12 +2,12 @@ VALID_METRICS = {
     ### metrics that occur inside of the React application ###
     'app.component.render': ('timing', ['name'],),
 
+    'app.component.async-component': ('timing', ['route', 'error'],),
+
     # TODO:
-    #  'app.component.api': [],
     #  'app.component.dynamic-import-fail': [],
 
     ### metrics related to page/script loads ###
-
     # time it takes to load scripts in <head>
     'app.page.head-load': (
         'timing',
