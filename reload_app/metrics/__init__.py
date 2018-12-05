@@ -27,7 +27,7 @@ VALID_METRICS = {
     'app.page.bundle-load-fail': ('increment', []),
 
     'app.api.request-success': ('timing', ['path', 'status']),
-    'app.api.request-fail': ('timing', ['path', 'status']),
+    'app.api.request-error': ('timing', ['path', 'status']),
     'app.api.request-abort': ('increment', []),
 }
 
