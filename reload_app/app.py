@@ -212,6 +212,8 @@ class App(Router):
             geo = geo_by_addr(ip_from_request(request))
             if geo is not None:
                 tags['country_code'] = geo.country.iso_code
+            else:
+                tags['country_code'] = 'unknown'
         except AddressNotFoundError:
           tags['country_code'] = 'unknown'
         except Exception:
