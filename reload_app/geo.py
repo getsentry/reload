@@ -2,13 +2,12 @@ import os
 
 # default is no-op
 def geo_by_addr(ip):
-    print('nope')
     pass
 
 def _init_geoip():
     global geo_by_addr
     try:
-        import GeoIP
+        import geoip2.database
     except ImportError:
         return
 
@@ -18,12 +17,12 @@ def _init_geoip():
         return
 
     try:
-        geo_db = GeoIP.open(geoip_path, GeoIP.GEOIP_MEMORY_CACHE)
+        geo_db = geoip2.database.Reader(geoip_path)
     except Exception:
         print("Error opening GeoIP database: %s" % geoip_path)
         return
 
-    geo_by_addr = geo_db.record_by_addr
+    geo_by_addr = geo_db.city
 
 
 _init_geoip()
