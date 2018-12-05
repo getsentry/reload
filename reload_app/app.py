@@ -4,7 +4,7 @@ import time
 
 from base64 import b64encode
 from datetime import datetime
-from geoip2.errors import AddressNotFound
+from geoip2.errors import AddressNotFoundError
 from google.cloud import pubsub_v1
 from json import load, dumps
 from werkzeug.wrappers import Response
@@ -53,15 +53,15 @@ class App(Router):
     def __init__(self, dataset, table, pubsub_project, pubsub_topic, datadog_prefix, datadog_host, datadog_port):
         super(App, self).__init__()
 
-        #self.worker = BigQueryWorker(dataset, table, flush_interval=1)
+        self.worker = BigQueryWorker(dataset, table, flush_interval=1)
 
         batch_settings = pubsub_v1.types.BatchSettings(
             max_bytes=1024*1024*5,
             max_latency=0.05,
             max_messages=1000,
         )
-        #self.publisher = pubsub_v1.PublisherClient(batch_settings)
-        #self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
+        self.publisher = pubsub_v1.PublisherClient(batch_settings)
+        self.topic = self.publisher.topic_path(pubsub_project, pubsub_topic)
         self.datadog_client = DogStatsdMetrics(datadog_prefix, prefix=datadog_prefix, host=datadog_host, port=datadog_port)
         self.datadog_client.setup()
 
@@ -212,7 +212,7 @@ class App(Router):
             geo = geo_by_addr(ip_from_request(request))
             if geo is not None:
                 tags['country_code'] = geo.country.iso_code
-        except AddressNotFound:
+        except AddressNotFoundError:
           tags['country_code'] = 'unknown'
         except Exception:
           tags['country_code'] = 'error'
