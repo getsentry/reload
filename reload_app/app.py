@@ -4,6 +4,7 @@ import time
 
 from base64 import b64encode
 from datetime import datetime
+from geoip2.errors import AddressNotFoundError
 from google.cloud import pubsub_v1
 from json import load, dumps
 from werkzeug.wrappers import Response
@@ -16,6 +17,7 @@ from .raven_client import client
 from .router import Router
 from .worker import BigQueryWorker
 from .utils import format_datetime, ip_from_request
+from .geo import geo_by_addr
 
 COMMON_FIELDS = ('url', 'referrer', 'title', 'path', 'search', 'anonymous_id', 'user_id')
 
@@ -182,7 +184,7 @@ class App(Router):
 
         return ok_response()
 
-    def track_single_metric(self, data):
+    def track_single_metric(self, data, request):
         metric_name = data.get('metric_name')
         tags = data.get('tags', {})
 
@@ -207,6 +209,18 @@ class App(Router):
                 return '%s: bad request check if valid value for metric' % metric_name
 
         try:
+            geo = geo_by_addr(ip_from_request(request))
+            if geo is not None:
+                tags['country_code'] = geo.country.iso_code
+            else:
+                tags['country_code'] = 'unknown'
+        except AddressNotFoundError:
+          tags['country_code'] = 'unknown'
+        except Exception:
+          tags['country_code'] = 'error'
+          client.captureException()
+
+        try:
             getattr(self.datadog_client, metric_type)(metric_name, value, tags=tags)
         except Exception as e:
             return '%s: failed request to metrics server' % metric_name
@@ -228,7 +242,7 @@ class App(Router):
 
         errors = []
         for metric_object in metric_objects:
-            error = self.track_single_metric(metric_object)
+            error = self.track_single_metric(metric_object, request)
             if error is not None:
                 errors.append(error)
 

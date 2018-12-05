@@ -27,6 +27,11 @@ class AppTests(TestCase):
         self.mock_dogstatsd = dogstatsd_cls.return_value = Mock(spec=['setup', 'gauge', 'increment', 'decrement', 'histogram', 'timing', 'timed',])
         self.addCleanup(patcher.stop)
 
+        patcher = patch('reload_app.app.geo_by_addr')
+        geo_by_addr_fn = patcher.start()
+        self.mock_geo_by_addr = geo_by_addr_fn.return_value = None
+        self.addCleanup(patcher.stop)
+
         if not getattr(self, 'client', None):
             app = make_app_from_environ()
             self.client = Client(app, BaseResponse)
@@ -94,7 +99,7 @@ class AppTests(TestCase):
         assert resp.status_code == 201
         assert self.mock_dogstatsd.timing.call_count == 1
         assert self.mock_dogstatsd.timing.call_args[0] == ("app.component.render", 123)
-        assert self.mock_dogstatsd.timing.call_args[1] == {'tags': {'name': 'Main'}}
+        assert self.mock_dogstatsd.timing.call_args[1] == {'tags': {'name': 'Main', 'country_code': 'unknown'}}
 
     def test_metric_timing(self):
         metric_data = {
@@ -139,7 +144,7 @@ class AppTests(TestCase):
         assert resp.status_code == 201
         assert self.mock_dogstatsd.timing.call_count == 1
         assert self.mock_dogstatsd.timing.call_args[0] == ("app.page.body-load", 123 )
-        assert self.mock_dogstatsd.timing.call_args[1] == {"tags": {"release": "release-name"}}
+        assert self.mock_dogstatsd.timing.call_args[1]['tags']['release'] == "release-name"
 
     def test_batch_metrics_with_valid_and_invalid_metrics(self):
         data = json.dumps([{
@@ -162,7 +167,7 @@ class AppTests(TestCase):
         assert resp.status_code == 400
 
         assert self.mock_dogstatsd.timing.call_count == 1
-        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={})
+        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={'country_code': 'unknown'})
         assert resp.data == 'invalid_metric_name: bad request check if valid metric name\napp.page.body-load: bad request check if valid tag name'
 
     def test_batch_metrics(self):
@@ -182,8 +187,8 @@ class AppTests(TestCase):
         assert resp.status_code == 201
 
         assert self.mock_dogstatsd.timing.call_count == 2
-        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={})
-        assert self.mock_dogstatsd.timing.mock_calls[1] == call("app.component.render", 123, tags={'name': 'Main'})
+        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={'country_code': 'unknown'})
+        assert self.mock_dogstatsd.timing.mock_calls[1] == call("app.component.render", 123, tags={'country_code': 'unknown', 'name': 'Main'})
 
     def test_bad_input(self):
         sent_data = {
