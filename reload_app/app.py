@@ -210,7 +210,8 @@ class App(Router):
 
         try:
             geo = geo_by_addr(ip_from_request(request))
-            tags['country_code'] = geo.country.iso_code
+            if geo is not None:
+                tags['country_code'] = geo.country.iso_code
         except AddressNotFoundError:
             pass
 
