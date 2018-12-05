@@ -4,6 +4,7 @@ import time
 
 from base64 import b64encode
 from datetime import datetime
+from geoip2.errors import AddressNotFound
 from google.cloud import pubsub_v1
 from json import load, dumps
 from werkzeug.wrappers import Response
@@ -211,8 +212,11 @@ class App(Router):
             geo = geo_by_addr(ip_from_request(request))
             if geo is not None:
                 tags['country_code'] = geo.country.iso_code
-        except:
-            client.captureException()
+        except AddressNotFound:
+          tags['country_code'] = 'unknown'
+        except Exception:
+          tags['country_code'] = 'error'
+          client.captureException()
 
         try:
             getattr(self.datadog_client, metric_type)(metric_name, value, tags=tags)
