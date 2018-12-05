@@ -1,8 +1,7 @@
 import os
 
-# default is no-op
 def geo_by_addr(ip):
-    pass
+    raise Exception('Problem loading geoip2 client')
 
 def _init_geoip():
     global geo_by_addr
