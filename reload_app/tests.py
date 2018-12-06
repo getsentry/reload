@@ -32,6 +32,18 @@ class AppTests(TestCase):
         self.mock_geo_by_addr = geo_by_addr_fn.return_value = None
         self.addCleanup(patcher.stop)
 
+        patcher = patch('reload_app.app.user_agent_parser.Parse')
+        user_agent_parser_fn = patcher.start()
+        self.mock_user_agent_parser = user_agent_parser_fn.return_value = {
+            'os': {
+                'family': 'Mac OS X',
+            },
+            'user_agent': {
+                'family': 'Chrome',
+            }
+        }
+        self.addCleanup(patcher.stop)
+
         if not getattr(self, 'client', None):
             app = make_app_from_environ()
             self.client = Client(app, BaseResponse)
@@ -99,7 +111,7 @@ class AppTests(TestCase):
         assert resp.status_code == 201
         assert self.mock_dogstatsd.timing.call_count == 1
         assert self.mock_dogstatsd.timing.call_args[0] == ("app.component.render", 123)
-        assert self.mock_dogstatsd.timing.call_args[1] == {'tags': {'name': 'Main', 'country_code': 'unknown'}}
+        assert self.mock_dogstatsd.timing.call_args[1] == {'tags': {'name': 'Main', 'country_code': 'unknown', 'browser': 'Chrome', 'os': 'Mac OS X'}}
 
     def test_metric_timing(self):
         metric_data = {
@@ -167,7 +179,7 @@ class AppTests(TestCase):
         assert resp.status_code == 400
 
         assert self.mock_dogstatsd.timing.call_count == 1
-        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={'country_code': 'unknown'})
+        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={'country_code': 'unknown', 'browser': "Chrome", 'os': 'Mac OS X'})
         assert resp.data == 'invalid_metric_name: bad request check if valid metric name\napp.page.body-load: bad request check if valid tag name'
 
     def test_batch_metrics(self):
@@ -187,8 +199,8 @@ class AppTests(TestCase):
         assert resp.status_code == 201
 
         assert self.mock_dogstatsd.timing.call_count == 2
-        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={'country_code': 'unknown'})
-        assert self.mock_dogstatsd.timing.mock_calls[1] == call("app.component.render", 123, tags={'country_code': 'unknown', 'name': 'Main'})
+        assert self.mock_dogstatsd.timing.mock_calls[0] == call("app.page.body-load", 123, tags={'country_code': 'unknown', 'browser': 'Chrome', 'os': 'Mac OS X'})
+        assert self.mock_dogstatsd.timing.mock_calls[1] == call("app.component.render", 123, tags={'country_code': 'unknown', 'name': 'Main', 'browser': 'Chrome', 'os': 'Mac OS X'})
 
     def test_bad_input(self):
         sent_data = {

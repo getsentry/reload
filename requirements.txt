@@ -4,4 +4,4 @@ google-cloud-bigquery==0.24.0
 google-cloud-pubsub==0.29.4
 raven==6.6.0
 geoip2==2.9.0
-
+ua-parser==0.8.0
