@@ -220,7 +220,6 @@ class App(Router):
         except AddressNotFoundError:
           tags['country_code'] = 'unknown'
         except Exception as e:
-          print(e)
           tags['country_code'] = 'error'
           client.captureException()
 
