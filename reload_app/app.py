@@ -219,13 +219,13 @@ class App(Router):
                 tags['country_code'] = 'unknown'
         except AddressNotFoundError:
           tags['country_code'] = 'unknown'
-        except Exception as e:
+        except Exception:
           tags['country_code'] = 'error'
           client.captureException()
 
         # attach UA data (browser)
         try:
-            ua = user_agent_parser.Parse(request.environ.get('HTTP_USER_AGENT'))
+            ua = user_agent_parser.Parse(request.environ.get('HTTP_USER_AGENT', ''))
             tags['browser'] = ua['user_agent']['family']
             tags['os'] = ua['os']['family']
         except Exception:
