@@ -68,6 +68,18 @@ VALID_EVENTS = {
         'org_id': int,
         'provider': str,
     },
+    'feature.rate_limits.learn_more_clicked': {
+        'org_id': int,
+    },
+    'feature.data_forwarding.learn_more_clicked': {
+        'org_id': int,
+    },
+    'feature.discard_group.learn_more_clicked': {
+        'org_id': int,
+    },
+    'feature.custom_inbound_filters.learn_more_clicked': {
+        'org_id': int,
+    },
     'integrations.index_viewed': {
         'org_id': int,
     },
