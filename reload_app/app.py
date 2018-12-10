@@ -8,7 +8,9 @@ from geoip2.errors import AddressNotFoundError
 from google.cloud import pubsub_v1
 from json import load, dumps
 from werkzeug.wrappers import Response
+from ua_parser import user_agent_parser
 from uuid import uuid1
+
 
 from .events import VALID_EVENTS
 from .metrics import VALID_METRICS, VALID_GLOBAL_TAGS
@@ -208,6 +210,7 @@ class App(Router):
             else:
                 return '%s: bad request check if valid value for metric' % metric_name
 
+        # attach geo data
         try:
             geo = geo_by_addr(ip_from_request(request))
             if geo is not None:
@@ -219,6 +222,16 @@ class App(Router):
         except Exception:
           tags['country_code'] = 'error'
           client.captureException()
+
+        # attach UA data (browser)
+        try:
+            ua = user_agent_parser.Parse(request.environ.get('HTTP_USER_AGENT', ''))
+            tags['browser'] = ua['user_agent']['family']
+            tags['os'] = ua['os']['family']
+        except Exception:
+            tags['browser'] = 'error'
+            tags['os'] = 'error'
+            client.captureException()
 
         try:
             getattr(self.datadog_client, metric_type)(metric_name, value, tags=tags)
