@@ -142,6 +142,17 @@ VALID_EVENTS = {
     'onboarding.create_project_viewed': {
         'org_id': int,
     },
+    'onboarding.survey_viewed': {
+        'org_id': int,
+        'project': str,
+        'platform': str,
+    },
+    'onboarding.survey_submitted': {
+        'org_id': int,
+        'project': str,
+        'platform': str,
+        'data': dict,
+    },
     'onboarding.wizard_opened': {
         'org_id': int,
     },
