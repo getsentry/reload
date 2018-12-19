@@ -96,6 +96,9 @@ VALID_EVENTS = {
     'issue.search': {
         'query': str,
     },
+    'issue.search_sidebar_clicked': {
+        'org_id': int,
+    },
     'issue_error_banner.viewed': {
         'org_id': int,
         'platform': str,
