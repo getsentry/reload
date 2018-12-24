@@ -254,6 +254,9 @@ VALID_EVENTS = {
     'trial.banner_clicked': {
         'org_id': int,
     },
+    'trial.request_another_clicked': {
+        'org_id': int,
+    },
     'feature.discard_group.modal_opened': {
         'org_id': int,
     },
