@@ -203,6 +203,7 @@ VALID_EVENTS = {
         'org_id': int,
         'project_id': int,
         'steps': list,
+        'cta': str,
     },
     'releases.progress_bar_clicked_next': {
         'org_id': int,
