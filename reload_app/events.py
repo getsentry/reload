@@ -189,6 +189,10 @@ VALID_EVENTS = {
     'platformpicker.select_tab': {
         'tab': str,
     },
+    'pricing.contact_sales_clicked': {
+        'org_id': int,
+        'source': str,
+    },
     'releases.landing_card_clicked': {
         'org_id': int,
         'project_id': int,
