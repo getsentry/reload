@@ -189,7 +189,7 @@ VALID_EVENTS = {
     'platformpicker.select_tab': {
         'tab': str,
     },
-    'pricing.contact_sales_clicked': {
+    'sales.contact_us_clicked': {
         'org_id': int,
         'source': str,
     },
