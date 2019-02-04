@@ -134,7 +134,7 @@ VALID_EVENTS = {
         'feature': str,
         'plan': str,
     },
-    'integrations.start_viewed': {
+    'integrations.trial_viewed': {
         'integration': str,
         'org_id': int,
         'feature': str,
@@ -166,7 +166,13 @@ VALID_EVENTS = {
         'org_id': int,
         'project_id': int,
     },
+    'membership_limit.trial_viewed': {
+        'org_id': int,
+    },
     'membership_limit.upgrade_clicked': {
+        'org_id': int,
+    },
+    'membership_limit.upgrade_viewed': {
         'org_id': int,
     },
     'omnisearch.open': {
