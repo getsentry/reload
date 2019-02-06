@@ -58,46 +58,60 @@ VALID_EVENTS = {
     'feature.auth_provider.upgrade_clicked': {
         'org_id': int,
         'provider': str,
+        'plan': str,
     },
     'feature.custom_inbound_filters.upgrade_clicked': {
         'org_id': int,
+        'plan': str,
     },
     'feature.data_forwarding.upgrade_clicked': {
         'org_id': int,
+        'plan': str,
     },
     'feature.discard_group.upgrade_clicked': {
         'org_id': int,
+        'plan': str,
     },
     'feature.rate_limits.upgrade_clicked': {
         'org_id': int,
+        'plan': str,
     },
     'feature.auth_provider.upgrade_viewed': {
         'org_id': int,
         'provider': str,
+        'plan': str,
     },
     'feature.custom_inbound_filters.trial_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'feature.data_forwarding.trial_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'feature.discard_group.trial_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'feature.rate_limits.trial_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'feature.custom_inbound_filters.upgrade_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'feature.data_forwarding.upgrade_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'feature.discard_group.upgrade_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'feature.rate_limits.upgrade_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'feature.custom_inbound_filters.learn_more_clicked': {
         'org_id': int,
@@ -168,12 +182,15 @@ VALID_EVENTS = {
     },
     'membership_limit.trial_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'membership_limit.upgrade_clicked': {
         'org_id': int,
+        'plan': str,
     },
     'membership_limit.upgrade_viewed': {
         'org_id': int,
+        'plan': str,
     },
     'omnisearch.open': {
     },
