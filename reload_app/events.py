@@ -48,6 +48,24 @@ VALID_EVENTS = {
     'docs.feedback-sent': {
         'useful': int,
     },
+    'environmentselector.toggle': {
+        'action': str,
+        'path': str,
+        'org_id': int,
+    },
+    'environmentselector.update': {
+        'count': int,
+        'path': str,
+        'org_id': int,
+    },
+    'environmentselector.clear': {
+        'path': str,
+        'org_id': int,
+    },
+    'environmentselector.direct_selection': {
+        'path': str,
+        'org_id': int,
+    },
     'experiment.installation_instructions': {
         'integration': str,
         'experiment': bool,
@@ -254,6 +272,25 @@ VALID_EVENTS = {
     },
     'platformpicker.select_tab': {
         'tab': str,
+    },
+    'projectselector.toggle': {
+        'action': str,
+        'path': str,
+        'org_id': int,
+    },
+    'projectselector.update': {
+        'count': int,
+        'path': str,
+        'multi': bool,
+        'org_id': int,
+    },
+    'projectselector.clear': {
+        'path': str,
+        'org_id': int,
+    },
+    'projectselector.direct_selection': {
+        'path': str,
+        'org_id': int,
     },
     'sales.contact_us_clicked': {
         'org_id': int,
