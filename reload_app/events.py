@@ -31,10 +31,14 @@ VALID_EVENTS = {
     },
     'dateselector.utc_changed': {
         'utc': bool,
+        'path': str,
+        'org_id': int,
     },
     'dateselector.time_changed': {
         'time': str,
         'field_changed': str,
+        'path': str,
+        'org_id': int,
     },
     'discover.query': {
         'org_id': int,
