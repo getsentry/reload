@@ -21,6 +21,19 @@ VALID_EVENTS = {
     'assistant.support': {
         'subject': str,
     },
+    'business_landing.viewed': {
+        'org_id': int,
+        'permissions': bool,
+        'referrer': str,
+        'is_modal': bool,
+        'type': str,
+    },
+    'business_landing.clicked': {
+        'org_id': int,
+        'referrer': str,
+        'is_modal': bool,
+        'type': str,
+    },
     'command_palette.open': {
     },
     'command_palette.select': {
