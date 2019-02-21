@@ -277,7 +277,6 @@ VALID_EVENTS = {
     'platformpicker.select_tab': {
         'tab': str,
     },
-<<<<<<< Updated upstream
     'projectselector.toggle': {
         'action': str,
         'path': str,
@@ -296,12 +295,11 @@ VALID_EVENTS = {
     'projectselector.direct_selection': {
         'path': str,
         'org_id': int,
-=======
+    },
     'power-icon.clicked': {
         'org_id': int,
         'plan': str,
         'source': str,
->>>>>>> Stashed changes
     },
     'sales.contact_us_clicked': {
         'org_id': int,
