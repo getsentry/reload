@@ -66,6 +66,9 @@ VALID_EVENTS = {
     'docs.feedback-sent': {
         'useful': int,
     },
+    'docs.cookie_consent': {
+        'consent': str,
+    },
     'environmentselector.toggle': {
         'action': str,
         'path': str,
