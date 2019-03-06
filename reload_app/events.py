@@ -313,7 +313,7 @@ VALID_EVENTS = {
         'path': str,
         'org_id': int,
     },
-    'power-icon.clicked': {
+    'power_icon.clicked': {
         'org_id': int,
         'plan': str,
         'source': str,
@@ -397,9 +397,5 @@ VALID_EVENTS = {
     },
     'trial.request_another_clicked': {
         'org_id': int,
-    },
-    'try_business.clicked': {
-        'org_id': int,
-        'plan': str,
     },
 }
