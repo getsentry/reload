@@ -26,6 +26,7 @@ VALID_EVENTS = {
         'plan': str,
         'source': str,
         'is_modal': bool,
+        'is_trial': bool,
         'has_permissions': bool,
     },
     'business_landing.clicked': {
@@ -33,6 +34,7 @@ VALID_EVENTS = {
         'plan': str,
         'source': str,
         'is_modal': bool,
+        'is_trial': bool,
         'type': str,
     },
     'command_palette.open': {
