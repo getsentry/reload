@@ -296,6 +296,10 @@ VALID_EVENTS = {
     'platformpicker.select_tab': {
         'tab': str,
     },
+    'projectselector.bookmark': {
+        'org_id': int,
+        'bookmarked': bool,
+    },
     'projectselector.toggle': {
         'action': str,
         'path': str,
