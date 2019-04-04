@@ -41,7 +41,7 @@ const assign =
 
 const getTLD = () => {
   // For development environments
-  if (["127.0.0.1", "0.0.0.0", "localhost"].includes(location.hostname)) {
+  if (["127.0.0.1", "0.0.0.0", "localhost"].indexOf(location.hostname) >= 0) {
     return location.host;
   }
 
