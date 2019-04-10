@@ -278,6 +278,18 @@ VALID_EVENTS = {
     'onboarding.show_instructions': {
         'project': str,
     },
+    'organization_saved_search.created': {
+        'organization_id': int,
+        'type': str,
+        'id': int,
+        'user_id': int,
+    },
+    'organization_saved_search.deleted': {
+        'organization_id': int,
+        'type': str,
+        'id': int,
+        'user_id': int,
+    },
     'orgdash.resources_shown': {
     },
     'orgdash.resource_clicked': {
