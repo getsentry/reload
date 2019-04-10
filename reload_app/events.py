@@ -278,13 +278,13 @@ VALID_EVENTS = {
     'onboarding.show_instructions': {
         'project': str,
     },
-    'organization-saved-search.created': {
+    'organization_saved_search.created': {
         'organization_id': int,
         'type': str,
         'id': int,
         'user_id': int,
     },
-    'organization-saved-search.deleted': {
+    'organization_saved_search.deleted': {
         'organization_id': int,
         'type': str,
         'id': int,
