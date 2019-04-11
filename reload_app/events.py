@@ -280,13 +280,13 @@ VALID_EVENTS = {
     },
     'organization_saved_search.created': {
         'organization_id': int,
-        'type': str,
+        'search_type': str,
         'id': int,
         'user_id': int,
     },
     'organization_saved_search.deleted': {
         'organization_id': int,
-        'type': str,
+        'search_type': str,
         'id': int,
         'user_id': int,
     },
