@@ -380,6 +380,12 @@ VALID_EVENTS = {
         "project_slug": str,
         "source": str,
     },
+    'search.pin': {
+        'org_id': int,
+        'search_type': str,  # "issues", "events"
+        'action': str,  # 'pin' or 'unpin'
+        'query': str,
+    },
     "settings_search.open": {},
     "settings_search.select": {
         "query": str,
