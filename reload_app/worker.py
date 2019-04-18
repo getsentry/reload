@@ -1,6 +1,6 @@
 from datetime import datetime
 from time import sleep
-from Queue import Queue, Empty
+from queue import Queue, Empty
 from threading import Lock, Thread
 from google.cloud.bigquery import Client as BigQuery
 
@@ -33,15 +33,15 @@ class BigQueryWorker(object):
 
     def queue(self, row):
         self._start()
-        self.q.put_nowait({
-            'json': row,
-            'insertId': row['id'],
-        })
+        self.q.put_nowait({"json": row, "insertId": row["id"]})
 
     def target(self):
         self.client = BigQuery()
-        self.path = '/projects/%s/datasets/%s/tables/%s$%%s/insertAll' % (
-            self.client.project, self.dataset, self.table)
+        self.path = "/projects/%s/datasets/%s/tables/%s$%%s/insertAll" % (
+            self.client.project,
+            self.dataset,
+            self.table,
+        )
 
         flush_interval = self.flush_interval
         queue = self.q
@@ -61,23 +61,27 @@ class BigQueryWorker(object):
                     import json
                     import sys
                     import traceback
-                    json.dump({
-                        'exc': traceback.format_exc(),
-                        'message': 'Failed to flush buffer',
-                    }, sys.stderr)
-                    sys.stderr.write('\n')
 
-                for _ in xrange(len(rows)):
+                    json.dump(
+                        {
+                            "exc": traceback.format_exc(),
+                            "message": "Failed to flush buffer",
+                        },
+                        sys.stderr,
+                    )
+                    sys.stderr.write("\n")
+
+                for _ in range(len(rows)):
                     queue.task_done()
 
             sleep(flush_interval)
 
     def flush(self, rows):
         self.client._connection.api_request(
-            method='POST',
-            path=self.path % datetime.today().strftime('%Y%m%d'),
+            method="POST",
+            path=self.path % datetime.today().strftime("%Y%m%d"),
             data={
-                'rows': rows,
+                "rows": rows,
                 # 'skipInvalidRows': True,
                 # 'ignoreUnknownValues': True,
             },

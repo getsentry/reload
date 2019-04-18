@@ -1,0 +1,9 @@
+[tool.black]
+target-version = ['py37']
+include = '\.py$'
+exclude = '''
+/(
+    \.git
+    client
+)/
+'''

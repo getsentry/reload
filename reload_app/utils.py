@@ -1,4 +1,4 @@
-_RFC3339_MICROS_NO_ZULU = '%Y-%m-%dT%H:%M:%S.%f'
+_RFC3339_MICROS_NO_ZULU = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 def format_datetime(dt):
