@@ -194,7 +194,7 @@ class App(Router):
             "type": EVENT_NAME_TEMPLATE % data["event_name"],
             "data": clean_data,
         }
-        self.publisher.publish(self.topic, data=dumps(row))
+        self.publisher.publish(self.topic, data=dumps(row).encode("utf8"))
 
         return ok_response()
 
