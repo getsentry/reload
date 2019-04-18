@@ -9,7 +9,7 @@ class Metrics(object):
 
     def _get_key(self, key):
         if self.prefix:
-            return '.'.join((self.prefix, key))
+            return ".".join((self.prefix, key))
         return key
 
     def _get_tags(self, tags=None):
@@ -19,7 +19,7 @@ class Metrics(object):
             tags.update(self.tags)
         if not tags:
             return None
-        return ['%s:%s' % i for i in tags.iteritems()]
+        return [f"{key}:{value}" for key, value in tags.items()]
 
     def gauge(self, metric, value, tags=None, sample_rate=1):
         pass

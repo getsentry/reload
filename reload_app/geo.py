@@ -1,7 +1,9 @@
 import os
 
+
 def geo_by_addr(ip):
-    raise Exception('Problem loading geoip2 client')
+    raise Exception("Problem loading geoip2 client")
+
 
 def _init_geoip():
     global geo_by_addr
@@ -10,7 +12,7 @@ def _init_geoip():
     except ImportError:
         return
 
-    geoip_path = os.environ.get('GEOIP_PATH')
+    geoip_path = os.environ.get("GEOIP_PATH")
     if not geoip_path:
         print("GEOIP_PATH environment variable required")
         return

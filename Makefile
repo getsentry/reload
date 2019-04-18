@@ -8,9 +8,16 @@ dev: requirements-test
 	PORT=8080 python ./run.py
 
 docker:
-	docker build --rm -t reload .
+	docker build --pull --rm -t reload .
 
 test:
-	py.test reload_app/tests.py
+	python -m pytest
 
-.PHONY: requirements requirements-test dev docker
+format:
+	python -m black .
+
+lint:
+	python -m flake8
+	python -m black --check .
+
+.PHONY: requirements requirements-test dev docker test format lint

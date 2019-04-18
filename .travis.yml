@@ -1,8 +1,12 @@
+sudo: true
+dist: xenial
+
 language: python
 python:
-  - '2.7'
+  - "3.7"
 
 install:
   - make requirements-test
 script:
-  - pytest reload_app/tests.py
+  - make lint
+  - make test
