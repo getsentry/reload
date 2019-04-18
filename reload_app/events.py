@@ -398,7 +398,7 @@ VALID_EVENTS = {
         'search_type': str,  # "issues" or "events"
         'search_source': str,  # "recent_search", "search_builder", "main_search",
     },
-    'search.used_autocomplete': {
+    'search.autocompleted': {
         'org_id': int,
         'query': str,
         'search_type': str,  # "issues" or "events"
