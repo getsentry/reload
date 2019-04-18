@@ -287,11 +287,11 @@ VALID_EVENTS = {
         "id": int,
         "user_id": int,
     },
-    'organization_saved_search.selected': {
-        'org_id': int,
-        'query': str,
-        'search_type': str,  # "issues" or "events"
-        'id': int,  # saved search id
+    "organization_saved_search.selected": {
+        "org_id": int,
+        "query": str,
+        "search_type": str,  # "issues" or "events"
+        "id": int,  # saved search id
     },
     "orgdash.resources_shown": {},
     "orgdash.resource_clicked": {
@@ -392,16 +392,16 @@ VALID_EVENTS = {
         "action": str,  # "pin" or "unpin"
         "query": str,
     },
-    'search.searched': {
-        'org_id': int,
-        'query': str,
-        'search_type': str,  # "issues" or "events"
-        'search_source': str,  # "recent_search", "search_builder", "main_search",
+    "search.searched": {
+        "org_id": int,
+        "query": str,
+        "search_type": str,  # "issues" or "events"
+        "search_source": str,  # "recent_search", "search_builder", "main_search",
     },
-    'search.autocompleted': {
-        'org_id': int,
-        'query': str,
-        'search_type': str,  # "issues" or "events"
+    "search.autocompleted": {
+        "org_id": int,
+        "query": str,
+        "search_type": str,  # "issues" or "events"
     },
     "settings_search.open": {},
     "settings_search.select": {
