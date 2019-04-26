@@ -166,9 +166,9 @@ VALID_EVENTS = {
     "feature.rate_limits.learn_more_clicked": {
         "org_id": int,
     },
-    "grace_period_modal_seen": {
+    "grace_period_modal.seen": {
         "org_id": int,
-    },    
+    },
     "integrations.index_viewed": {
         "org_id": int,
     },
@@ -222,7 +222,7 @@ VALID_EVENTS = {
         "org_id": int,
         "project_id": int,
     },
-    "member_limit_modal_seen": {
+    "member_limit_modal.seen": {
         "org_id": int,
     },
     "membership_limit.trial_viewed": {
@@ -304,7 +304,7 @@ VALID_EVENTS = {
         "link": str,
         "title": str,
     },
-    "past_due_modal_seen": {
+    "past_due_modal.seen": {
         "org_id": int,
     },
     "platformpicker.search": {
@@ -441,7 +441,7 @@ VALID_EVENTS = {
     "trial.request_another_clicked": {
         "org_id": int,
     },
-    "usage_exceeded_modal_seen": {
+    "usage_exceeded_modal.seen": {
         "org_id": int,
-    },    
+    },
 }
