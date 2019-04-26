@@ -282,16 +282,14 @@ VALID_EVENTS = {
         "project": str,
     },
     "organization_saved_search.created": {
-        "organization_id": int,
-        "search_type": int,
-        "id": int,
-        "user_id": int,
+        "org_id": int,
+        "search_type": str,
+        "query": str,
     },
     "organization_saved_search.deleted": {
-        "organization_id": int,
-        "search_type": int,
-        "id": int,
-        "user_id": int,
+        "org_id": int,
+        "search_type": str,
+        "query": str,
     },
     "organization_saved_search.selected": {
         "org_id": int,
