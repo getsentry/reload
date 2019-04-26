@@ -166,6 +166,9 @@ VALID_EVENTS = {
     "feature.rate_limits.learn_more_clicked": {
         "org_id": int,
     },
+    "grace_period_modal_seen": {
+        "org_id": int,
+    },    
     "integrations.index_viewed": {
         "org_id": int,
     },
@@ -218,6 +221,9 @@ VALID_EVENTS = {
         "group_id": int,
         "org_id": int,
         "project_id": int,
+    },
+    "member_limit_modal_seen": {
+        "org_id": int,
     },
     "membership_limit.trial_viewed": {
         "org_id": int,
@@ -297,6 +303,9 @@ VALID_EVENTS = {
     "orgdash.resource_clicked": {
         "link": str,
         "title": str,
+    },
+    "past_due_modal_seen": {
+        "org_id": int,
     },
     "platformpicker.search": {
         "query": str,
@@ -432,4 +441,7 @@ VALID_EVENTS = {
     "trial.request_another_clicked": {
         "org_id": int,
     },
+    "usage_exceeded_modal_seen": {
+        "org_id": int,
+    },    
 }
