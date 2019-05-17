@@ -281,6 +281,31 @@ VALID_EVENTS = {
     "onboarding.show_instructions": {
         "project": str,
     },
+    'onboarding_v2.step_compete': {
+        'org_id': int,
+        'project': str,
+        'step': str,
+    },
+    'onboarding_v2.skipped': {
+        'org_id': int,
+    },
+    'onboarding_v2.first_event_recieved': {
+        'org_id': int,
+        'project': str,
+    },
+    'onboarding_v2.setup_choice_selected': {
+        'org_id': int,
+        'choice': str,
+    },
+    'onboarding_v2.user_invited': {
+        'org_id': int,
+        'project': str,
+    },
+    'onboarding_v2.full_docs_clicked': {
+        'org_id': int,
+        'project': str,
+        'platform': str,
+    },
     "organization_saved_search.created": {
         "org_id": int,
         "search_type": str,
