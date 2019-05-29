@@ -57,6 +57,7 @@ class App(Router):
         "/page/": "page_view",
         "/event/": "event",
         "/metric/": "metric",
+        "/healthz": "healthz",
     }
     # fmt: on
 
@@ -274,6 +275,9 @@ class App(Router):
             return Response("\n".join(errors), status=400)
 
         return ok_response()
+
+    def healthz(self, request):
+        return Response("ok", status=200)
 
 
 def make_app_from_environ():
