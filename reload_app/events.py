@@ -1,8 +1,16 @@
 # fmt: off
 VALID_EVENTS = {
-    "assistant.search": {
-        "query": str,
-    },
+    # Core product analytics
+    #
+    # Generally you will want to categorize your events here.
+    #
+    # These are for usages of the product that we want to explicitly always
+    # track. These events should likely also be tracked in external services
+    # such as Amplitude.
+    #
+    # A good question to ask yourself to decide if a event falls into this
+    # category is "would these be part of an event funnel that I would like to
+    # understand?"
     "assistant.guide_cued": {
         "guide": int,
         "cue": str,
@@ -20,9 +28,6 @@ VALID_EVENTS = {
         "guide": int,
         "useful": bool,
         "org_id": int,
-    },
-    "assistant.support": {
-        "subject": str,
     },
     "business_landing.viewed": {
         "org_id": int,
@@ -56,12 +61,6 @@ VALID_EVENTS = {
         "session_id": str,
     },
     "command_palette.open": {},
-    "command_palette.select": {
-        "query": str,
-    },
-    "command_palette.query": {
-        "query": str,
-    },
     "dateselector.utc_changed": {
         "utc": bool,
         "path": str,
@@ -81,12 +80,6 @@ VALID_EVENTS = {
         "aggregations": list,
         "orderby": str,
         "limit": int,
-    },
-    "docs.feedback-sent": {
-        "useful": int,
-    },
-    "docs.cookie_consent": {
-        "consent": str,
     },
     "environmentselector.toggle": {
         "action": str,
@@ -221,9 +214,6 @@ VALID_EVENTS = {
     "install_prompt.banner_clicked": {
         "org_id": int, "page": str,
     },
-    "issue.search": {
-        "query": str,
-    },
     "issue.search_sidebar_clicked": {
         "org_id": int,
     },
@@ -261,12 +251,6 @@ VALID_EVENTS = {
         "plan": str,
     },
     "omnisearch.open": {},
-    "omnisearch.select": {
-        "query": str,
-    },
-    "omnisearch.query": {
-        "query": str,
-    },
     "onboarding.complete": {
         "project": str,
     },
@@ -304,46 +288,30 @@ VALID_EVENTS = {
     "onboarding.show_instructions": {
         "project": str,
     },
-    'onboarding_v2.step_compete': {
-        'org_id': int,
-        'project': str,
-        'step': str,
-    },
-    'onboarding_v2.skipped': {
-        'org_id': int,
-    },
-    'onboarding_v2.first_event_recieved': {
-        'org_id': int,
-        'project': str,
-    },
-    'onboarding_v2.setup_choice_selected': {
-        'org_id': int,
-        'choice': str,
-    },
-    'onboarding_v2.user_invited': {
-        'org_id': int,
-        'project': str,
-    },
-    'onboarding_v2.full_docs_clicked': {
-        'org_id': int,
-        'project': str,
-        'platform': str,
-    },
-    "organization_saved_search.created": {
+    "onboarding_v2.step_compete": {
         "org_id": int,
-        "search_type": str,
-        "query": str,
+        "project": str,
+        "step": str,
     },
-    "organization_saved_search.deleted": {
+    "onboarding_v2.skipped": {
         "org_id": int,
-        "search_type": str,
-        "query": str,
     },
-    "organization_saved_search.selected": {
+    "onboarding_v2.first_event_recieved": {
         "org_id": int,
-        "query": str,
-        "search_type": str,  # "issues" or "events"
-        "id": int,  # saved search id
+        "project": str,
+    },
+    "onboarding_v2.setup_choice_selected": {
+        "org_id": int,
+        "choice": str,
+    },
+    "onboarding_v2.user_invited": {
+        "org_id": int,
+        "project": str,
+    },
+    "onboarding_v2.full_docs_clicked": {
+        "org_id": int,
+        "project": str,
+        "platform": str,
     },
     "orgdash.resources_shown": {},
     "orgdash.resource_clicked": {
@@ -352,10 +320,6 @@ VALID_EVENTS = {
     },
     "past_due_modal.seen": {
         "org_id": int,
-    },
-    "platformpicker.search": {
-        "query": str,
-        "num_results": int,
     },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
@@ -441,34 +405,8 @@ VALID_EVENTS = {
         "project_slug": str,
         "source": str,
     },
-    "search.pin": {
-        "org_id": int,
-        "search_type": str,  # "issues", "events"
-        "action": str,  # "pin" or "unpin"
-        "query": str,
-    },
-    "search.searched": {
-        "org_id": int,
-        "query": str,
-        "search_type": str,  # "issues" or "events"
-        "search_source": str,  # "recent_search", "search_builder", "main_search",
-    },
-    "search.autocompleted": {
-        "org_id": int,
-        "query": str,
-        "search_type": str,  # "issues" or "events"
-    },
     "settings_search.open": {},
-    "settings_search.select": {
-        "query": str,
-    },
-    "settings_search.query": {
-        "query": str,
-    },
     "sidebar_help.open": {},
-    "sidebar_help.query": {
-        "query": str,
-    },
     "sourcemap.sourcemap_error": {
         "org_id": int,
         "group": str,
@@ -489,5 +427,94 @@ VALID_EVENTS = {
     },
     "usage_exceeded_modal.seen": {
         "org_id": int,
+    },
+
+    # Adhoc events
+    #
+    # These are events that are NOT bounded events, for example search queries
+    # or clicking specific results of a search.
+    #
+    # A good way to determine if an event falls into this category is to ask
+    # yourself the following questions:
+    #
+    # - Is this event going to be high volume?
+    # - Does this event contain unstructured data like search queries
+    # - Would you explicitly only write SQL queries / JOINs for this data to
+    #   get exact numbers? Or is it enough to exist in a tool such as Amplitude
+    #   for simple analytic.
+    #
+    # Otherwise you group your event above as a product analytics.
+    "assistant.search": {
+        "query": str,
+    },
+    "assistant.support": {
+        "subject": str,
+    },
+    "command_palette.query": {
+        "query": str,
+    },
+    "command_palette.select": {
+        "query": str,
+    },
+    "docs.feedback-sent": {
+        "useful": int,
+    },
+    "docs.cookie_consent": {
+        "consent": str,
+    },
+    "issue.search": {
+        "query": str,
+    },
+    "omnisearch.query": {
+        "query": str,
+    },
+    "omnisearch.select": {
+        "query": str,
+    },
+    "search.pin": {
+        "org_id": int,
+        "search_type": str,  # "issues", "events"
+        "action": str,  # "pin" or "unpin"
+        "query": str,
+    },
+    "search.autocompleted": {
+        "org_id": int,
+        "query": str,
+        "search_type": str,  # "issues" or "events"
+    },
+    "search.searched": {
+        "org_id": int,
+        "query": str,
+        "search_type": str,  # "issues" or "events"
+        "search_source": str,  # "recent_search", "search_builder", "main_search",
+    },
+    "settings_search.select": {
+        "query": str,
+    },
+    "settings_search.query": {
+        "query": str,
+    },
+    "sidebar_help.query": {
+        "query": str,
+    },
+    "organization_saved_search.created": {
+        "org_id": int,
+        "search_type": str,
+        "query": str,
+    },
+    "organization_saved_search.deleted": {
+        "org_id": int,
+        "search_type": str,
+        "query": str,
+    },
+    "organization_saved_search.selected": {
+        "org_id": int,
+        "query": str,
+        "search_type": str,  # "issues" or "events"
+        "id": int,  # saved search id
+    },
+    "platformpicker.search": {
+        "query": str,
+        "num_results": int,
     },
 }
