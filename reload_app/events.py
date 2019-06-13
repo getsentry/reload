@@ -38,6 +38,18 @@ VALID_EVENTS = {
         "is_trial": bool,
         "type": str,
     },
+    "checkout.step_activated": {
+        "org_id": int,
+        "step": int,
+        "step_name": str,
+        "plan": str,
+        "plan_tier": str,
+        "ondemand_max_spend": int,
+        "session_id": str,
+    },
+    "checkout.viewed": {
+        "org_id": int,
+    },
     "command_palette.open": {},
     "command_palette.select": {
         "query": str,
