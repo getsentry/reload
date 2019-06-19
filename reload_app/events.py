@@ -42,6 +42,7 @@ VALID_EVENTS = {
         "org_id": int,
         "step": int,
         "step_name": str,
+        "current_plan": str,
         "plan": str,
         "plan_tier": str,
         "ondemand_max_spend": int,
@@ -49,6 +50,8 @@ VALID_EVENTS = {
     },
     "checkout.viewed": {
         "org_id": int,
+        "current_plan": str,
+        "session_id": str,
     },
     "command_palette.open": {},
     "command_palette.select": {
