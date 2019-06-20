@@ -240,7 +240,7 @@ VALID_EVENTS = {
     # Track the redirects from legacy URLs of cross-project views (global views)
     "legacy_urls_global_views.redirect": {
         "from": str,
-        "to": str
+        "org_id": int,
     },
     "member_limit_modal.seen": {
         "org_id": int,
