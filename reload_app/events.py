@@ -241,6 +241,7 @@ VALID_EVENTS = {
     "legacy_urls_global_views.redirect": {
         "from": str,
         "org_id": int,
+        "project_id": int,
     },
     "member_limit_modal.seen": {
         "org_id": int,
