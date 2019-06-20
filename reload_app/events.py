@@ -237,11 +237,11 @@ VALID_EVENTS = {
         "org_id": int,
         "project_id": int,
     },
-    # Track the redirects from legacy URLs of cross-project views (global views)
-    "legacy_urls_global_views.redirect": {
-        "from": str,
-        "org_id": int,
-        "project_id": int,
+    # Track the redirects from deprecated URLs to newer URLs
+    "deprecated_urls.redirect": {
+        "feature": str,
+        "url": str,  # the URL being redirected from
+        "org_id": int
     },
     "member_limit_modal.seen": {
         "org_id": int,
