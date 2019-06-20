@@ -237,6 +237,11 @@ VALID_EVENTS = {
         "org_id": int,
         "project_id": int,
     },
+    # Track the redirects from URLs of pre-Sentry 10 to post-Sentry 10 URLs
+    "legacy_urls_pre_sentry10.redirect": {
+        "from": str,
+        "to": str
+    },
     "member_limit_modal.seen": {
         "org_id": int,
     },
