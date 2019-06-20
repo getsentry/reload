@@ -237,8 +237,8 @@ VALID_EVENTS = {
         "org_id": int,
         "project_id": int,
     },
-    # Track the redirects from URLs of pre-Sentry 10 to post-Sentry 10 URLs
-    "legacy_urls_pre_sentry10.redirect": {
+    # Track the redirects from legacy URLs of cross-project views (global views)
+    "legacy_urls_global_views.redirect": {
         "from": str,
         "to": str
     },
