@@ -51,24 +51,13 @@ RUN set -x \
 RUN mkdir -p /usr/src/reload
 WORKDIR /usr/src/reload
 
-# We need uwsgi for production deploy
-RUN pip install --no-cache-dir pyuwsgi==2.0.18.post0
-
 COPY requirements.txt /usr/src/reload
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY reload_app /usr/src/reload/reload_app
 COPY docker-entrypoint.sh /usr/src/reload
 
-ENV PORT=8000 \
-    UWSGI_MASTER=true \
-    UWSGI_MODULE=reload_app.wsgi:application \
-    UWSGI_DIE_ON_TERM=true \
-    UWSGI_ENABLE_THREADS=true \
-    UWSGI_NEED_APP=true \
-    UWSGI_LAZY_APPS=true
-
 EXPOSE 8000
 
 ENTRYPOINT ["/usr/src/reload/docker-entrypoint.sh"]
-CMD [ "uwsgi" ]
+CMD [ "mywsgi", "reload_app.wsgi:application", "0.0.0.0:8000" ]

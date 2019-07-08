@@ -5,3 +5,5 @@ google-cloud-pubsub==0.40.0
 raven==6.10.0
 geoip2==2.9.0
 ua-parser==0.8.0
+pyuwsgi==2.0.18.post0
+mywsgi==1.0.0

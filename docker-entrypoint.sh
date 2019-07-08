@@ -3,7 +3,7 @@
 set -e
 
 if [ "${1:0:1}" = '-' ]; then
-    set -- uwsgi "$@"
+    set -- mywsgi "$@"
 fi
 
 # Write credentials JSON to disk for google.auth to pick it up
@@ -16,9 +16,7 @@ if [ -n "$GOOGLE_APPLICATION_CREDENTIALS_JSON" ]; then
 fi
 
 
-if [ "$1" = 'uwsgi' -a "$(id -u)" = '0' ]; then
-    export UWSGI_HTTP=:${PORT}
-
+if [ "$1" = 'mywsgi' -a "$(id -u)" = '0' ]; then
     set -- gosu reload tini -- "$@"
 fi
 
