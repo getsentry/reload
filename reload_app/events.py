@@ -14,10 +14,12 @@ VALID_EVENTS = {
     "assistant.guide_dismissed": {
         "guide": int,
         "step": int,
+        "org_id": int,
     },
     "assistant.guide_finished": {
         "guide": int,
         "useful": bool,
+        "org_id": int,
     },
     "assistant.support": {
         "subject": str,
