@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.7-slim-buster
 
 RUN groupadd -r reload && useradd -r -g reload reload
 
@@ -48,11 +48,26 @@ RUN set -x \
     && rm -r "$GNUPGHOME" \
     && apt-get purge -y --auto-remove wget
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libmaxminddb-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN mkdir -p /usr/src/reload
 WORKDIR /usr/src/reload
 
 COPY requirements.txt /usr/src/reload
-RUN pip install --no-cache-dir -r requirements.txt
+
+RUN set -ex \
+    \
+    && buildDeps=' \
+        gcc \
+        libc6-dev \
+    ' \
+    && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
+    \
+    && pip install --no-cache-dir -r requirements.txt \
+    \
+    && apt-get purge -y --auto-remove $buildDeps
 
 COPY reload_app /usr/src/reload/reload_app
 COPY docker-entrypoint.sh /usr/src/reload
