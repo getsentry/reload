@@ -160,6 +160,26 @@ VALID_EVENTS = {
         "org_id": int,
         "plan": str,
     },
+    "feature.event_cause.viewed": {
+        "org_id": int,
+        "project_id": int,
+        "platform": str,
+    },
+    "feature.event_cause.docs_clicked": {
+        "org_id": int,
+        "project_id": int,
+        "platform": str,
+    },
+    "feature.event_cause.snoozed": {
+        "org_id": int,
+        "project_id": int,
+        "platform": str,
+    },
+    "feature.event_cause.dismissed": {
+        "org_id": int,
+        "project_id": int,
+        "platform": str,
+    },
     "feature.rate_limits.upgrade_viewed": {
         "org_id": int,
         "plan": str,
