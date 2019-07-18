@@ -251,28 +251,6 @@ VALID_EVENTS = {
         "plan": str,
     },
     "omnisearch.open": {},
-    "onboarding.complete": {
-        "project": str,
-    },
-    "onboarding.configure_viewed": {
-        "org_id": int,
-        "project": str,
-        "platform": str,
-    },
-    "onboarding.create_project_viewed": {
-        "org_id": int,
-    },
-    "onboarding.survey_viewed": {
-        "org_id": int,
-        "project": str,
-        "platform": str,
-    },
-    "onboarding.survey_submitted": {
-        "org_id": int,
-        "project": str,
-        "platform": str,
-        "data": dict,
-    },
     "onboarding.wizard_opened": {
         "org_id": int,
     },
@@ -284,9 +262,6 @@ VALID_EVENTS = {
         "todo_id": int,
         "todo_title": str,
         "action": str,
-    },
-    "onboarding.show_instructions": {
-        "project": str,
     },
     "onboarding_v2.step_compete": {
         "org_id": int,
