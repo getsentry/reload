@@ -99,6 +99,26 @@ VALID_EVENTS = {
         "path": str,
         "org_id": int,
     },
+    "event_cause.viewed": {
+        "org_id": int,
+        "project_id": int,
+        "platform": str,
+    },
+    "event_cause.docs_clicked": {
+        "org_id": int,
+        "project_id": int,
+        "platform": str,
+    },
+    "event_cause.snoozed": {
+        "org_id": int,
+        "project_id": int,
+        "platform": str,
+    },
+    "event_cause.dismissed": {
+        "org_id": int,
+        "project_id": int,
+        "platform": str,
+    },
     "experiment.installation_instructions": {
         "integration": str,
         "experiment": bool,
@@ -159,26 +179,6 @@ VALID_EVENTS = {
     "feature.discard_group.upgrade_viewed": {
         "org_id": int,
         "plan": str,
-    },
-    "feature.event_cause.viewed": {
-        "org_id": int,
-        "project_id": int,
-        "platform": str,
-    },
-    "feature.event_cause.docs_clicked": {
-        "org_id": int,
-        "project_id": int,
-        "platform": str,
-    },
-    "feature.event_cause.snoozed": {
-        "org_id": int,
-        "project_id": int,
-        "platform": str,
-    },
-    "feature.event_cause.dismissed": {
-        "org_id": int,
-        "project_id": int,
-        "platform": str,
     },
     "feature.rate_limits.upgrade_viewed": {
         "org_id": int,
