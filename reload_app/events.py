@@ -423,6 +423,18 @@ VALID_EVENTS = {
     "usage_exceeded_modal.seen": {
         "org_id": int,
     },
+    "user_feedback.viewed": {
+        "org_id": int,
+        "projects": list,
+    },
+    "user_feedback.docs_clicked": {
+        "org_id": int,
+        "projects": list,
+    },
+    "user_feedback.dialog_opened": {
+        "org_id": int,
+        "projects": list,
+    },
 
     # Adhoc events
     #
