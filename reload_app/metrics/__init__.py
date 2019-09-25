@@ -16,7 +16,7 @@ VALID_METRICS = {
     "app.api.request-success": ("timing", ["path", "status"]),
     "app.api.request-error": ("timing", ["path", "status"]),
     "app.api.request-abort": ("increment", []),
-    # used for performance measurements such as 
+    # used for performance measurements such as
     # when /organizations/{org_slug}/ endpoint finishes and state is refreshed
     "app.component.perf": ("timing", ["route", "organization_id"]),
 }
