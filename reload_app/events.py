@@ -451,12 +451,6 @@ VALID_EVENTS = {
     #   for simple analytic.
     #
     # Otherwise you group your event above as a product analytics.
-    "assistant.search": {
-        "query": str,
-    },
-    "assistant.support": {
-        "subject": str,
-    },
     "command_palette.query": {
         "query": str,
     },
@@ -468,9 +462,6 @@ VALID_EVENTS = {
     },
     "docs.cookie_consent": {
         "consent": str,
-    },
-    "issue.search": {
-        "query": str,
     },
     "omnisearch.query": {
         "query": str,
@@ -502,16 +493,6 @@ VALID_EVENTS = {
         "query": str,
     },
     "sidebar_help.query": {
-        "query": str,
-    },
-    "organization_saved_search.created": {
-        "org_id": int,
-        "search_type": str,
-        "query": str,
-    },
-    "organization_saved_search.deleted": {
-        "org_id": int,
-        "search_type": str,
         "query": str,
     },
     "organization_saved_search.selected": {
