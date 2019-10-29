@@ -234,6 +234,28 @@ VALID_EVENTS = {
     "install_prompt.banner_clicked": {
         "org_id": int, "page": str,
     },
+    "invite_modal.opened": {
+        "org_id": int,
+        "modal_session": str,
+        "can_invite": bool,
+        "source": str,
+    },
+    "invite_modal.requests_sent": {
+        "org_id": int,
+        "modal_session": str,
+    },
+    "invite_modal.invites_sent": {
+        "org_id": int,
+        "modal_session": str,
+    },
+    "invite_modal.add_more": {
+        "org_id": int,
+        "modal_session": str,
+    },
+    "invite_modal.closed": {
+        "org_id": int,
+        "modal_session": str,
+    },
     "invite_request.tab_viewed": {
         "org_id": int,
     },
