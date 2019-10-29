@@ -234,6 +234,23 @@ VALID_EVENTS = {
     "install_prompt.banner_clicked": {
         "org_id": int, "page": str,
     },
+    "invite_request.tab_viewed": {
+        "org_id": int,
+    },
+    "invite_request.tab_clicked": {
+        "org_id": int,
+    },
+    "invite_request.page_viewed": {
+        "org_id": int,
+    },
+    "invite_request.approved": {
+        "org_id": int,
+        "invite_status": str,
+    },
+    "invite_request.denied": {
+        "org_id": int,
+        "invite_status": str,
+    },
     "issue.search_sidebar_clicked": {
         "org_id": int,
     },
