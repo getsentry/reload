@@ -266,6 +266,9 @@ VALID_EVENTS = {
         "org_id": int,
         "project_id": int,
     },
+    "join_request.viewed": {
+        "org_slug": str,
+    },
     # Track the redirects from deprecated URLs to newer URLs
     "deprecated_urls.redirect": {
         "feature": str,
