@@ -246,10 +246,12 @@ VALID_EVENTS = {
     "invite_request.approved": {
         "org_id": int,
         "invite_status": str,
+        "member_id": int,
     },
     "invite_request.denied": {
         "org_id": int,
         "invite_status": str,
+        "member_id": int,
     },
     "issue.search_sidebar_clicked": {
         "org_id": int,
