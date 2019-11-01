@@ -81,7 +81,24 @@ VALID_EVENTS = {
         "orderby": str,
         "limit": int,
     },
-    "discover_v2.delete_query": {
+    "discover_v2.delete_query_failed": {
+        "error": str,
+        "fieldnames": list,
+        "fields": list,
+        "org_id": int,
+        "projects": list,
+        "query": str,
+        "tags": list,
+    },
+    "discover_v2.delete_query_request": {
+        "fieldnames": list,
+        "fields": list,
+        "org_id": int,
+        "projects": list,
+        "query": str,
+        "tags": list,
+    },
+    "discover_v2.delete_query_success": {
         "fieldnames": list,
         "fields": list,
         "org_id": int,
@@ -93,7 +110,8 @@ VALID_EVENTS = {
         "org_id": int,
         "query_name": str,
     },
-    "discover_v2.save_existing_query": {
+    "discover_v2.save_existing_query_failed": {
+        "error": str,
         "fieldnames": list,
         "fields": list,
         "org_id": int,
@@ -101,7 +119,7 @@ VALID_EVENTS = {
         "query": str,
         "tags": list,
     },
-    "discover_v2.save_new_query": {
+    "discover_v2.save_existing_query_request": {
         "fieldnames": list,
         "fields": list,
         "org_id": int,
@@ -109,7 +127,57 @@ VALID_EVENTS = {
         "query": str,
         "tags": list,
     },
-    "discover_v2.update_query": {
+    "discover_v2.save_existing_query_success": {
+        "fieldnames": list,
+        "fields": list,
+        "org_id": int,
+        "projects": list,
+        "query": str,
+        "tags": list,
+    },
+    "discover_v2.save_new_query_failed": {
+        "fieldnames": list,
+        "fields": list,
+        "org_id": int,
+        "projects": list,
+        "query": str,
+        "tags": list,
+        "error": str,
+    },
+    "discover_v2.save_new_query_request": {
+        "fieldnames": list,
+        "fields": list,
+        "org_id": int,
+        "projects": list,
+        "query": str,
+        "tags": list,
+    },
+    "discover_v2.save_new_query_success": {
+        "fieldnames": list,
+        "fields": list,
+        "org_id": int,
+        "projects": list,
+        "query": str,
+        "tags": list,
+    },
+    "discover_v2.update_query_failed": {
+        "error": str,
+        "fieldnames": list,
+        "fields": list,
+        "org_id": int,
+        "projects": list,
+        "query": str,
+        "tags": list,
+    },
+    "discover_v2.update_query_request": {
+        "fieldnames": list,
+        "fields": list,
+        "org_id": int,
+        "projects": list,
+        "query": str,
+        "tags": list,
+    },
+    "discover_v2.update_query_success": {
         "fieldnames": list,
         "fields": list,
         "org_id": int,
