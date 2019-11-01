@@ -244,6 +244,9 @@ VALID_EVENTS = {
         "from_index": int,
         "to_index": int,
         "org_id": int,
+        "aggregation": str,
+        "field": str,
+        "fieldname": str,
     },
     "environmentselector.toggle": {
         "action": str,
