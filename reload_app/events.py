@@ -227,7 +227,7 @@ VALID_EVENTS = {
     },
     "discover_v2.update_column": {
         "updated_at_index": int,
-        "changed": str,
+        "changed": list,
         "aggregation": str,
         "field": str,
         "fieldname": str,
