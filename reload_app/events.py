@@ -189,6 +189,65 @@ VALID_EVENTS = {
         "org_id": int,
         "y_axis_value": str,
     },
+    "discover_v2.table.column_header.edit_mode.enter": {
+        "org_id": int,
+    },
+    "discover_v2.table.column_header.edit_mode.exit": {
+        "org_id": int,
+    },
+    "discover_v2.facet_map.clicked": {
+        "tag": str,
+        "value": str,
+        "org_id": int,
+    },
+    "discover_v2.event_details": {
+        "event_type": str,
+        "org_id": int,
+    },
+    "discover_v2.edit_column.open_modal": {
+        "index": int,
+        "org_id": int,
+    },
+    "discover_v2.add_column.open_modal": {
+        "index": int,
+        "org_id": int,
+    },
+    "discover_v2.add_column": {
+        "insert_at_index": int,
+        "aggregation": str,
+        "field": str,
+        "fieldname": str,
+        "org_id": int,
+    },
+    "discover_v2.add_column.right_end": {
+        "aggregation": str,
+        "field": str,
+        "fieldname": str,
+        "org_id": int,
+    },
+    "discover_v2.update_column": {
+        "updated_at_index": int,
+        "changed": list,
+        "aggregation": str,
+        "field": str,
+        "fieldname": str,
+        "org_id": int,
+    },
+    "discover_v2.delete_column": {
+        "deleted_at_index": int,
+        "org_id": int,
+        "aggregation": str,
+        "field": str,
+        "fieldname": str,
+    },
+    "discover_v2.move_column": {
+        "from_index": int,
+        "to_index": int,
+        "org_id": int,
+        "aggregation": str,
+        "field": str,
+        "fieldname": str,
+    },
     "environmentselector.toggle": {
         "action": str,
         "path": str,
