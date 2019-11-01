@@ -236,6 +236,9 @@ VALID_EVENTS = {
     "discover_v2.delete_column": {
         "deleted_at_index": int,
         "org_id": int,
+        "aggregation": str,
+        "field": str,
+        "fieldname": str,
     },
     "discover_v2.move_column": {
         "from_index": int,
