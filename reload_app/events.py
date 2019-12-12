@@ -671,6 +671,12 @@ VALID_EVENTS = {
         "org_id": int,
         "projects": list,
     },
+    "zendesk_link.viewed": {
+        "org_id": int,
+    },
+    "zendesk_link.clicked": {
+        "org_id": int,
+    },
 
     # Adhoc events
     #
