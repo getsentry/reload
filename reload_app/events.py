@@ -222,7 +222,6 @@ VALID_EVENTS = {
     },
     "discover_v2.facet_map.clicked": {
         "tag": str,
-        "value": str,
         "org_id": int,
     },
     "discover_v2.event_details": {
