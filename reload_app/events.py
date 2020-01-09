@@ -83,7 +83,6 @@ VALID_EVENTS = {
     },
     "discover_v2.delete_query_failed": {
         "error": str,
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -91,7 +90,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.delete_query_request": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -99,7 +97,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.delete_query_success": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -112,7 +109,6 @@ VALID_EVENTS = {
     },
     "discover_v2.save_existing_query_failed": {
         "error": str,
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -120,7 +116,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.save_existing_query_request": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -128,7 +123,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.save_existing_query_success": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -136,7 +130,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.save_new_query_failed": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -145,7 +138,6 @@ VALID_EVENTS = {
         "error": str,
     },
     "discover_v2.save_new_query_request": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -153,7 +145,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.save_new_query_success": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -162,7 +153,6 @@ VALID_EVENTS = {
     },
     "discover_v2.update_query_failed": {
         "error": str,
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -170,7 +160,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.update_query_request": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -178,7 +167,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.update_query_success": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -187,7 +175,6 @@ VALID_EVENTS = {
     },
     "discover_v2.update_query_name_failed": {
         "error": str,
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -195,7 +182,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.update_query_name_request": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -203,7 +189,6 @@ VALID_EVENTS = {
         "tags": list,
     },
     "discover_v2.update_query_name_success": {
-        "fieldnames": list,
         "fields": list,
         "org_id": int,
         "projects": list,
@@ -241,13 +226,11 @@ VALID_EVENTS = {
         "insert_at_index": int,
         "aggregation": str,
         "field": str,
-        "fieldname": str,
         "org_id": int,
     },
     "discover_v2.add_column.right_end": {
         "aggregation": str,
         "field": str,
-        "fieldname": str,
         "org_id": int,
     },
     "discover_v2.update_column": {
@@ -255,7 +238,6 @@ VALID_EVENTS = {
         "changed": list,
         "aggregation": str,
         "field": str,
-        "fieldname": str,
         "org_id": int,
     },
     "discover_v2.delete_column": {
@@ -263,7 +245,6 @@ VALID_EVENTS = {
         "org_id": int,
         "aggregation": str,
         "field": str,
-        "fieldname": str,
     },
     "discover_v2.move_column": {
         "from_index": int,
@@ -271,7 +252,6 @@ VALID_EVENTS = {
         "org_id": int,
         "aggregation": str,
         "field": str,
-        "fieldname": str,
     },
     "environmentselector.toggle": {
         "action": str,
