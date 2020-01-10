@@ -731,6 +731,6 @@ VALID_EVENTS = {
         "org_id": int,
         "project_id": int,
         "sidebar_item_id": str,
-        "dest": str,  # the URL the click wil lbring you to
+        "dest": str,  # the URL the click will bring you to
     },
 }
