@@ -727,4 +727,10 @@ VALID_EVENTS = {
         "query": str,
         "num_results": int,
     },
+    "sidebar.item_clicked": {
+        "org_id": int,
+        "project_id": int,
+        "sidebar_item_id": str,
+        "dest": str,  # the URL the click will bring you to
+    },
 }
