@@ -361,6 +361,11 @@ VALID_EVENTS = {
     "integrations.install_modal_opened": {
         "org_id": int,
         "integration": str,
+        "integration_type": str,
+        "already_installed": bool,
+        "analytics_session_id": str,
+        "role": str,
+        "view": str,
     },
     "integrations.details_viewed": {
         "org_id": int,
