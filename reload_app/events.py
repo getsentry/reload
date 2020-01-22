@@ -357,6 +357,7 @@ VALID_EVENTS = {
     },
     "integrations.index_viewed": {
         "org_id": int,
+        "analytics_session_id": str,
         "integrations_installed": int,
         "view": str,
     },
