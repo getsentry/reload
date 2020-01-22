@@ -237,6 +237,14 @@ VALID_EVENTS = {
         "aggregation": str,
         "field": str,
     },
+    "discover_v2.opt_out": {
+        "org_id": int,
+        "user_id": int,
+    },
+    "discover_v2.opt_in": {
+        "org_id": int,
+        "user_id": int,
+    },
     "environmentselector.toggle": {
         "action": str,
         "path": str,
