@@ -369,6 +369,7 @@ VALID_EVENTS = {
         "analytics_session_id": str,
         "role": str,
         "view": str,
+        "integration_status": str,
     },
     "integrations.details_viewed": {
         "org_id": int,
@@ -376,6 +377,7 @@ VALID_EVENTS = {
         "analytics_session_id": str,
         "integration_type": str,
         "role": str,
+        "integration_status": str,
     },
     "integrations.installation_start": {
         "org_id": int,
@@ -383,6 +385,7 @@ VALID_EVENTS = {
         "analytics_session_id": str,
         "integration_type": str,
         "role": str,
+        "integration_status": str,
     },
     "integrations.installation_complete": {
         "org_id": int,
@@ -390,6 +393,7 @@ VALID_EVENTS = {
         "analytics_session_id": str,
         "integration_type": str,
         "role": str,
+        "integration_status": str,
     },
     "integrations.uninstall_clicked": {
         "org_id": int,
@@ -397,6 +401,7 @@ VALID_EVENTS = {
         "analytics_session_id": str,
         "integration_type": str,
         "role": str,
+        "integration_status": str,
     },
     "integrations.uninstall_completed": {
         "org_id": int,
@@ -404,6 +409,7 @@ VALID_EVENTS = {
         "analytics_session_id": str,
         "integration_type": str,
         "role": str,
+        "integration_status": str,
     },
     "integrations.upgrade_clicked": {
         "integration": str,
