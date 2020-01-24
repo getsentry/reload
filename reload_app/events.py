@@ -742,6 +742,8 @@ VALID_EVENTS = {
     },
     "command_palette.select": {
         "query": str,
+        "source_type": str,
+        "result_type": str,
     },
     "docs.feedback-sent": {
         "useful": int,
@@ -754,6 +756,8 @@ VALID_EVENTS = {
     },
     "omnisearch.select": {
         "query": str,
+        "source_type": str,
+        "result_type": str,
     },
     "search.pin": {
         "org_id": int,
@@ -774,6 +778,8 @@ VALID_EVENTS = {
     },
     "settings_search.select": {
         "query": str,
+        "source_type": str,
+        "result_type": str,
     },
     "settings_search.query": {
         "query": str,
