@@ -550,6 +550,13 @@ VALID_EVENTS = {
         "org_id": int,
         "plan": str,
     },
+    "new_project.alert_rule_selected": {
+        "org_id": int,
+        "project_id": int,
+        "rule_type": str,
+        "user_id": int,
+        "custom_rule_id": int,
+    },
     "omnisearch.open": {},
     "onboarding.wizard_opened": {
         "org_id": int,
