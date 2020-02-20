@@ -550,6 +550,9 @@ VALID_EVENTS = {
         "org_id": int,
         "plan": str,
     },
+    "new_project.visited": {
+        "org_id": int,
+    },
     "new_project.alert_rule_selected": {
         "org_id": int,
         "project_id": int,
