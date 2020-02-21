@@ -554,7 +554,6 @@ VALID_EVENTS = {
         "org_id": int,
         "project_id": int,
         "rule_type": str,
-        "user_id": int,
         "custom_rule_id": int,
     },
     "omnisearch.open": {},
