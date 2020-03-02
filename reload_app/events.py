@@ -602,7 +602,7 @@ VALID_EVENTS = {
     },
     "onboarding.wizard_clicked": {
         "org_id": int,
-        "todo_id": int,
+        "todo_id": str,
         "todo_title": str,
         "action": str,
     },
