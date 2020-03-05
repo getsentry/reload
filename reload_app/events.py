@@ -585,7 +585,7 @@ VALID_EVENTS = {
         "plan": str,
     },
     "new_project.visited": {
-        "org_id": int,
+        "organization_id": int,
         "alert_defaults_experiment_variant": str,
     },
     "new_project.alert_rule_selected": {
