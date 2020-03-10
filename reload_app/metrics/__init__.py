@@ -13,6 +13,7 @@ VALID_METRICS = {
     "app.page.bundle-load": ("timing", []),
     # when the main js bundle fails to load
     "app.page.bundle-load-fail": ("increment", []),
+    "app.api.discover-query": ("timing", ["status"]),
     "app.api.request-success": ("timing", ["path", "status"]),
     "app.api.request-error": ("timing", ["path", "status"]),
     "app.api.request-abort": ("increment", []),
