@@ -12,20 +12,20 @@ VALID_EVENTS = {
     # category is "would these be part of an event funnel that I would like to
     # understand?"
     "assistant.guide_cued": {
-        "guide": int,
+        "guide": str,
         "cue": str,
         "org_id": int,
     },
     "assistant.guide_opened": {
-        "guide": int,
+        "guide": str,
     },
     "assistant.guide_dismissed": {
-        "guide": int,
+        "guide": str,
         "step": int,
         "org_id": int,
     },
     "assistant.guide_finished": {
-        "guide": int,
+        "guide": str,
         "useful": bool,
         "org_id": int,
     },
