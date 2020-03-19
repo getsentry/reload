@@ -14,7 +14,6 @@ VALID_EVENTS = {
     "alert_details.viewed": {
         "alert_id": int,
         "org_id": int,
-        "project_id": int,
     },
     "alert_stream.viewed": {
         "org_id": int,
