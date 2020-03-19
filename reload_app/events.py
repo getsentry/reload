@@ -15,6 +15,7 @@ VALID_EVENTS = {
         "guide": str,
         "cue": str,
         "org_id": int,
+        "user_id": int,
     },
     "assistant.guide_opened": {
         "guide": str,
@@ -23,11 +24,13 @@ VALID_EVENTS = {
         "guide": str,
         "step": int,
         "org_id": int,
+        "user_id": int,
     },
     "assistant.guide_finished": {
         "guide": str,
         "useful": bool,
         "org_id": int,
+        "user_id": int,
     },
     "business_landing.viewed": {
         "org_id": int,
