@@ -17,7 +17,7 @@ VALID_EVENTS = {
     },
     "alert_stream.viewed": {
         "org_id": int,
-        "status": string,
+        "status": str,
     },
     "assistant.guide_cued": {
         "guide": str,
