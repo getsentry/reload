@@ -11,6 +11,14 @@ VALID_EVENTS = {
     # A good question to ask yourself to decide if a event falls into this
     # category is "would these be part of an event funnel that I would like to
     # understand?"
+    "alert_details.viewed": {
+        "alert_id": int,
+        "org_id": int,
+    },
+    "alert_stream.viewed": {
+        "org_id": int,
+        "status": str,
+    },
     "assistant.guide_cued": {
         "guide": str,
         "cue": str,
@@ -593,6 +601,10 @@ VALID_EVENTS = {
         "project_id": int,
         "rule_type": str,
         "custom_rule_id": int,
+    },
+    "new_alert_rule.viewed": {
+        "org_id": int,
+        "project_id": int,
     },
     "omnisearch.open": {},
     "onboarding.wizard_opened": {
