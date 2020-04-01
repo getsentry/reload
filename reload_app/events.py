@@ -112,6 +112,9 @@ VALID_EVENTS = {
         "org_id": int,
         "query_name": str,
     },
+    "discover_v2.build_new_query": {
+        "org_id": int,
+    },
     "discover_v2.save_existing_query_failed": {
         "error": str,
         "fields": list,
