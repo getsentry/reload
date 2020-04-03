@@ -146,6 +146,23 @@ VALID_EVENTS = {
         "projects": list,
         "query": str,
     },
+    "discover_v2.saved_query.search": {
+        "org_id": int,
+        "user_id": int,
+    },
+    "discover_v2.results.download_csv": {
+        "org_id": int,
+        "user_id": int,
+    },
+    "discover_v2.results.drilldown": {
+        "org_id": int,
+        "user_id": int,
+    },
+    "discover_v2.results.cellaction": {
+        "org_id": int,
+        "user_id": int,
+        "action": str,
+    },
     "discover_v2.y_axis_change": {
         "org_id": int,
         "y_axis_value": str,
