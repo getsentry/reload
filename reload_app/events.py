@@ -115,44 +115,6 @@ VALID_EVENTS = {
     "discover_v2.build_new_query": {
         "org_id": int,
     },
-    "discover_v2.save_existing_query_failed": {
-        "error": str,
-        "fields": list,
-        "org_id": int,
-        "projects": list,
-        "query": str,
-    },
-    "discover_v2.save_existing_query_request": {
-        "fields": list,
-        "org_id": int,
-        "projects": list,
-        "query": str,
-    },
-    "discover_v2.save_existing_query_success": {
-        "fields": list,
-        "org_id": int,
-        "projects": list,
-        "query": str,
-    },
-    "discover_v2.save_new_query_failed": {
-        "fields": list,
-        "org_id": int,
-        "projects": list,
-        "query": str,
-        "error": str,
-    },
-    "discover_v2.save_new_query_request": {
-        "fields": list,
-        "org_id": int,
-        "projects": list,
-        "query": str,
-    },
-    "discover_v2.save_new_query_success": {
-        "fields": list,
-        "org_id": int,
-        "projects": list,
-        "query": str,
-    },
     "discover_v2.update_query_failed": {
         "error": str,
         "fields": list,
@@ -172,13 +134,6 @@ VALID_EVENTS = {
         "projects": list,
         "query": str,
     },
-    "discover_v2.update_query_name_failed": {
-        "error": str,
-        "fields": list,
-        "org_id": int,
-        "projects": list,
-        "query": str,
-    },
     "discover_v2.update_query_name_request": {
         "fields": list,
         "org_id": int,
@@ -190,6 +145,23 @@ VALID_EVENTS = {
         "org_id": int,
         "projects": list,
         "query": str,
+    },
+    "discover_v2.saved_query.search": {
+        "org_id": int,
+        "user_id": int,
+    },
+    "discover_v2.results.download_csv": {
+        "org_id": int,
+        "user_id": int,
+    },
+    "discover_v2.results.drilldown": {
+        "org_id": int,
+        "user_id": int,
+    },
+    "discover_v2.results.cellaction": {
+        "org_id": int,
+        "user_id": int,
+        "action": str,
     },
     "discover_v2.y_axis_change": {
         "org_id": int,
@@ -208,45 +180,6 @@ VALID_EVENTS = {
     "discover_v2.event_details": {
         "event_type": str,
         "org_id": int,
-    },
-    "discover_v2.edit_column.open_modal": {
-        "index": int,
-        "org_id": int,
-    },
-    "discover_v2.add_column.open_modal": {
-        "index": int,
-        "org_id": int,
-    },
-    "discover_v2.add_column": {
-        "insert_at_index": int,
-        "aggregation": str,
-        "field": str,
-        "org_id": int,
-    },
-    "discover_v2.add_column.right_end": {
-        "aggregation": str,
-        "field": str,
-        "org_id": int,
-    },
-    "discover_v2.update_column": {
-        "updated_at_index": int,
-        "changed": list,
-        "aggregation": str,
-        "field": str,
-        "org_id": int,
-    },
-    "discover_v2.delete_column": {
-        "deleted_at_index": int,
-        "org_id": int,
-        "aggregation": str,
-        "field": str,
-    },
-    "discover_v2.move_column": {
-        "from_index": int,
-        "to_index": int,
-        "org_id": int,
-        "aggregation": str,
-        "field": str,
     },
     "discover_v2.opt_out": {
         "org_id": int,
