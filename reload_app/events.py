@@ -655,6 +655,28 @@ VALID_EVENTS = {
     "past_due_modal.seen": {
         "org_id": int,
     },
+    "performance_views.overview.sort": {
+        "org_id": int,
+        "field": str,
+    },
+    "performance_views.overview.navigate.summary": {
+        "org_id": int,
+    },
+    "performance_views.overview.search": {
+        "org_id": int,
+    },
+    "performance_views.latency_chart.zoom": {
+        "org_id": int,
+    },
+    "performance_views.summary.view_in_discover": {
+        "org_id": int,
+    },
+    "performance_views.summary.view_details": {
+        "org_id": int,
+    },
+    "performance_views.key_transactions.add": {
+        "org_id": int,
+    },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
         "platform": str,
