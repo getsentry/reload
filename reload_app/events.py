@@ -420,6 +420,13 @@ VALID_EVENTS = {
         "search_term": str,
         "num_results": int,
     },
+    "integrations.directory_category_selected": {
+        "org_id": int,
+        "analytics_session_id": str,
+        "role": str,
+        "view": str,
+        "category": str,
+    },
     "integrations.upgrade_clicked": {
         "integration": str,
         "org_id": int,
