@@ -503,7 +503,6 @@ VALID_EVENTS = {
         "error_message": list,
     },
     "issue_page.viewed": {
-        "group_id": int,
         "org_id": int,
         "project_id": int,
     },
@@ -539,7 +538,6 @@ VALID_EVENTS = {
         "org_id": int,
         "project_id": int,
         "rule_type": str,
-        "custom_rule_id": int,
     },
     "new_alert_rule.viewed": {
         "org_id": int,
@@ -560,7 +558,6 @@ VALID_EVENTS = {
     },
     "onboarding_v2.step_compete": {
         "org_id": int,
-        "project": str,
         "step": str,
     },
     "onboarding_v2.skipped": {
@@ -568,7 +565,6 @@ VALID_EVENTS = {
     },
     "onboarding_v2.first_event_recieved": {
         "org_id": int,
-        "project": str,
     },
     "onboarding_v2.setup_choice_selected": {
         "org_id": int,
