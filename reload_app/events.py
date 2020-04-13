@@ -166,9 +166,6 @@ VALID_EVENTS = {
     "discover_v2.table.column_header.edit_mode.enter": {
         "org_id": int,
     },
-    "discover_v2.table.column_header.edit_mode.exit": {
-        "org_id": int,
-    },
     "discover_v2.facet_map.clicked": {
         "tag": str,
         "org_id": int,
