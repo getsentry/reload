@@ -182,6 +182,9 @@ VALID_EVENTS = {
     "discover_v2.column_editor.open": {
         "org_id": int,
     },
+    "discover_v2.update_columns": {
+        "org_id": int,
+    },
     "environmentselector.toggle": {
         "action": str,
         "path": str,
