@@ -179,6 +179,9 @@ VALID_EVENTS = {
         "org_id": int,
         "user_id": int,
     },
+    "discover_v2.column_editor.open": {
+        "org_id": int,
+    },
     "environmentselector.toggle": {
         "action": str,
         "path": str,
