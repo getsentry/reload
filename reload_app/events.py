@@ -163,12 +163,6 @@ VALID_EVENTS = {
         "org_id": int,
         "y_axis_value": str,
     },
-    "discover_v2.table.column_header.edit_mode.enter": {
-        "org_id": int,
-    },
-    "discover_v2.table.column_header.edit_mode.exit": {
-        "org_id": int,
-    },
     "discover_v2.facet_map.clicked": {
         "tag": str,
         "org_id": int,
@@ -184,6 +178,12 @@ VALID_EVENTS = {
     "discover_v2.opt_in": {
         "org_id": int,
         "user_id": int,
+    },
+    "discover_v2.column_editor.open": {
+        "org_id": int,
+    },
+    "discover_v2.update_columns": {
+        "org_id": int,
     },
     "environmentselector.toggle": {
         "action": str,
