@@ -300,6 +300,12 @@ VALID_EVENTS = {
     "feature.rate_limits.learn_more_clicked": {
         "org_id": int,
     },
+    "trial_ended_notice.dismissed_understood": {
+        "org_id": int,
+    },
+    "trial_ended_notice.dismissed_upgrade": {
+        "org_id": int,
+    },
     "grace_period_modal.seen": {
         "org_id": int,
     },
