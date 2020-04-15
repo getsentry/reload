@@ -206,22 +206,18 @@ VALID_EVENTS = {
     "event_cause.viewed": {
         "org_id": int,
         "project_id": int,
-        "platform": str,
     },
     "event_cause.docs_clicked": {
         "org_id": int,
         "project_id": int,
-        "platform": str,
     },
     "event_cause.snoozed": {
         "org_id": int,
         "project_id": int,
-        "platform": str,
     },
     "event_cause.dismissed": {
         "org_id": int,
         "project_id": int,
-        "platform": str,
     },
     "experiment.installation_instructions": {
         "integration": str,
