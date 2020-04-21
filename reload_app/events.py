@@ -80,6 +80,18 @@ VALID_EVENTS = {
         "path": str,
         "org_id": int,
     },
+    # Track the redirects from deprecated URLs to newer URLs
+    "deprecated_urls.redirect": {
+        "feature": str,
+        "url": str,  # the URL being redirected from
+        "org_id": int
+    },
+    # Track deprecated features
+    "deprecated.feature": {
+        "feature": str,
+        "url": str,  # optional
+        "org_id": int
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
@@ -510,12 +522,6 @@ VALID_EVENTS = {
     },
     "join_request.viewed": {
         "org_slug": str,
-    },
-    # Track the redirects from deprecated URLs to newer URLs
-    "deprecated_urls.redirect": {
-        "feature": str,
-        "url": str,  # the URL being redirected from
-        "org_id": int
     },
     "member_limit_modal.seen": {
         "org_id": int,
