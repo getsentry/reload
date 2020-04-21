@@ -20,6 +20,13 @@ VALID_METRICS = {
     # used for performance measurements such as
     # when /organizations/{org_slug}/ endpoint finishes and state is refreshed
     "app.component.perf": ("timing", ["name", "route", "organization_id"]),
+
+    # app.perf.page.<name> are metrics to measure load time for specific pages
+    # Group: Control or experiment group for perf upgrades
+    # Milestone: Key points in the loading of a page (e.g. First Meaningful Paint)
+    # Type: Cold-start or warm-start for loading a page
+    "app.perf.page.issue-list": ("timing": ["organization_id", "group", "type", "milestone"]),
+    "app.perf.page.issue-detail": ("timing": ["organization_id", "group", "type", "milestone"]),
 }
 
 VALID_GLOBAL_TAGS = {"release"}
