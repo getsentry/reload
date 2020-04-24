@@ -19,6 +19,10 @@ VALID_EVENTS = {
         "org_id": int,
         "status": str,
     },
+    "alert_stream.documentation_clicked": {
+        "org_id": int,
+        "user_id": int,
+    },
     "assistant.guide_cued": {
         "guide": str,
         "cue": str,
