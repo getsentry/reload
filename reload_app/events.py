@@ -23,6 +23,15 @@ VALID_EVENTS = {
         "org_id": int,
         "user_id": int,
     },
+    "am_beta.learn_more_clicked": {
+        "org_id": int,
+    },
+    "am_beta.viewed": {
+        "org_id": int,
+    },
+    "am_beta_modal.docs_clicked": {
+        "org_id": int,
+    },
     "assistant.guide_cued": {
         "guide": str,
         "cue": str,
