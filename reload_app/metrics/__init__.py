@@ -4,6 +4,7 @@ VALID_METRICS = {
     "app.component.async-component": ("timing", ["route", "error"]),
     # TODO:
     #  'app.component.dynamic-import-fail': [],
+
     ### metrics related to page/script loads ###
     # time it takes to load scripts in <head>
     "app.page.head-load": ("timing", []),
@@ -22,11 +23,11 @@ VALID_METRICS = {
     "app.component.perf": ("timing", ["name", "route", "organization_id"]),
 
     # app.perf.page.<name> are metrics to measure load time for specific pages
-    # Group: Control or experiment group for perf upgrades
-    # Milestone: Key points in the loading of a page (e.g. First Meaningful Paint)
-    # Type: Cold-start or warm-start for loading a page
-    "app.perf.page.issue-list": ("timing": ["organization_id", "group", "start_type", "milestone"]),
-    "app.perf.page.issue-detail": ("timing": ["organization_id", "group", "start_type", "milestone"]),
+    # - group: Control or experiment group for perf upgrades
+    # - milestone: Key points in the loading of a page (e.g. First Meaningful Paint)
+    # - start_type: 'cold-start' or 'warm-start' for loading a page
+    "app.page.perf.issue-list": ("timing", ["organization_slug", "group", "start_type", "milestone"]),
+    "app.page.perf.issue-detail": ("timing", ["organization_slug", "group", "start_type", "milestone"]),
 }
 
 VALID_GLOBAL_TAGS = {"release"}
