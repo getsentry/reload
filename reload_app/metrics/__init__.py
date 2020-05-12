@@ -25,8 +25,8 @@ VALID_METRICS = {
     # Group: Control or experiment group for perf upgrades
     # Milestone: Key points in the loading of a page (e.g. First Meaningful Paint)
     # Type: Cold-start or warm-start for loading a page
-    "app.perf.page.issue-list": ("timing": ["organization_id", "group", "type", "milestone"]),
-    "app.perf.page.issue-detail": ("timing": ["organization_id", "group", "type", "milestone"]),
+    "app.perf.page.issue-list": ("timing": ["organization_id", "group", "start_type", "milestone"]),
+    "app.perf.page.issue-detail": ("timing": ["organization_id", "group", "start_type", "milestone"]),
 }
 
 VALID_GLOBAL_TAGS = {"release"}
