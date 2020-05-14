@@ -4,7 +4,6 @@ VALID_METRICS = {
     "app.component.async-component": ("timing", ["route", "error"]),
     # TODO:
     #  'app.component.dynamic-import-fail': [],
-
     ### metrics related to page/script loads ###
     # time it takes to load scripts in <head>
     "app.page.head-load": ("timing", []),
@@ -21,18 +20,17 @@ VALID_METRICS = {
     # used for performance measurements such as
     # when /organizations/{org_slug}/ endpoint finishes and state is refreshed
     "app.component.perf": ("timing", ["name", "route", "organization_id"]),
-
     # app.perf.page.<name> are metrics to measure load time for specific pages
     # - group: Control or experiment group for perf upgrades
     # - milestone: Key points in the loading of a page (e.g. First Meaningful Paint)
     # - start_type: 'cold-start' or 'warm-start' for loading a page
     "app.page.perf.issue-list": (
         "timing",
-        ["org_id", "group", "start_type", "milestone"]
+        ["org_id", "group", "start_type", "milestone"],
     ),
     "app.page.perf.issue-detail": (
         "timing",
-        ["org_id", "group", "start_type", "milestone"]
+        ["org_id", "group", "start_type", "milestone"],
     ),
 }
 
