@@ -22,15 +22,17 @@ VALID_METRICS = {
     "app.component.perf": ("timing", ["name", "route", "organization_id"]),
     # app.perf.page.<name> are metrics to measure load time for specific pages
     # - group: Control or experiment group for perf upgrades
-    # - milestone: Key points in the loading of a page (e.g. First Meaningful Paint)
     # - start_type: 'cold-start' or 'warm-start' for loading a page
+    # - milestone: Key points in the loading of a page (e.g. First Meaningful Paint)
+    # - is_enterprise: Large orgs experiencing performance issues
+    # - is_outlier: Super-large orgs experiencing extreme performance issues
     "app.page.perf.issue-list": (
         "timing",
-        ["org_id", "group", "start_type", "milestone"],
+        ["org_id", "group", "start_type", "milestone", "is_enterprise", "is_outlier"],
     ),
     "app.page.perf.issue-detail": (
         "timing",
-        ["org_id", "group", "start_type", "milestone"],
+        ["org_id", "group", "start_type", "milestone", "is_enterprise", "is_outlier"],
     ),
 }
 
