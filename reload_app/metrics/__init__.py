@@ -26,11 +26,11 @@ VALID_METRICS = {
     # - start_type: 'cold-start' or 'warm-start' for loading a page
     "app.page.perf.issue-list": (
         "timing",
-        ["org_id", "group", "start_type", "milestone"],
+        ["org_id", "group", "start_type", "milestone", "is_enterprise", "is_outlier"],
     ),
     "app.page.perf.issue-details": (
         "timing",
-        ["org_id", "group", "start_type", "milestone"],
+        ["org_id", "group", "start_type", "milestone", "is_enterprise", "is_outlier"],
     ),
 }
 
