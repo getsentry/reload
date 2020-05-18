@@ -394,6 +394,22 @@ VALID_EVENTS = {
         "role": str,
         "integration_status": str,
     },
+    "integrations.reauth_start": {
+        "org_id": int,
+        "integration": str,
+        "analytics_session_id": str,
+        "integration_type": str,
+        "role": str,
+        "integration_status": str,
+    },
+    "integrations.reauth_complete": {
+        "org_id": int,
+        "integration": str,
+        "analytics_session_id": str,
+        "integration_type": str,
+        "role": str,
+        "integration_status": str,
+    },
     "integrations.enabled": {
         "org_id": int,
         "integration": str,
@@ -420,6 +436,14 @@ VALID_EVENTS = {
         "role": str,
         "integration_status": str,
         "view": str,
+    },
+    "integrations.upgrade_plan_modal_opened": {
+        "org_id": int,
+        "integration": str,
+        "analytics_session_id": str,
+        "role": str,
+        "integration_tab": str,
+        "plan": str,
     },
     "integrations.integration_tab_clicked": {
         "org_id": int,
