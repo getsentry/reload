@@ -23,6 +23,15 @@ VALID_EVENTS = {
         "org_id": int,
         "user_id": int,
     },
+    "alert_chooser_flow.select": {
+        "org_id": int,
+        "type": str,
+        "granularity": str,
+    },
+    "alert_chooser_cards.select": {
+        "org_id": int,
+        "type": str,
+    },
     "am_beta.learn_more_clicked": {
         "org_id": int,
     },
