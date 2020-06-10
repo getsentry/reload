@@ -193,6 +193,9 @@ VALID_EVENTS = {
         "org_id": int,
         "action": str,
     },
+    "discover_v2.results.toggle_tag_facets": {
+        "org_id": int,
+    },
     "discover_v2.y_axis_change": {
         "org_id": int,
         "y_axis_value": str,
@@ -651,6 +654,14 @@ VALID_EVENTS = {
     "performance_views.overview.search": {
         "org_id": int,
     },
+    "performance_views.overview.change_chart": {
+        "org_id": int,
+        "metric": str,
+    },
+    "performance_views.overview.cellaction": {
+        "org_id": int,
+        "action": str,
+    },
     "performance_views.latency_chart.zoom": {
         "org_id": int,
     },
@@ -658,6 +669,9 @@ VALID_EVENTS = {
         "org_id": int,
     },
     "performance_views.summary.view_details": {
+        "org_id": int,
+    },
+    "performance_views.summary.open_issues": {
         "org_id": int,
     },
     "performance_views.key_transactions.add": {
