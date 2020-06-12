@@ -32,6 +32,10 @@ VALID_EVENTS = {
         "org_id": int,
         "type": str,
     },
+    "alert_builder.filter": {
+        "org_id": int,
+        "query": str,
+    },
     "am_beta.learn_more_clicked": {
         "org_id": int,
     },
