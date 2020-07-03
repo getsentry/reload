@@ -184,6 +184,9 @@ VALID_EVENTS = {
         "projects": list,
         "query": str,
     },
+    "discover_v2.saved_query_click": {
+        "org_id": int,
+    },
     "discover_v2.saved_query.search": {
         "org_id": int,
     },
