@@ -651,6 +651,9 @@ VALID_EVENTS = {
     "past_due_modal.seen": {
         "org_id": int,
     },
+    "performance_views.overview.view": {
+        "org_id": int,
+    },
     "performance_views.overview.sort": {
         "org_id": int,
         "field": str,
