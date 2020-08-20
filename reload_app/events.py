@@ -629,6 +629,11 @@ VALID_EVENTS = {
     },
     "onboarding_v2.first_event_recieved": {
         "org_id": int,
+        "project": str,
+    },
+    "onboarding_v2.first_transaction_recieved": {
+        "org_id": int,
+        "project": str,
     },
     "onboarding_v2.setup_choice_selected": {
         "org_id": int,
