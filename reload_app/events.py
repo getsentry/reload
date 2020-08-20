@@ -692,6 +692,19 @@ VALID_EVENTS = {
     "performance_views.key_transactions.add": {
         "org_id": int,
     },
+    "performance_views.tour.start": {
+        "org_id": int,
+    },
+    "performance_views.tour.advance": {
+        "org_id": int,
+        "step": int,
+        "duration": int,
+    },
+    "performance_views.tour.close": {
+        "org_id": int,
+        "step": int,
+        "duration": int,
+    },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
         "platform": str,
