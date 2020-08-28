@@ -229,6 +229,19 @@ VALID_EVENTS = {
     "discover_v2.update_columns": {
         "org_id": int,
     },
+    "discover_v2.tour.start": {
+        "org_id": int,
+    },
+    "discover_v2.tour.advance": {
+        "org_id": int,
+        "step": int,
+        "duration": int,
+    },
+    "discover_v2.tour.close": {
+        "org_id": int,
+        "step": int,
+        "duration": int,
+    },
     "environmentselector.toggle": {
         "action": str,
         "path": str,
