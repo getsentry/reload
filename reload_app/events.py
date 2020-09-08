@@ -792,6 +792,10 @@ VALID_EVENTS = {
         "project_id": int,
         "source": str,
     },
+    "sample_event.failed": {
+        "org_id": int,
+        "project_id": int,
+    },
     "sample_event.button_viewed": {
         "org_id": int,
         "project_id": int,
