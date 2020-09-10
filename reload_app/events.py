@@ -94,6 +94,12 @@ VALID_EVENTS = {
         "current_plan": str,
         "session_id": str,
     },
+    "checkout.transactions_upgrade": {
+        "org_id": int,
+    },
+    "checkout.upgrade": {
+        "org_id": int,
+    },
     "command_palette.open": {},
     "dateselector.utc_changed": {
         "utc": bool,
