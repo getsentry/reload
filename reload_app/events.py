@@ -718,6 +718,10 @@ VALID_EVENTS = {
         "step": int,
         "duration": int,
     },
+    "performance_views.key_transaction.toggle": {
+        "org_id": int,
+        "action": str,
+    },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
         "platform": str,
