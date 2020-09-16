@@ -96,9 +96,19 @@ VALID_EVENTS = {
     },
     "checkout.transactions_upgrade": {
         "org_id": int,
+        "transactions": int,
+        "previous_transactions": int,
     },
     "checkout.upgrade": {
         "org_id": int,
+        "plan": str,
+        "errors": int,
+        "transactions": int,
+        "attachments": int,
+        "previous_plan": str,
+        "previous_errors": int,
+        "previous_transactions": int,
+        "previous_attachments": int,
     },
     "command_palette.open": {},
     "dateselector.utc_changed": {
