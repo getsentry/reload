@@ -685,6 +685,10 @@ VALID_EVENTS = {
     "past_due_modal.seen": {
         "org_id": int,
     },
+    "performance_views.change_view": {
+        "org_id": int,
+        "view_name": str,
+    },
     "performance_views.overview.view": {
         "org_id": int,
     },
@@ -720,6 +724,13 @@ VALID_EVENTS = {
     },
     "performance_views.key_transactions.add": {
         "org_id": int,
+    },
+    "performance_views.trends.compare_baselines": {
+        "org_id": int,
+    },
+    "performance_views.trends.change_function": {
+        "org_id": int,
+        "function_name": str,
     },
     "performance_views.tour.start": {
         "org_id": int,
