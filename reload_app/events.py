@@ -143,6 +143,10 @@ VALID_EVENTS = {
         "orderby": str,
         "limit": int,
     },
+    "discover_v2.change_sort": {
+        "org_id": int,
+        "sort": str,
+    },
     "discover_v2.delete_query_failed": {
         "error": str,
         "fields": list,
