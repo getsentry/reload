@@ -736,6 +736,18 @@ VALID_EVENTS = {
         "org_id": int,
         "function_name": str,
     },
+    "performance_views.trends.change_confidence": {
+        "org_id": int,
+        "confidence_level": str,
+    },
+    "performance_views.trends.hide_transaction": {
+        "org_id": int,
+        "confidence_level": str,
+    },
+    "performance_views.trends.summary": {
+        "org_id": int,
+        "confidence_level": str,
+    },
     "performance_views.tour.start": {
         "org_id": int,
     },
