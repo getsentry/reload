@@ -765,6 +765,20 @@ VALID_EVENTS = {
         "org_id": int,
         "action": str,
     },
+    "performance_views.vitals.vitals_tab_clicked": {
+        "org_id": int,
+    },
+    "performance_views.vitals.reset_view": {
+        "org_id": int,
+    },
+    "performance_views.vitals.filter_changed": {
+        "org_id": int,
+        "value": str,
+    },
+    "performance_views.vitals.open_in_discover": {
+        "org_id": int,
+        "vital": str,
+    },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
         "platform": str,
