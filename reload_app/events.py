@@ -609,6 +609,11 @@ VALID_EVENTS = {
         "org_id": int,
         "project_id": int,
     },
+    "issues_tab.viewed": {
+        "org_id": int,
+        "num_issues": int,
+        "tab": str,
+    },
     "join_request.viewed": {
         "org_slug": str,
     },
