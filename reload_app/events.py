@@ -703,7 +703,7 @@ VALID_EVENTS = {
         "current_display": str,
         "is_default": bool,
     },
-    "performance_views.landingv2.filter_change": {
+    "performance_views.landingv2.display.filter_change": {
         "org_id": int,
         "field": str,
         "min_value": int,
