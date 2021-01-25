@@ -698,6 +698,22 @@ VALID_EVENTS = {
         "org_id": int,
         "view_name": str,
     },
+    "performance_views.landingv2.content": {
+        "org_id": int,
+    },
+    "performance_views.landingv2.display_change": {
+        "org_id": int,
+        "change_to_display": str,
+        "default_display": str,
+        "current_display": str,
+        "is_default": bool,
+    },
+    "performance_views.landingv2.display.filter_change": {
+        "org_id": int,
+        "field": str,
+        "min_value": int,
+        "max_value": int,
+    },
     "performance_views.overview.view": {
         "org_id": int,
     },
