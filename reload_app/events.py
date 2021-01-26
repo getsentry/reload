@@ -134,6 +134,32 @@ VALID_EVENTS = {
         "url": str,  # optional
         "org_id": int
     },
+    "dashboards2.edit.start": {
+        "org_id": int,
+    },
+    "dashboards2.edit.cancel": {
+        "org_id": int,
+    },
+    "dashboards2.edit.complete": {
+        "org_id": int,
+    },
+    "dashboards2.create.start": {
+        "org_id": int,
+    },
+    "dashboards2.create.cancel": {
+        "org_id": int,
+    },
+    "dashboards2.create.complete": {
+        "org_id": int,
+    },
+    "dashboards2.delete": {
+        "org_id": int,
+        "dashboard_id": int,
+    },
+    "dashboards2.view": {
+        "org_id": int,
+        "dashboard_id": int,
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
