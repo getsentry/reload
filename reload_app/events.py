@@ -156,6 +156,10 @@ VALID_EVENTS = {
         "org_id": int,
         "dashboard_id": int,
     },
+    "dashboards2.widget.change_source": {
+        "org_id": int,
+        "source": str,
+    },
     "dashboards2.view": {
         "org_id": int,
         "dashboard_id": int,
