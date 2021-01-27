@@ -731,6 +731,9 @@ VALID_EVENTS = {
     "performance_views.landingv2.content": {
         "org_id": int,
     },
+    "performance_views.landingv2.new_landing": {
+        "org_id": int,
+    },
     "performance_views.landingv2.display_change": {
         "org_id": int,
         "change_to_display": str,
