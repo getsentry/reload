@@ -644,6 +644,9 @@ VALID_EVENTS = {
         "num_issues": int,
         "tab": str,
     },
+    "inbox_tab.clicked": {
+        "org_id": int,
+    },
     "join_request.viewed": {
         "org_slug": str,
     },
