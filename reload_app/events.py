@@ -981,6 +981,20 @@ VALID_EVENTS = {
     #   for simple analytic.
     #
     # Otherwise you group your event above as a product analytics.
+    "am_checkout.viewed": {
+        "org_id": int,
+        "user_id": int,
+    },
+    "checkout.data_sliders_viewed": {
+        "org_id": int,
+        "user_id": int,
+    },
+    "checkout.data_slider_changed": {
+        "org_id": int,
+        "user_id": int,
+        "data_type": str,
+        "quantity": int,
+    },
     "command_palette.query": {
         "query": str,
     },
