@@ -793,9 +793,9 @@ VALID_EVENTS = {
         "org_id": int,
         "function_name": str,
     },
-    "performance_views.trends.change_confidence": {
+    "performance_views.trends.change_parameter": {
         "org_id": int,
-        "confidence_level": str,
+        "parameter_name": str,
     },
     "performance_views.trends.hide_transaction": {
         "org_id": int,
