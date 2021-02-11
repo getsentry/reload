@@ -924,6 +924,15 @@ VALID_EVENTS = {
         "project_slug": str,
         "source": str,
     },
+    "sdk_updates.seen": {
+        "org_id": int,
+    },
+    "sdk_updates.snoozed": {
+        "org_id": int,
+    },
+    "sdk_updates.clicked": {
+        "org_id": int,
+    },
     "settings_search.open": {},
     "sidebar_help.open": {},
     "sourcemap.sourcemap_error": {
