@@ -651,6 +651,21 @@ VALID_EVENTS = {
         "org_id": int,
         "group_id": str,
     },
+    "issues_stream.issue_clicked": {
+        "org_id": int,
+        "group_id": str,
+        "tab": str,
+        "was_shown_suggestion": bool,
+    },
+    "issues_stream.issue_assigned": {
+        "org_id": int,
+        "group_id": str,
+        "tab": str,
+        "was_shown_suggestion": bool,
+        "did_assign_suggestion": bool,
+        "assigned_suggestion_reason": str,
+        "assigned_type": str,
+    },
     "join_request.viewed": {
         "org_slug": str,
     },
