@@ -894,6 +894,15 @@ VALID_EVENTS = {
         "org_id": int,
         "source": str,
     },
+    "quick_trace.trace_id.clicked": {
+        "org_id": int,
+    },
+    "quick_trace.dropdown.clicked": {
+        "org_id": int,
+    },
+    "quick_trace.dropdown.clicked_extra": {
+        "org_id": int,
+    },
     "releases.landing_card_clicked": {
         "org_id": int,
         "project_id": int,
