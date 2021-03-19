@@ -164,6 +164,9 @@ VALID_EVENTS = {
         "org_id": int,
         "dashboard_id": int,
     },
+    "dashboards2.tablewidget.open_in_discover": {
+        "org_id": int,
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
