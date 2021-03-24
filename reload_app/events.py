@@ -911,6 +911,7 @@ VALID_EVENTS = {
     },
     "quick_trace.trace_id.clicked": {
         "org_id": int,
+        "source": str,
     },
     "releases.landing_card_clicked": {
         "org_id": int,
