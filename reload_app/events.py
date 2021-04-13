@@ -905,6 +905,14 @@ VALID_EVENTS = {
         "org_id": int,
         "node_key": str,
     },
+    "quick_trace.missing_service.docs": {
+        "org_id": int,
+        "platform": str,
+    },
+    "quick_trace.missing_service.dismiss": {
+        "org_id": int,
+        "platform": str,
+    },
     "quick_trace.node.clicked": {
         "org_id": int,
         "node_key": str,
