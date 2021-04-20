@@ -913,6 +913,11 @@ VALID_EVENTS = {
         "org_id": int,
         "platform": str,
     },
+    "quick_trace.missing_instrumentation.docs": {
+        "org_id": int,
+        "project_id": int,
+        "platform": str,
+    },
     "quick_trace.missing_instrumentation.dismiss": {
         "org_id": int,
         "project_id": int,
