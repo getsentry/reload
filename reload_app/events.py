@@ -36,6 +36,14 @@ VALID_EVENTS = {
         "org_id": int,
         "query": str,
     },
+    "alert_wizard.option_selected": {
+        "org_id": int,
+        "alert_type": str,
+    },
+    "alert_wizard.option_viewed": {
+        "org_id": int,
+        "alert_type": str,
+    },
     "am_beta.learn_more_clicked": {
         "org_id": int,
     },
