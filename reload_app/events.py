@@ -813,6 +813,20 @@ VALID_EVENTS = {
     "performance_views.summary.open_issues": {
         "org_id": int,
     },
+    "performance_views.summary.tag_explorer.cell_action": {
+        "org_id": int,
+    },
+    "performance_views.summary.tag_explorer.change_page": {
+        "org_id": int,
+    },
+    "performance_views.summary.tag_explorer.sort": {
+        "org_id": int,
+        "field": str,
+        "direction": str,
+    },
+    "performance_views.summary.tag_explorer.tag_value": {
+        "org_id": int,
+    },
     "performance_views.key_transactions.add": {
         "org_id": int,
     },
