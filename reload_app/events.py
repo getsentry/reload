@@ -880,6 +880,14 @@ VALID_EVENTS = {
         "org_id": int,
         "vital": str,
     },
+    "performance_views.filter_dropdown.selection": {
+        "org_id": int,
+        "action": str,
+    },
+    "performance_views.relative_breakdown.selection": {
+        "org_id": int,
+        "action": str,
+    },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
         "platform": str,
