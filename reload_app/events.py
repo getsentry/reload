@@ -897,6 +897,10 @@ VALID_EVENTS = {
         "org_id": int,
         "source": str,
     },
+    "quick_trace.connected_services": {
+        "org_id": int,
+        "projects": int,
+    },
     "quick_trace.dropdown.clicked": {
         "org_id": int,
         "node_key": str,
