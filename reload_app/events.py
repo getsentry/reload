@@ -780,6 +780,11 @@ VALID_EVENTS = {
         "min_value": int,
         "max_value": int,
     },
+    "performance_views.landingv2.transactions.sort": {
+        "org_id": int,
+        "field": str,
+        "direction": str,
+    },
     "performance_views.overview.view": {
         "org_id": int,
     },
