@@ -175,6 +175,27 @@ VALID_EVENTS = {
     "dashboards2.tablewidget.open_in_discover": {
         "org_id": int,
     },
+    "dashboards_manage.change_sort": {
+        "org_id": int,
+        "sort": str,
+    },
+    "dashboards_manage.search": {
+        "org_id": int,
+    },
+    "dashboards_manage.paginate": {
+        "org_id": int,
+    },
+    "dashboards_manage.delete": {
+        "org_id": int,
+        "dashboard_id": int,
+    },
+    "dashboards_manage.duplicate": {
+        "org_id": int,
+        "dashboard_id": int,
+    },
+    "dashboards_manage.create.start": {
+        "org_id": int,
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
