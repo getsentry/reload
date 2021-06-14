@@ -922,6 +922,9 @@ VALID_EVENTS = {
         "org_id": int,
         "action": str,
     },
+    "performance_views.events.events_tab_clicked": {
+        "org_id": int,
+    },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
         "platform": str,
