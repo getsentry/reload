@@ -835,6 +835,15 @@ VALID_EVENTS = {
         "org_id": int,
         "action": str,
     },
+    "performance_views.project_transaction_threshold.change": {
+        "org_id": int,
+        "from": str,
+        "to": str,
+        "key": str,
+    },
+    "performance_views.project_transaction_threshold.clear": {
+        "org_id": int,
+    },
     "performance_views.latency_chart.zoom": {
         "org_id": int,
     },
