@@ -934,6 +934,15 @@ VALID_EVENTS = {
     "performance_views.events.events_tab_clicked": {
         "org_id": int,
     },
+    "performance_views.transactionEvents.cellaction": {
+        "org_id": int,
+        "action": str,
+    },
+    "performance_views.transactionEvents.sort": {
+        "org_id": int,
+        "field": str,
+        "direction": str,
+    },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
         "platform": str,
