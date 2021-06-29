@@ -870,6 +870,9 @@ VALID_EVENTS = {
     "performance_views.summary.tag_explorer.tag_value": {
         "org_id": int,
     },
+    "performance_views.summary.view_in_transaction_events": {
+        "org_id": int,
+    },
     "performance_views.key_transactions.add": {
         "org_id": int,
     },
@@ -942,6 +945,14 @@ VALID_EVENTS = {
         "org_id": int,
         "field": str,
         "direction": str,
+    },
+    "performance_views.transactionEvents.ops_filter_dropdown.selection": {
+        "org_id": int,
+        "action": str,
+    },
+    "performance_views.transactionEvents.display_filter_dropdown.selection": {
+        "org_id": int,
+        "action": str,
     },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
