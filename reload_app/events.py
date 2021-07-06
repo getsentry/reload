@@ -954,6 +954,12 @@ VALID_EVENTS = {
         "org_id": int,
         "action": str,
     },
+    "span_view.embedded_child.hide": {
+        "org_id": int,
+    },
+    "span_view.embedded_child.show": {
+        "org_id": int,
+    },
     "platformpicker.create_project": {},
     "platformpicker.select_platform": {
         "platform": str,
