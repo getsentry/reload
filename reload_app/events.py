@@ -205,6 +205,9 @@ VALID_EVENTS = {
         "orderby": str,
         "limit": int,
     },
+    "discover_v2.add_equation": {
+        "org_id": int,
+    },
     "discover_v2.change_sort": {
         "org_id": int,
         "sort": str,
