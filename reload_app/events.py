@@ -873,10 +873,19 @@ VALID_EVENTS = {
     "performance_views.summary.tag_explorer.tag_value": {
         "org_id": int,
     },
+    "performance_views.summary.tag_explorer.visit_tag_key": {
+        "org_id": int,
+    },
     "performance_views.summary.view_in_transaction_events": {
         "org_id": int,
     },
     "performance_views.key_transactions.add": {
+        "org_id": int,
+    },
+    "performance_views.tags.tags_tab_clicked": {
+        "org_id": int,
+    },
+    "performance_views.tags.interaction": {
         "org_id": int,
     },
     "performance_views.trends.compare_baselines": {
