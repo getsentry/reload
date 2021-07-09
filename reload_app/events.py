@@ -1225,6 +1225,7 @@ VALID_EVENTS = {
     "search.operator_autocompleted": {
         "org_id": int,
         "query": str,
+        "search_operator": str,
         "search_type": str,
     },
     "settings_search.select": {
