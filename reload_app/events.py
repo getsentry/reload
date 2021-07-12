@@ -1222,6 +1222,12 @@ VALID_EVENTS = {
         "search_type": str,  # "issues" or "events"
         "search_source": str,  # "recent_search", "search_builder", "main_search",
     },
+    "search.operator_autocompleted": {
+        "org_id": int,
+        "query": str,
+        "search_operator": str,
+        "search_type": str,
+    },
     "settings_search.select": {
         "query": str,
         "source_type": str,
