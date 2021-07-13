@@ -87,6 +87,19 @@ VALID_EVENTS = {
         "is_trial": bool,
         "type": str,
     },
+    "checkout.click_continue": {
+        "step_number": int,
+    },
+    "checkout.change_plan": {
+        "plan": str,
+    },
+    "checkout.change_contract": {
+        "plan": str,
+    },
+    "checkout.ondemand_changed": {
+        "cents": int,
+        "plan": str,
+    },
     "checkout.step_activated": {
         "org_id": int,
         "step": int,
