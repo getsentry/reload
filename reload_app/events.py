@@ -89,6 +89,7 @@ VALID_EVENTS = {
     },
     "checkout.click_continue": {
         "step_number": int,
+        "plan": str,
     },
     "checkout.change_plan": {
         "plan": str,
