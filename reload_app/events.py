@@ -205,6 +205,12 @@ VALID_EVENTS = {
         "orderby": str,
         "limit": int,
     },
+    "discover_search.failed": {
+        "org_di": int,
+        "search_type": str,
+        "search_source": str,
+        "error": str,
+    },
     "discover_v2.add_equation": {
         "org_id": int,
     },
@@ -670,6 +676,12 @@ VALID_EVENTS = {
     },
     "issue.search_sidebar_clicked": {
         "org_id": int,
+    },
+    "issue_search.failed": {
+        "org_id": int,
+        "search_type": str,
+        "search_source": str,
+        "error": str,
     },
     "issue_error_banner.viewed": {
         "org_id": int,
