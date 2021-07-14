@@ -206,7 +206,7 @@ VALID_EVENTS = {
         "limit": int,
     },
     "discover_search.failed": {
-        "org_di": int,
+        "org_id": int,
         "search_type": str,
         "search_source": str,
         "error": str,
