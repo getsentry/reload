@@ -765,6 +765,24 @@ VALID_EVENTS = {
     "new_alert_rule.viewed": {
         "org_id": int,
         "project_id": int,
+        "alert_type": str,
+    },
+    "edit_alert_rule.viewed": {
+        "org_id": int,
+        "project_id": int,
+        "alert_type": str,
+    },
+    "edit_alert_rule.add_row": {
+        "org_id": int,
+        "project_id": int,
+        "type": str,
+        "name": str,
+    },
+    "alert_rule_details.viewed": {
+        "org_id": int,
+        "project_id": int,
+        "rule_id": int,
+        "alert": str,
     },
     "omnisearch.open": {},
     "onboarding.wizard_opened": {
