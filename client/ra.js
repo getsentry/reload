@@ -8,19 +8,20 @@ const generateUUID = () => {
   if (window.performance && typeof window.performance.now === "function") {
     d += performance.now(); //use high-precision timer if available
   }
-  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
-    c
-  ) {
-    var r = (d + Math.random() * 16) % 16 | 0;
-    d = Math.floor(d / 16);
-    return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-  });
+  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function (c) {
+      var r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+    }
+  );
   return uuid;
 };
 
 const assign =
   Object.assign ||
-  function(target) {
+  function (target) {
     if (target === undefined || target === null) {
       throw new TypeError("Cannot convert undefined or null to object");
     }
@@ -63,12 +64,29 @@ const getAnonId = () => {
   return anonId;
 };
 
+// we want to use the referrer from the site that
+// brought us here from the original_referrer query param
+// which we store in a cookie since it will be lost on page navigation
+const getOriginalReferrer = () => {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const originalReferrer = params.get("original_referrer");
+    if (originalReferrer) {
+      set("origRef", originalReferrer);
+      return originalReferrer;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  return get("origRef") || document.referrer;
+};
+
 const getContext = () => ({
   url: window.location.href,
   path: window.location.pathname,
-  referrer: document.referrer,
+  referrer: getOriginalReferrer(),
   title: document.title,
-  sent_at: Date.now().toString()
+  sent_at: Date.now().toString(),
 });
 
 const performXhrSend = (endpoint, data) => {
@@ -115,7 +133,7 @@ const send = (path, extraData, batch) => {
   const anonymous_id = getAnonId();
   let data = {
     user_id,
-    anonymous_id
+    anonymous_id,
   };
 
   assign(data, getContext(), extraData);
@@ -130,11 +148,11 @@ const event = (name, extraData) => {
   send("/event/", data);
 };
 
-const page = extraData => {
+const page = (extraData) => {
   send("/page/", extraData);
 };
 
-const identify = gsID => {
+const identify = (gsID) => {
   set("gsID", gsID, { domain: getTLD() });
 };
 
@@ -144,7 +162,7 @@ const metric = (name, value, tags) => {
     {
       metric_name: name,
       value,
-      tags
+      tags,
     },
     true
   );
