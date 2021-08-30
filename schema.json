@@ -50,6 +50,11 @@
         "type": "STRING"
     },
     {
+        "mode": "NULLABLE",
+        "name": "last_page_url",
+        "type": "STRING"
+    },
+    {
         "mode": "REQUIRED",
         "name": "context",
         "type": "RECORD",
