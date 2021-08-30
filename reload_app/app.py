@@ -171,7 +171,7 @@ class App(Router):
                 pass
 
         for field, type_expected in VALID_EVENTS[data["event_name"]].items():
-            if field not in data:
+            if field not in data or data[field] is None:
                 continue
             try:
                 type_expected(data[field])
