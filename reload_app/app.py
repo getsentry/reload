@@ -24,6 +24,7 @@ from .geo import geo_by_addr
 COMMON_FIELDS = (
     "url",
     "referrer",
+    "document_referrer",
     "title",
     "path",
     "search",

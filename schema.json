@@ -26,6 +26,11 @@
     },
     {
         "mode": "NULLABLE",
+        "name": "document_referrer",
+        "type": "STRING"
+    },
+    {
+        "mode": "NULLABLE",
         "name": "title",
         "type": "STRING"
     },
