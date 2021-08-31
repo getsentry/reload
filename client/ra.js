@@ -85,6 +85,7 @@ const getContext = () => ({
   url: window.location.href,
   path: window.location.pathname,
   referrer: getOriginalReferrer(),
+  document_referrer: document.referrer,
   title: document.title,
   sent_at: Date.now().toString(),
 });
