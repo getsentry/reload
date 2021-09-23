@@ -78,6 +78,7 @@ VALID_EVENTS = {
         "is_modal": bool,
         "is_trial": bool,
         "has_permissions": bool,
+        "initial_feature": str,
     },
     "business_landing.clicked": {
         "org_id": int,
@@ -86,6 +87,14 @@ VALID_EVENTS = {
         "is_modal": bool,
         "is_trial": bool,
         "type": str,
+    },
+    "business_landing.closed": {
+        "org_id": int,
+        "plan": str,
+        "source": str,
+        "is_modal": bool,
+        "is_trial": bool,
+        "closing_feature": str,
     },
     "checkout.click_continue": {
         "step_number": int,
