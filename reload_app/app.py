@@ -2,6 +2,7 @@ import os
 import re
 import time
 import sentry_sdk
+import logging
 
 from base64 import b64encode
 from datetime import datetime
@@ -21,6 +22,8 @@ from .utils import format_datetime, ip_from_request
 from .geo import geo_by_addr
 
 sentry_sdk.init()
+
+logger = logging.getLogger(__name__)
 
 COMMON_FIELDS = (
     "url",
@@ -183,11 +186,7 @@ class App(Router):
 
             type_received = type(data[field])
             if type_expected != type_received:
-                sentry_sdk.capture_message(
-                    "expected %s, received %s for field %s of event %s"
-                    % (type_expected, type_received, field, data["event_name"]),
-                    level="warning",
-                )
+                logger.error("expected %s, received %s for field %s of event %s" % (type_expected, type_received, field, data["event_name"]))
             clean_data[field] = data[field]
 
         # Conforms to super-big-data.analytics.events schema.
