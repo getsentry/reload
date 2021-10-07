@@ -1,6 +1,8 @@
 import os
 import re
 import time
+import sentry_sdk
+import logging
 
 from base64 import b64encode
 from datetime import datetime
@@ -11,15 +13,17 @@ from werkzeug.wrappers import Response
 from ua_parser import user_agent_parser
 from uuid import uuid1
 
-
 from .events import VALID_EVENTS
 from .metrics import VALID_METRICS, VALID_GLOBAL_TAGS
 from .metrics.dogstatsd import DogStatsdMetrics
-from .raven_client import client
 from .router import Router
 from .worker import BigQueryWorker
 from .utils import format_datetime, ip_from_request
 from .geo import geo_by_addr
+
+sentry_sdk.init()
+
+logger = logging.getLogger(__name__)
 
 COMMON_FIELDS = (
     "url",
@@ -47,7 +51,7 @@ def validate_user_id(uid):
         try:
             int(uid)
         except ValueError:
-            client.captureException()
+            sentry_sdk.capture_exception()
             return False
     return True
 
@@ -177,16 +181,12 @@ class App(Router):
             try:
                 type_expected(data[field])
             except ValueError:
-                client.captureException()
+                sentry_sdk.capture_exception()
                 return Response("bad request maybe check field type\n", status=400)
 
             type_received = type(data[field])
             if type_expected != type_received:
-                client.captureMessage(
-                    "expected %s, received %s for field %s of event %s"
-                    % (type_expected, type_received, field, data["event_name"]),
-                    level="warning",
-                )
+                logger.error("expected %s, received %s for field %s of event %s" % (type_expected, type_received, field, data["event_name"]))
             clean_data[field] = data[field]
 
         # Conforms to super-big-data.analytics.events schema.
@@ -235,7 +235,7 @@ class App(Router):
             tags["country_code"] = "unknown"
         except Exception:
             tags["country_code"] = "error"
-            client.captureException()
+            sentry_sdk.capture_exception()
 
         # attach UA data (browser)
         try:
@@ -245,7 +245,7 @@ class App(Router):
         except Exception:
             tags["browser"] = "error"
             tags["os"] = "error"
-            client.captureException()
+            sentry_sdk.capture_exception()
 
         try:
             getattr(self.datadog_client, metric_type)(metric_name, value, tags=tags)
@@ -283,7 +283,8 @@ class App(Router):
 
 def make_app_from_environ():
     from werkzeug.middleware.proxy_fix import ProxyFix
-    from raven.middleware import Sentry
+    from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
+
 
     app = App(
         dataset=os.environ.get("BIGQUERY_DATASET", "reload"),
@@ -294,4 +295,4 @@ def make_app_from_environ():
         datadog_host=os.environ.get("DATADOG_HOST", "127.0.0.1"),
         datadog_port=int(os.environ.get("DATADOG_PORT", 8125)),
     )
-    return ProxyFix(Sentry(app, client))
+    return ProxyFix(SentryWsgiMiddleware(app))
