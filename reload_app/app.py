@@ -20,7 +20,7 @@ from .worker import BigQueryWorker
 from .utils import format_datetime, ip_from_request
 from .geo import geo_by_addr
 
-sentry_sdk.init(os.environ.get("SENTRY_DSN"))
+sentry_sdk.init()
 
 COMMON_FIELDS = (
     "url",
@@ -186,7 +186,7 @@ class App(Router):
                 sentry_sdk.capture_message(
                     "expected %s, received %s for field %s of event %s"
                     % (type_expected, type_received, field, data["event_name"]),
-                    "warning",
+                    level="warning",
                 )
             clean_data[field] = data[field]
 
