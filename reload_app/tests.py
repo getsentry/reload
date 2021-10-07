@@ -236,3 +236,20 @@ class AppTests(TestCase):
         sent_data.update(event_name="assistant.guide_dismissed", step="bad type")
         resp = self.client.post("/event/", data=json.dumps(sent_data))
         assert resp.status_code == 400
+
+    def test_schemaless_event(self):
+        sent_data = {
+            "url": "https://sentry.io/",
+            "referrer": "/referrer/",
+            "user_id": 10,
+            "event_name": "generic_event",
+            "allow_no_schema": True,
+            "random_field": "val",
+        }
+        resp = self.client.post("/event/", data=json.dumps(sent_data))
+        assert resp.status_code == 201
+        assert self.mock_publisher.publish.call_count == 1
+        row = json.loads(self.mock_publisher.publish.call_args[1]["data"])
+        data = row["data"]
+        assert "allow_no_schema" not in data
+        assert data["random_field"] == "val"
