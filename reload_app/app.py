@@ -284,6 +284,8 @@ class App(Router):
 
 def make_app_from_environ():
     from werkzeug.middleware.proxy_fix import ProxyFix
+    from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
+
 
     app = App(
         dataset=os.environ.get("BIGQUERY_DATASET", "reload"),
@@ -294,4 +296,4 @@ def make_app_from_environ():
         datadog_host=os.environ.get("DATADOG_HOST", "127.0.0.1"),
         datadog_port=int(os.environ.get("DATADOG_PORT", 8125)),
     )
-    return ProxyFix(app)
+    return ProxyFix(SentryWsgiMiddleware(app))
