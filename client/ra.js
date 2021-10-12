@@ -64,28 +64,10 @@ const getAnonId = () => {
   return anonId;
 };
 
-// we want to use the referrer from the site that
-// brought us here from the original_referrer query param
-// which we store in a cookie since it will be lost on page navigation
-const getOriginalReferrer = () => {
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const originalReferrer = params.get("original_referrer");
-    if (originalReferrer) {
-      set("origRef", originalReferrer);
-      return originalReferrer;
-    }
-  } catch (err) {
-    console.error(err);
-  }
-  return get("origRef") || document.referrer;
-};
-
 const getContext = () => ({
   url: window.location.href,
   path: window.location.pathname,
-  referrer: getOriginalReferrer(),
-  document_referrer: document.referrer,
+  referrer: document.referrer,
   title: document.title,
   sent_at: Date.now().toString(),
 });
