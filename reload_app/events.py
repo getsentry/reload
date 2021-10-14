@@ -219,6 +219,20 @@ VALID_EVENTS = {
     "dashboards_manage.create.start": {
         "org_id": int,
     },
+    "dashboards_views.add_widget_modal.change": {
+        "org_id": int,
+        "from": str,
+        "field": str,
+        "value": str,
+    },
+    "dashboards_views.query_selector.opened": {
+        "org_id": int,
+        "widget_type": str,
+    },
+    "dashboards_views.query_selector.selected": {
+        "org_id": int,
+        "widget_type": str,
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
@@ -355,6 +369,13 @@ VALID_EVENTS = {
         "org_id": int,
         "step": int,
         "duration": int,
+    },  
+    "discover_views.add_to_dashboard.modal_open": {
+        "org_id": int,
+        "saved_query": bool,
+    },
+    "discover_views.add_to_dashboard.confirm": {
+        "org_id": int,
     },
     "environmentselector.toggle": {
         "action": str,
