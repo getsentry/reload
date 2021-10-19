@@ -369,7 +369,7 @@ VALID_EVENTS = {
         "org_id": int,
         "step": int,
         "duration": int,
-    },  
+    },
     "discover_views.add_to_dashboard.modal_open": {
         "org_id": int,
         "saved_query": bool,
@@ -1193,7 +1193,7 @@ VALID_EVENTS = {
         "group": str,
         "error_type": list,
     },
-    "team_insights.viewed":{
+    "team_insights.viewed": {
         "org_id": int,
     },
     "trial.start_clicked": {

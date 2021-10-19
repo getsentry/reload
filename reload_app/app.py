@@ -186,7 +186,10 @@ class App(Router):
 
             type_received = type(data[field])
             if type_expected != type_received:
-                logger.error("expected %s, received %s for field %s of event %s" % (type_expected, type_received, field, data["event_name"]))
+                logger.error(
+                    "expected %s, received %s for field %s of event %s"
+                    % (type_expected, type_received, field, data["event_name"])
+                )
             clean_data[field] = data[field]
 
         # Conforms to super-big-data.analytics.events schema.
@@ -284,7 +287,6 @@ class App(Router):
 def make_app_from_environ():
     from werkzeug.middleware.proxy_fix import ProxyFix
     from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
-
 
     app = App(
         dataset=os.environ.get("BIGQUERY_DATASET", "reload"),
