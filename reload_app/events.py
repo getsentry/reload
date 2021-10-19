@@ -1193,7 +1193,7 @@ VALID_EVENTS = {
         "group": str,
         "error_type": list,
     },
-    "team_insights.viewed":{
+    "team_insights.viewed": {
         "org_id": int,
     },
     "trial.start_clicked": {
