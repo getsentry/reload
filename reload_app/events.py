@@ -1193,6 +1193,9 @@ VALID_EVENTS = {
         "group": str,
         "error_type": list,
     },
+    "team_insights.viewed":{
+        "org_id": int,
+    },
     "trial.start_clicked": {
         "org_id": int,
         "source": str,
