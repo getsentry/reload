@@ -891,6 +891,16 @@ VALID_EVENTS = {
         "field": str,
         "direction": str,
     },
+    "performance_views.landingv3.widget.interaction": {
+        "org_id": int,
+        "widget_type": str,
+    },
+    "performance_views.landingv3.widget.switch": {
+        "org_id": int,
+        "from_widget": str,
+        "to_widget": str,
+        "from_default": bool,
+    },
     "performance_views.overview.view": {
         "org_id": int,
     },
