@@ -233,6 +233,10 @@ VALID_EVENTS = {
         "org_id": int,
         "widget_type": str,
     },
+    "dashboards_views.open_in_discover.opened": {
+        "org_id": int,
+        "widget_type": str,
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
