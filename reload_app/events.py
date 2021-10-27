@@ -219,11 +219,17 @@ VALID_EVENTS = {
     "dashboards_manage.create.start": {
         "org_id": int,
     },
+    "dashboards_views.add_widget_modal.opened": {
+        "org_id": int,
+    },
     "dashboards_views.add_widget_modal.change": {
         "org_id": int,
         "from": str,
         "field": str,
         "value": str,
+    },
+    "dashboards_views.edit_widget_modal.opened": {
+        "org_id": int,
     },
     "dashboards_views.query_selector.opened": {
         "org_id": int,
