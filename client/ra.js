@@ -2,6 +2,8 @@ import { get, set } from "js-cookie";
 // const _endpoint = 'http://localhost:5000/api/'
 let endpoint = "";
 
+// we want to make sure we don't create events with too large a size
+// so we should trim any fields to this length or less
 const MAX_FIELD_LENGTH = 2000;
 
 //http://stackoverflow.com/a/8809472/3842656
