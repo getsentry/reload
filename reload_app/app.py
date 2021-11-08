@@ -142,7 +142,7 @@ class App(Router):
         # Make sure we only get POST requests
         if request.method != "POST":
             return Response("method not allowed\n", status=405)
-        
+
         # validate payload size and send to Sentry
         if request.content_length > MAX_PAYLOAD_SIZE:
             message = f"event exceeds max payload size of {MAX_PAYLOAD_SIZE}\n"
@@ -153,7 +153,6 @@ class App(Router):
             data = load(request.stream)
         except Exception:
             return Response("bad request expecting json under \n", status=400)
-            
 
         if data.get("event_name") not in VALID_EVENTS:
             return Response("bad request check if valid event name\n", status=400)
@@ -291,6 +290,7 @@ class App(Router):
 
     def healthz(self, request):
         return Response("ok", status=200)
+
 
 def make_app_from_environ():
     from werkzeug.middleware.proxy_fix import ProxyFix
