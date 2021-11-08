@@ -41,6 +41,9 @@ EVENT_NAME_TEMPLATE = "reload.%s"
 
 URL_FILTER_REGEX = r"(https?://)?(localhost|dev\.getsentry\.net)"
 
+# 8k bytes is enough to fit every event if we trim certain extra large fields
+MAX_PAYLOAD_SIZE = 8_000
+
 
 def ok_response():
     return Response(status=201, headers=(("Access-Control-Allow-Origin", "*"),))
@@ -139,6 +142,7 @@ class App(Router):
         # Make sure we only get POST requests
         if request.method != "POST":
             return Response("method not allowed\n", status=405)
+        
 
         start = datetime.utcnow()
 
@@ -146,6 +150,9 @@ class App(Router):
             data = load(request.stream)
         except Exception:
             return Response("bad request expecting json\n", status=400)
+
+        if self.exceeds_max_payload_size(data):
+            return Response(f"event exceeds max payload size of {MAX_PAYLOAD_SIZE}\n", status=400)
 
         if data.get("event_name") not in VALID_EVENTS:
             return Response("bad request check if valid event name\n", status=400)
@@ -283,6 +290,13 @@ class App(Router):
     def healthz(self, request):
         return Response("ok", status=200)
 
+    def exceeds_max_payload_size(self, data):
+        try:
+            raw_data = dumps(data)
+        except Exception:
+            # ignore any JSON errors, we should validate that elsewhere
+            return False
+        return len(raw_data) > MAX_PAYLOAD_SIZE
 
 def make_app_from_environ():
     from werkzeug.middleware.proxy_fix import ProxyFix

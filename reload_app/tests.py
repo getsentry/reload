@@ -236,3 +236,18 @@ class AppTests(TestCase):
         sent_data.update(event_name="assistant.guide_dismissed", step="bad type")
         resp = self.client.post("/event/", data=json.dumps(sent_data))
         assert resp.status_code == 400
+
+    def test_oversized_payload(self):
+        sent_data = {
+            "url": "https://sentry.io/",
+            "referrer": "/referrer/",
+            "user_id": "10",
+            "event_name": "assistant.guide_dismissed",
+            # add in a giant field
+            "some_field": "hi" * 10_000,
+        }
+
+        # Make sure oversized events aren't accepted.
+        resp = self.client.post("/event/", data=json.dumps(sent_data))
+        assert resp.status_code == 400
+        assert self.mock_publisher.publish.call_count == 0
