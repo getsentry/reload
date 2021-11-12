@@ -243,6 +243,12 @@ VALID_EVENTS = {
         "org_id": int,
         "widget_type": str,
     },
+    "dashboards_views.add_widget_modal.confirm": {
+        "org_id": int,
+    },
+    "dashboards_views.edit_widget_modal.confirm": {
+        "org_id": int,
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
