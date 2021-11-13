@@ -250,4 +250,5 @@ class AppTests(TestCase):
         # Make sure oversized events aren't accepted.
         resp = self.client.post("/event/", data=json.dumps(sent_data))
         assert resp.status_code == 400
+        assert resp.data == b'event exceeds max payload size of 8000\n'
         assert self.mock_publisher.publish.call_count == 0

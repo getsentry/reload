@@ -143,6 +143,8 @@ class App(Router):
         if request.method != "POST":
             return Response("method not allowed\n", status=405)
 
+        start = datetime.utcnow()
+
         # validate payload size and send to Sentry
         if request.content_length > MAX_PAYLOAD_SIZE:
             message = f"event exceeds max payload size of {MAX_PAYLOAD_SIZE}\n"
@@ -152,12 +154,11 @@ class App(Router):
         try:
             data = load(request.stream)
         except Exception:
-            return Response("bad request expecting json under \n", status=400)
+            return Response(f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n", status=400)
 
         if data.get("event_name") not in VALID_EVENTS:
             return Response("bad request check if valid event name\n", status=400)
 
-        start = datetime.utcnow()
         clean_data = {
             "received_at": format_datetime(start),
             "context": {
