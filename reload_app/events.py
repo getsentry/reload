@@ -917,6 +917,10 @@ VALID_EVENTS = {
         "to_widget": str,
         "from_default": bool,
     },
+    "performance_views.landingv3.widget.add_to_dashboard": {
+        "org_id": int,
+        "from_widget": str,
+    },
     "performance_views.overview.view": {
         "org_id": int,
     },
