@@ -154,7 +154,9 @@ class App(Router):
         try:
             data = load(request.stream)
         except Exception:
-            return Response(f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n", status=400)
+            return Response(
+                f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n", status=400
+            )
 
         if data.get("event_name") not in VALID_EVENTS:
             return Response("bad request check if valid event name\n", status=400)
