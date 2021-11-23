@@ -921,6 +921,12 @@ VALID_EVENTS = {
         "org_id": int,
         "from_widget": str,
     },
+    "performance_views.landingv3.batch_queries": {
+        "org_id": int,
+        "num_collected": int,
+        "num_sent": int,
+        "num_saved": int,
+    },
     "performance_views.overview.view": {
         "org_id": int,
     },
