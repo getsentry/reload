@@ -927,6 +927,13 @@ VALID_EVENTS = {
         "num_sent": int,
         "num_saved": int,
     },
+    "performance_views.landingv3.display_change": {
+        "org_id": int,
+        "change_to_display": str,
+        "default_display": str,
+        "current_display": str,
+        "is_default": bool,
+    },
     "performance_views.overview.view": {
         "org_id": int,
     },
