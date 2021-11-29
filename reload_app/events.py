@@ -1083,6 +1083,17 @@ VALID_EVENTS = {
         "org_id": int,
         "action": str,
     },
+    "performance_views.spans.spans_tab_clicked": {
+        "org_id": int,
+    },
+    "performance_views.spans.change_op": {
+        "org_id": int,
+        "op": str,
+    },
+    "performance_views.spans.change_sort": {
+        "org_id": int,
+        "sort": str,
+    },
     "span_view.embedded_child.hide": {
         "org_id": int,
     },
