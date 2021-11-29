@@ -1088,11 +1088,11 @@ VALID_EVENTS = {
     },
     "performance_views.spans.change_op": {
         "org_id": int,
-        "op": str,
+        "operation_name": str,
     },
     "performance_views.spans.change_sort": {
         "org_id": int,
-        "sort": str,
+        "sort_column": str,
     },
     "span_view.embedded_child.hide": {
         "org_id": int,
