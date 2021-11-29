@@ -227,7 +227,7 @@ VALID_EVENTS = {
         "from": str,
         "field": str,
         "value": str,
-        "widgetType": str,
+        "widget_type": str,
     },
     "dashboards_views.edit_widget_modal.opened": {
         "org_id": int,
