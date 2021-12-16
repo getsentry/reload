@@ -206,6 +206,10 @@ class App(Router):
                                  (type_expected, type_received, field, data["event_name"]))
                 clean_data[field] = data[field]
         else:
+            # every schema-less event needs a user_id or organization_id
+            if not data.get("user_id") and not data.get("organization_id"):
+                return Response("bad request no user_id or organization_id", status=400)
+
             # blindly pass fields otherwise
             clean_data.update(data)
 

@@ -270,3 +270,15 @@ class AppTests(TestCase):
         data = row["data"]
         assert "allow_no_schema" not in data
         assert data["random_field"] == "val"
+
+    def test_schemaless_event_no_user_or_org(self):
+        sent_data = {
+            "url": "https://sentry.io/",
+            "referrer": "/referrer/",
+            "event_name": "generic_event",
+            "allow_no_schema": True,
+            "random_field": "val",
+        }
+        resp = self.client.post("/event/", data=json.dumps(sent_data))
+        assert resp.status_code == 400
+        assert self.mock_publisher.publish.call_count == 0
