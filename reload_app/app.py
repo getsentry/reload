@@ -41,6 +41,9 @@ EVENT_NAME_TEMPLATE = "reload.%s"
 
 URL_FILTER_REGEX = r"(https?://)?(localhost|dev\.getsentry\.net)"
 
+# 8k bytes is enough to fit every event if we trim certain extra large fields
+MAX_PAYLOAD_SIZE = 8_000
+
 
 def ok_response():
     return Response(status=201, headers=(("Access-Control-Allow-Origin", "*"),))
@@ -142,10 +145,18 @@ class App(Router):
 
         start = datetime.utcnow()
 
+        # validate payload size and send to Sentry
+        if request.content_length > MAX_PAYLOAD_SIZE:
+            message = f"event exceeds max payload size of {MAX_PAYLOAD_SIZE}\n"
+            sentry_sdk.capture_message(message)
+            return Response(message, status=400)
+
         try:
             data = load(request.stream)
         except Exception:
-            return Response("bad request expecting json\n", status=400)
+            return Response(
+                f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n", status=400
+            )
 
 
         # pop off allow_no_schema since we don't want to pass it
@@ -197,6 +208,22 @@ class App(Router):
         else:
             # blindly pass fields otherwise
             clean_data.update(data)
+        for field, type_expected in VALID_EVENTS[data["event_name"]].items():
+            if field not in data or data[field] is None:
+                continue
+            try:
+                type_expected(data[field])
+            except ValueError:
+                sentry_sdk.capture_exception()
+                return Response("bad request maybe check field type\n", status=400)
+
+            type_received = type(data[field])
+            if type_expected != type_received:
+                logger.error(
+                    "expected %s, received %s for field %s of event %s"
+                    % (type_expected, type_received, field, data["event_name"])
+                )
+            clean_data[field] = data[field]
 
         # Conforms to super-big-data.analytics.events schema.
         row = {
@@ -293,7 +320,6 @@ class App(Router):
 def make_app_from_environ():
     from werkzeug.middleware.proxy_fix import ProxyFix
     from sentry_sdk.integrations.wsgi import SentryWsgiMiddleware
-
 
     app = App(
         dataset=os.environ.get("BIGQUERY_DATASET", "reload"),

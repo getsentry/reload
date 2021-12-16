@@ -219,6 +219,37 @@ VALID_EVENTS = {
     "dashboards_manage.create.start": {
         "org_id": int,
     },
+    "dashboards_views.add_widget_modal.opened": {
+        "org_id": int,
+    },
+    "dashboards_views.add_widget_modal.change": {
+        "org_id": int,
+        "from": str,
+        "field": str,
+        "value": str,
+        "widget_type": str,
+    },
+    "dashboards_views.edit_widget_modal.opened": {
+        "org_id": int,
+    },
+    "dashboards_views.query_selector.opened": {
+        "org_id": int,
+        "widget_type": str,
+    },
+    "dashboards_views.query_selector.selected": {
+        "org_id": int,
+        "widget_type": str,
+    },
+    "dashboards_views.open_in_discover.opened": {
+        "org_id": int,
+        "widget_type": str,
+    },
+    "dashboards_views.add_widget_modal.confirm": {
+        "org_id": int,
+    },
+    "dashboards_views.edit_widget_modal.confirm": {
+        "org_id": int,
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
@@ -355,6 +386,13 @@ VALID_EVENTS = {
         "org_id": int,
         "step": int,
         "duration": int,
+    },
+    "discover_views.add_to_dashboard.modal_open": {
+        "org_id": int,
+        "saved_query": bool,
+    },
+    "discover_views.add_to_dashboard.confirm": {
+        "org_id": int,
     },
     "environmentselector.toggle": {
         "action": str,
@@ -870,6 +908,33 @@ VALID_EVENTS = {
         "field": str,
         "direction": str,
     },
+    "performance_views.landingv3.widget.interaction": {
+        "org_id": int,
+        "widget_type": str,
+    },
+    "performance_views.landingv3.widget.switch": {
+        "org_id": int,
+        "from_widget": str,
+        "to_widget": str,
+        "from_default": bool,
+    },
+    "performance_views.landingv3.widget.add_to_dashboard": {
+        "org_id": int,
+        "from_widget": str,
+    },
+    "performance_views.landingv3.batch_queries": {
+        "org_id": int,
+        "num_collected": int,
+        "num_sent": int,
+        "num_saved": int,
+    },
+    "performance_views.landingv3.display_change": {
+        "org_id": int,
+        "change_to_display": str,
+        "default_display": str,
+        "current_display": str,
+        "is_default": bool,
+    },
     "performance_views.overview.view": {
         "org_id": int,
     },
@@ -1018,6 +1083,17 @@ VALID_EVENTS = {
     "performance_views.transactionEvents.display_filter_dropdown.selection": {
         "org_id": int,
         "action": str,
+    },
+    "performance_views.spans.spans_tab_clicked": {
+        "org_id": int,
+    },
+    "performance_views.spans.change_op": {
+        "org_id": int,
+        "operation_name": str,
+    },
+    "performance_views.spans.change_sort": {
+        "org_id": int,
+        "sort_column": str,
     },
     "span_view.embedded_child.hide": {
         "org_id": int,
@@ -1171,6 +1247,9 @@ VALID_EVENTS = {
         "org_id": int,
         "group": str,
         "error_type": list,
+    },
+    "team_insights.viewed": {
+        "org_id": int,
     },
     "trial.start_clicked": {
         "org_id": int,

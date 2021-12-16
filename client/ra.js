@@ -2,6 +2,10 @@ import { get, set } from "js-cookie";
 // const _endpoint = 'http://localhost:5000/api/'
 let endpoint = "";
 
+// we want to make sure we don't create events with too large a size
+// so we should trim any fields to this length or less
+const MAX_FIELD_LENGTH = 2000;
+
 //http://stackoverflow.com/a/8809472/3842656
 const generateUUID = () => {
   var d = new Date().getTime();
@@ -81,14 +85,21 @@ const getOriginalReferrer = () => {
   return get("origRef") || document.referrer;
 };
 
-const getContext = () => ({
-  url: window.location.href,
-  path: window.location.pathname,
-  referrer: getOriginalReferrer(),
-  document_referrer: document.referrer,
-  title: document.title,
-  sent_at: Date.now().toString(),
-});
+const getContext = () => {
+  const out = {
+    url: window.location.href,
+    path: window.location.pathname,
+    referrer: getOriginalReferrer(),
+    document_referrer: document.referrer,
+    title: document.title,
+    sent_at: Date.now().toString(),
+  };
+  // trim fields to prevent the payload from being too large
+  for (let field in out) {
+    out[field] = out[field].slice(0, MAX_FIELD_LENGTH);
+  }
+  return out;
+};
 
 const performXhrSend = (endpoint, data) => {
   const xhr = new XMLHttpRequest();
