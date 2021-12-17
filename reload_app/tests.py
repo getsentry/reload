@@ -253,7 +253,6 @@ class AppTests(TestCase):
         assert resp.data == b"event exceeds max payload size of 8000\n"
         assert self.mock_publisher.publish.call_count == 0
 
-
     def test_schemaless_event(self):
         sent_data = {
             "url": "https://sentry.io/",
