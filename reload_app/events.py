@@ -250,6 +250,21 @@ VALID_EVENTS = {
     "dashboards_views.edit_widget_modal.confirm": {
         "org_id": int,
     },
+    "dashboards_views.widget_library.add": {
+        "org_id": int,
+        "num_widgets": int,
+    },
+    "dashboards_views.widget_library.add_widget": {
+        "org_id": int,
+        "title": str,
+    },
+    "dashboards_views.widget_library.switch_tab": {
+        "org_id": int,
+        "to": str,
+    },
+    "dashboards_views.widget_library.opened": {
+        "org_id": int,
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
