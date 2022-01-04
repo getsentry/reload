@@ -351,13 +351,23 @@ VALID_EVENTS = {
         "org_id": int,
     },
     "discover_v2.save_new_query_request": {
+        "fields": list,
         "org_id": int,
+        "projects": list,
+        "query": str,
     },
     "discover_v2.save_new_query_success": {
+        "fields": list,
         "org_id": int,
+        "projects": list,
+        "query": str,
     },
     "discover_v2.save_new_query_failed": {
+        "fields": list,
         "org_id": int,
+        "projects": list,
+        "query": str,
+        "error": str,
     },
     "discover_v2.results.download_csv": {
         "org_id": int,
