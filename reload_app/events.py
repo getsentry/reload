@@ -350,6 +350,15 @@ VALID_EVENTS = {
     "discover_v2.saved_query.search": {
         "org_id": int,
     },
+    "discover_v2.save_new_query_request": {
+        "org_id": int,
+    },
+    "discover_v2.save_new_query_success": {
+        "org_id": int,
+    },
+    "discover_v2.save_new_query_failed": {
+        "org_id": int,
+    },
     "discover_v2.results.download_csv": {
         "org_id": int,
     },
