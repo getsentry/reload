@@ -202,8 +202,10 @@ class App(Router):
 
                 type_received = type(data[field])
                 if type_expected != type_received:
-                    logger.error("expected %s, received %s for field %s of event %s" %
-                                 (type_expected, type_received, field, data["event_name"]))
+                    logger.error(
+                        "expected %s, received %s for field %s of event %s"
+                        % (type_expected, type_received, field, data["event_name"])
+                    )
                 clean_data[field] = data[field]
         else:
             # every schema-less event needs a user_id or organization_id
