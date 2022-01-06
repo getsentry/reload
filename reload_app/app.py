@@ -158,7 +158,10 @@ class App(Router):
                 f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n", status=400
             )
 
-        if data.get("event_name") not in VALID_EVENTS:
+        # pop off allow_no_schema since we don't want to pass it
+        allow_no_schema = data.pop("allow_no_schema", False)
+        event_has_schema = data.get("event_name") in VALID_EVENTS
+        if not event_has_schema and not allow_no_schema:
             return Response("bad request check if valid event name\n", status=400)
 
         clean_data = {
@@ -186,22 +189,31 @@ class App(Router):
             except KeyError:
                 pass
 
-        for field, type_expected in VALID_EVENTS[data["event_name"]].items():
-            if field not in data or data[field] is None:
-                continue
-            try:
-                type_expected(data[field])
-            except ValueError:
-                sentry_sdk.capture_exception()
-                return Response("bad request maybe check field type\n", status=400)
+        # validate schema if it exists
+        if event_has_schema:
+            for field, type_expected in VALID_EVENTS[data["event_name"]].items():
+                if field not in data or data[field] is None:
+                    continue
+                try:
+                    type_expected(data[field])
+                except ValueError:
+                    sentry_sdk.capture_exception()
+                    return Response("bad request maybe check field type\n", status=400)
 
-            type_received = type(data[field])
-            if type_expected != type_received:
-                logger.error(
-                    "expected %s, received %s for field %s of event %s"
-                    % (type_expected, type_received, field, data["event_name"])
-                )
-            clean_data[field] = data[field]
+                type_received = type(data[field])
+                if type_expected != type_received:
+                    logger.error(
+                        "expected %s, received %s for field %s of event %s"
+                        % (type_expected, type_received, field, data["event_name"])
+                    )
+                clean_data[field] = data[field]
+        else:
+            # every schema-less event needs a user_id or organization_id
+            if not data.get("user_id") and not data.get("organization_id"):
+                return Response("bad request no user_id or organization_id", status=400)
+
+            # blindly pass fields otherwise
+            clean_data.update(data)
 
         # Conforms to super-big-data.analytics.events schema.
         row = {
