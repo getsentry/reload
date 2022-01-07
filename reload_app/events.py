@@ -1394,6 +1394,9 @@ VALID_EVENTS = {
         "search_operator": str,
         "search_type": str,
     },
+    "tag.clicked": {
+        "is_clickable": bool,  # whether the tag is meant to be clickable or not
+    },
     "settings_search.select": {
         "query": str,
         "source_type": str,
