@@ -219,9 +219,18 @@ VALID_EVENTS = {
     "dashboards_manage.create.start": {
         "org_id": int,
     },
+    "dashboards_manage.templates.add": {
+        "org_id": int,
+        "dashboard_id": str,
+        "was_previewed": bool,
+    },
     "dashboards_manage.templates.toggle": {
         "org_id": int,
         "show_templates": bool,
+    },
+    "dashboards_manage.templates.preview": {
+        "org_id": int,
+        "dashboard_id": str,
     },
     "dashboards_views.add_widget_modal.opened": {
         "org_id": int,
