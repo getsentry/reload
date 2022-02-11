@@ -265,7 +265,7 @@ VALID_EVENTS = {
     },
     "dahsboards_views.widget_resize": {
         "org_id": int,
-        "displayType": str,
+        "display_type": str,
         "height": str,
         "width": str,
     },
