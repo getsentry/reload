@@ -263,7 +263,7 @@ VALID_EVENTS = {
     "dashboards_views.edit_widget_modal.confirm": {
         "org_id": int,
     },
-    "dahsboards_views.widget_resize": {
+    "dashboards_views.widget_resize": {
         "org_id": int,
         "display_type": str,
         "height": str,
