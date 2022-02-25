@@ -110,6 +110,24 @@ VALID_EVENTS = {
         "cents": int,
         "plan": str,
     },
+    "checkout.ondemand_budget.turned_off": {
+        "org_id": int,
+    },
+    "checkout.ondemand_budget.update": {
+        "org_id": int,
+        # current budget
+        "strategy": str,
+        "total_budget": int,
+        "error_budget": int,
+        "transaction_budget": int,
+        "attachment_budget": int,
+        # previous budget
+        "previous_strategy": str,
+        "previous_total_budget": int,
+        "previous_error_budget": int,
+        "previous_transaction_budget": int,
+        "previous_attachment_budget": int,
+    },
     "checkout.step_activated": {
         "org_id": int,
         "step": int,
@@ -918,6 +936,24 @@ VALID_EVENTS = {
         "org_id": int,
         "project": str,
         "platform": str,
+    },
+    "ondemand_budget_modal.ondemand_budget.turned_off": {
+        "org_id": int,
+    },
+    "ondemand_budget_modal.ondemand_budget.update": {
+        "org_id": int,
+        # current budget
+        "strategy": str,
+        "total_budget": int,
+        "error_budget": int,
+        "transaction_budget": int,
+        "attachment_budget": int,
+        # previous budget
+        "previous_strategy": str,
+        "previous_total_budget": int,
+        "previous_error_budget": int,
+        "previous_transaction_budget": int,
+        "previous_attachment_budget": int,
     },
     "orgdash.resources_shown": {},
     "orgdash.resource_clicked": {
