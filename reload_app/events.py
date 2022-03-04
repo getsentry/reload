@@ -832,6 +832,14 @@ VALID_EVENTS = {
         "org_id": int,
         "group_id": str,
     },
+    "issue_alert_rule_details.viewed": {
+        "org_id": int,
+        "rule_id: int,
+    },
+    "issue_alert_rule_details.edit_clicked": {
+        "org_id": int,
+        "rule_id: int,
+    },
     "issues_stream.issue_clicked": {
         "org_id": int,
         "group_id": str,
