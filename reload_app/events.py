@@ -838,7 +838,7 @@ VALID_EVENTS = {
     },
     "issue_alert_rule_details.edit_clicked": {
         "org_id": int,
-        "rule_id: int,
+        "rule_id": int,
     },
     "issues_stream.issue_clicked": {
         "org_id": int,
