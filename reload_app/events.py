@@ -296,6 +296,48 @@ VALID_EVENTS = {
     "dashboards_views.widget_library.opened": {
         "org_id": int,
     },
+    'dashboards_views.widget_viewer.edit': {
+        "org_id": int,
+        "display_type": str,
+        "widget_type": str,
+    },
+    'dashboards_views.widget_viewer.open': {
+        "org_id": int,
+        "display_type": str,
+        "widget_type": str,
+    },
+    'dashboards_views.widget_viewer.open_source': {
+        "org_id": int,
+        "display_type": str,
+        "widget_type": str,
+    },
+    'dashboards_views.widget_viewer.paginate': {
+        "org_id": int,
+        "display_type": str,
+        "widget_type": str,
+    },
+    'dashboards_views.widget_viewer.select_query': {
+        "org_id": int,
+        "display_type": str,
+        "widget_type": str,
+    },
+    'dashboards_views.widget_viewer.sort': {
+        "org_id": int,
+        "display_type": str,
+        "widget_type": str,
+        "column": str,
+        "order": str,
+    },
+    'dashboards_views.widget_viewer.toggle_legend': {
+        "org_id": int,
+        "display_type": str,
+        "widget_type": str,
+    },
+    'dashboards_views.widget_viewer.zoom': {
+        "org_id": int,
+        "display_type": str,
+        "widget_type": str,
+    },
     "discover.query": {
         "org_id": int,
         "projects": list,
