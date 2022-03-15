@@ -325,6 +325,8 @@ VALID_EVENTS = {
         "org_id": int,
         "display_type": str,
         "widget_type": str,
+        "column": str,
+        "order": str,
     },
     'dashboards_views.widget_viewer.toggle_legend': {
         "org_id": int,
