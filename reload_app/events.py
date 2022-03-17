@@ -1485,6 +1485,9 @@ VALID_EVENTS = {
         "query": str,
         "search_type": str,  # "issues" or "events"
     },
+    "search.display_changed": {
+        "org_id": int,
+    },
     "search.searched": {
         "org_id": int,
         "query": str,
