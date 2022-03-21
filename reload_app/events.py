@@ -848,6 +848,8 @@ VALID_EVENTS = {
     },
     "issue_details.action_clicked": {
         "org_id": int,
+        "group_id": int,
+        "project_id": int,
         "action_type": str,
         "alert_date": str,
         "alert_rule_id": str,
