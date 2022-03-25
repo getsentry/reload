@@ -846,6 +846,23 @@ VALID_EVENTS = {
         "invite_status": str,
         "member_id": int,
     },
+    "issue_details.action_clicked": {
+        "org_id": int,
+        "group_id": int,
+        "project_id": int,
+        "action_type": str,
+        "alert_date": str,
+        "alert_rule_id": str,
+        "alert_type": str,
+    },
+    "issue_details.viewed": {
+        "org_id": int,
+        "group_id": int,
+        "project_id": int,
+        "alert_date": str,
+        "alert_rule_id": str,
+        "alert_type": str,
+    },
     "issue.search_sidebar_clicked": {
         "org_id": int,
     },
