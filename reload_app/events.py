@@ -338,15 +338,6 @@ VALID_EVENTS = {
         "display_type": str,
         "widget_type": str,
     },
-    "discover.query": {
-        "org_id": int,
-        "projects": list,
-        "fields": list,
-        "conditions": list,
-        "aggregations": list,
-        "orderby": str,
-        "limit": int,
-    },
     "discover_search.failed": {
         "org_id": int,
         "search_type": str,
@@ -500,10 +491,6 @@ VALID_EVENTS = {
     },
     "discover_views.add_to_dashboard.confirm": {
         "org_id": int,
-    },
-    "discover_views.query": {
-        "org_id": int,
-        "conditions": list,
     },
     "environmentselector.toggle": {
         "action": str,
