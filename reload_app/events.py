@@ -492,10 +492,6 @@ VALID_EVENTS = {
     "discover_views.add_to_dashboard.confirm": {
         "org_id": int,
     },
-    "discover_views.query": {
-        "org_id": int,
-        "conditions": list,
-    },
     "environmentselector.toggle": {
         "action": str,
         "path": str,
