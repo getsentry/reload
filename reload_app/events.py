@@ -263,6 +263,29 @@ VALID_EVENTS = {
     "dashboards_views.edit_widget_modal.opened": {
         "org_id": int,
     },
+    "dashboards_views.add_widget_modal.confirm": {
+        "org_id": int,
+    },
+    "dashboards_views.edit_widget_modal.confirm": {
+        "org_id": int,
+    },
+    "dashboards_views.widget_builder.change": {
+        "org_id": int,
+        "field": str,
+        "from": str,
+        "value": str,
+        "widget_type": str,
+        "new_widget": bool,
+    },
+    "dashboards_views.widget_builder.opened": {
+        "org_id": int,
+        "new_widget": bool,
+    },
+    "dashboards_views.widget_builder.save": {
+        "org_id": int,
+        "data_set": str,
+        "new_widget": bool,
+    },
     "dashboards_views.query_selector.opened": {
         "org_id": int,
         "widget_type": str,
@@ -274,12 +297,6 @@ VALID_EVENTS = {
     "dashboards_views.open_in_discover.opened": {
         "org_id": int,
         "widget_type": str,
-    },
-    "dashboards_views.add_widget_modal.confirm": {
-        "org_id": int,
-    },
-    "dashboards_views.edit_widget_modal.confirm": {
-        "org_id": int,
     },
     "dashboards_views.widget_library.add": {
         "org_id": int,
