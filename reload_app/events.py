@@ -294,7 +294,7 @@ VALID_EVENTS = {
         "org_id": int,
     },
     "dashboards_views.widget_builder.edit_widget_save": {
-       "org_id": int,
+        "org_id": int,
         "data_set": str,
     },
     "dashboards_views.query_selector.opened": {
