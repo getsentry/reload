@@ -626,14 +626,6 @@ VALID_EVENTS = {
     "trial_ended_notice.dismissed_upgrade": {
         "org_id": int,
     },
-    "global_notification.clicked": {
-        "org_id": int,
-        "name": str,
-    },
-    "global_notification.dismissed": {
-        "org_id": int,
-        "name": str,
-    },
     "grace_period_modal.seen": {
         "org_id": int,
     },
