@@ -1234,6 +1234,10 @@ VALID_EVENTS = {
         "org_id": int,
         "action": str,
     },
+    "performance_views.span_summary.change_chart": {
+        "org_id": int,
+        "change_to_display": str,
+    },
     "performance_views.spans.spans_tab_clicked": {
         "org_id": int,
     },
