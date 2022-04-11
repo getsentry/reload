@@ -1027,6 +1027,11 @@ VALID_EVENTS = {
         "link": str,
         "title": str,
     },
+    "page_filters.pin_click": {
+        "org_id": int,
+        "filter": str,
+        "pin": bool,
+    },
     "past_due_modal.seen": {
         "org_id": int,
     },
