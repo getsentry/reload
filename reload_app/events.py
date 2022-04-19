@@ -851,6 +851,11 @@ VALID_EVENTS = {
         "alert_rule_id": str,
         "alert_type": str,
     },
+    "issue_details.event_navigation_clicked": {
+        "org_id": int,
+        "project_id": int,
+        "button": str,
+    },
     "issue_details.viewed": {
         "org_id": int,
         "group_id": int,
