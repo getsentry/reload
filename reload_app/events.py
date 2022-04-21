@@ -856,6 +856,10 @@ VALID_EVENTS = {
         "project_id": int,
         "button": str,
     },
+    "issue_details.event_json_clicked": {
+        "org_id": int,
+        "group_id": int,
+    },
     "issue_details.viewed": {
         "org_id": int,
         "group_id": int,
