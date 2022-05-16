@@ -955,6 +955,7 @@ VALID_EVENTS = {
         "project_id": int,
         "alert_type": str,
         "duplicate_rule": str,
+        "wizard_v3": str,
         "session_id": str,
     },
     "edit_alert_rule.viewed": {
