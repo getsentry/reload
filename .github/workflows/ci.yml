@@ -13,14 +13,23 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
       # Until GH composite actions can use `uses`, we need to setup python here
       - uses: actions/setup-python@v2
         with:
           python-version: 3.7
+          python -m pip install --upgrade pip
+          pip install flake8 pytest 
+          pip install pytest-cov
 
       - run: make requirements-test
 
       - run: make lint
 
       - run: make test
+
+      - run: |
+          pytest --cov=./ --cov-report=xml
+          bash <(curl https://codecov.io/bash)
