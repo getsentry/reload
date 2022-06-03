@@ -974,6 +974,7 @@ VALID_EVENTS = {
         "project_id": int,
         "rule_id": int,
         "alert": str,
+        "has_chartcuterie": str,
     },
     "omnisearch.open": {},
     "onboarding.wizard_opened": {
