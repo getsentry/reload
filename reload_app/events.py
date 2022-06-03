@@ -1266,6 +1266,12 @@ VALID_EVENTS = {
         "org_id": int,
         "sort_column": str,
     },
+    "performance_views.vital_detail.view": {
+        "org_id": int,
+    },
+    "performance_views.trace_view.view": {
+        "org_id": int,
+    },
     "span_view.embedded_child.hide": {
         "org_id": int,
     },
