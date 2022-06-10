@@ -974,6 +974,7 @@ VALID_EVENTS = {
         "project_id": int,
         "rule_id": int,
         "alert": str,
+        "has_chartcuterie": str,
     },
     "omnisearch.open": {},
     "onboarding.wizard_opened": {
@@ -1284,8 +1285,15 @@ VALID_EVENTS = {
         "org_id": int,
         "sort_column": str,
     },
+    "performance_views.vital_detail.view": {
+        "org_id": int,
+    },
+    "performance_views.trace_view.view": {
+        "org_id": int,
+    },
     "performance_views.team_key_transaction.set": {
         "org_id": int,
+        "action": str,
     },
     "span_view.embedded_child.hide": {
         "org_id": int,
