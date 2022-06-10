@@ -1102,6 +1102,10 @@ VALID_EVENTS = {
         "current_display": str,
         "is_default": bool,
     },
+    "performance_views.landingv3.table_pagination": {
+        "org_id": int,
+        "direction": str,
+    },
     "performance_views.overview.view": {
         "org_id": int,
     },
@@ -1192,6 +1196,20 @@ VALID_EVENTS = {
         "org_id": int,
         "confidence_level": str,
     },
+    "performance_views.trends.widget_interaction": {
+        "org_id": int,
+        "widget_type": str,
+    },
+    "performance_views.trends.widget_pagination": {
+        "org_id": int,
+        "direction": str,
+        "widget_type": str,
+    },
+    "performance_views.trends.change_duration": {
+        "org_id": int,
+        "value": str,
+        "widget_type": str,
+    },
     "performance_views.tour.start": {
         "org_id": int,
     },
@@ -1265,6 +1283,9 @@ VALID_EVENTS = {
     "performance_views.spans.change_sort": {
         "org_id": int,
         "sort_column": str,
+    },
+    "performance_views.team_key_transaction.set": {
+        "org_id": int,
     },
     "span_view.embedded_child.hide": {
         "org_id": int,
