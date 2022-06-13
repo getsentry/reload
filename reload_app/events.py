@@ -1172,10 +1172,19 @@ VALID_EVENTS = {
     "performance_views.key_transactions.add": {
         "org_id": int,
     },
+    "performance_views.tags.change_tag": {
+        "org_id": int,
+        "from_tag": str,
+        "to_tag": str,
+        "is_other_tag": bool
+    },
     "performance_views.tags.tags_tab_clicked": {
         "org_id": int,
     },
     "performance_views.tags.interaction": {
+        "org_id": int,
+    },
+    "performance_views.tags.jump_to_release": {
         "org_id": int,
     },
     "performance_views.trends.compare_baselines": {
@@ -1294,6 +1303,18 @@ VALID_EVENTS = {
     "performance_views.team_key_transaction.set": {
         "org_id": int,
         "action": str,
+    },
+    "performance_views.transaction_summary.change_chart_display": {
+        "org_id": int,
+        "from_chart": str,
+        "to_chart": str,
+    },
+    "performance_views.transaction_summary.status_breakdown_click": {
+        "org_id": int,
+        "status": str
+    },
+    "performance_views.all_events.open_in_discover": {
+        "org_id": int,
     },
     "span_view.embedded_child.hide": {
         "org_id": int,
