@@ -1297,11 +1297,24 @@ VALID_EVENTS = {
         "org_id": int,
         "sort_column": str,
     },
+    "performance_views.vital_detail.switch_vital": {
+        "org_id": int,
+        "from_vital": str,
+        "to_vital": str,
+    },
     "performance_views.vital_detail.view": {
         "org_id": int,
     },
     "performance_views.trace_view.view": {
         "org_id": int,
+    },
+    "performance_views.trace_view.open_in_discover": {
+        "org_id": int,
+    },
+    "performance_views.trace_view.open_transaction_details": {
+        "org_id": int,
+        "operation": str,
+        "transaction": str,
     },
     "performance_views.team_key_transaction.set": {
         "org_id": int,
@@ -1315,6 +1328,9 @@ VALID_EVENTS = {
     "performance_views.transaction_summary.status_breakdown_click": {
         "org_id": int,
         "status": str
+    },
+    "performance_views.transaction_summary.view": {
+        "org_id": int,
     },
     "performance_views.all_events.open_in_discover": {
         "org_id": int,
