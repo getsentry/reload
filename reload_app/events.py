@@ -1329,9 +1329,6 @@ VALID_EVENTS = {
         "org_id": int,
         "status": str
     },
-    "performance_views.transaction_summary.view": {
-        "org_id": int,
-    },
     "performance_views.all_events.open_in_discover": {
         "org_id": int,
     },
