@@ -1283,6 +1283,9 @@ VALID_EVENTS = {
         "org_id": int,
         "change_to_display": str,
     },
+    "performance_views.span_summary.view": {
+        "org_id": int,
+    },
     "performance_views.spans.spans_tab_clicked": {
         "org_id": int,
     },
@@ -1314,6 +1317,26 @@ VALID_EVENTS = {
         "status": str
     },
     "performance_views.all_events.open_in_discover": {
+        "org_id": int,
+    },
+    "performance_views.event_details.filter_by_op": {
+        "org_id": int,
+        "operation": str,
+    },
+    "performance_views.event_details.search_query": {
+        "org_id": int,
+        "query": str,
+    },
+    "performance_views.event_details.open_span_details": {
+        "org_id": int,
+        "description": str,
+        "operation": str,
+    },
+    "performance_views.event_details.anchor_span": {
+        "org_id": int,
+        "span_id": str,
+    },
+    "performance_views.event_details.json_button_click": {
         "org_id": int,
     },
     "span_view.embedded_child.hide": {
