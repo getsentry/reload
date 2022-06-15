@@ -1338,11 +1338,9 @@ VALID_EVENTS = {
     },
     "performance_views.event_details.search_query": {
         "org_id": int,
-        "query": str,
     },
     "performance_views.event_details.open_span_details": {
         "org_id": int,
-        "description": str,
         "operation": str,
     },
     "performance_views.event_details.anchor_span": {
