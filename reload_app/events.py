@@ -1109,6 +1109,7 @@ VALID_EVENTS = {
     },
     "performance_views.overview.view": {
         "org_id": int,
+        "project_platforms": str,
     },
     "performance_views.overview.sort": {
         "org_id": int,
@@ -1116,6 +1117,7 @@ VALID_EVENTS = {
     },
     "performance_views.overview.navigate.summary": {
         "org_id": int,
+        "project_platforms": str,
     },
     "performance_views.overview.search": {
         "org_id": int,
@@ -1180,6 +1182,7 @@ VALID_EVENTS = {
     },
     "performance_views.tags.tags_tab_clicked": {
         "org_id": int,
+        "project_platforms": str,
     },
     "performance_views.tags.interaction": {
         "org_id": int,
@@ -1239,6 +1242,7 @@ VALID_EVENTS = {
     },
     "performance_views.vitals.vitals_tab_clicked": {
         "org_id": int,
+        "project_platforms": str,
     },
     "performance_views.vitals.reset_view": {
         "org_id": int,
@@ -1261,6 +1265,7 @@ VALID_EVENTS = {
     },
     "performance_views.events.events_tab_clicked": {
         "org_id": int,
+        "project_platforms": str,
     },
     "performance_views.transactionEvents.cellaction": {
         "org_id": int,
@@ -1285,9 +1290,11 @@ VALID_EVENTS = {
     },
     "performance_views.span_summary.view": {
         "org_id": int,
+        "project_platforms": str,
     },
     "performance_views.spans.spans_tab_clicked": {
         "org_id": int,
+        "project_platforms": str,
     },
     "performance_views.spans.change_op": {
         "org_id": int,
@@ -1304,6 +1311,7 @@ VALID_EVENTS = {
     },
     "performance_views.vital_detail.view": {
         "org_id": int,
+        "project_platforms": str,
     },
     "performance_views.trace_view.view": {
         "org_id": int,
@@ -1349,6 +1357,10 @@ VALID_EVENTS = {
     },
     "performance_views.event_details.json_button_click": {
         "org_id": int,
+    },
+    "performance_views.anomalies.anomalies_tab_clicked": {
+        "org_id": int,
+        "project_platforms": str,
     },
     "span_view.embedded_child.hide": {
         "org_id": int,
