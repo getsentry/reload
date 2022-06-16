@@ -1051,6 +1051,7 @@ VALID_EVENTS = {
     "performance_views.change_view": {
         "org_id": int,
         "view_name": str,
+        "project_platforms": str,
     },
     "performance_views.landingv2.content": {
         "org_id": int,
