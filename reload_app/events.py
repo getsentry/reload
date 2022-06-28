@@ -1516,6 +1516,10 @@ VALID_EVENTS = {
         "group": str,
         "error_type": list,
     },
+    'subscription_page.usagelog_filter.clicked': {
+        "org_id": int, 
+        "selection": str,
+    },
     "team_insights.viewed": {
         "org_id": int,
     },
