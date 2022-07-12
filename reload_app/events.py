@@ -11,6 +11,15 @@ VALID_EVENTS = {
     # A good question to ask yourself to decide if a event falls into this
     # category is "would these be part of an event funnel that I would like to
     # understand?"
+    "active_release_notification.sent": {
+        "organization_id": int,
+        "project_id": int,
+        "group_id": int,
+        "provider": str,
+        "release_version": str,
+        "recipient_email": str,
+        "recipient_username": str,  
+    },
     "alert_details.viewed": {
         "alert_id": int,
         "org_id": int,
