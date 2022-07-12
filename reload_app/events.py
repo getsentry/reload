@@ -18,7 +18,7 @@ VALID_EVENTS = {
         "provider": str,
         "release_version": str,
         "recipient_email": str,
-        "recipient_username": str,  
+        "recipient_username": str,
     },
     "alert_details.viewed": {
         "alert_id": int,
