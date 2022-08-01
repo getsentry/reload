@@ -1517,7 +1517,7 @@ VALID_EVENTS = {
     },
     'sampling.settings.modal.specify.client.rate_read_docs': {
         "project_id": str,
-    }, 
+    },
     'sampling.settings.modal.uniform.rate_cancel': {
         "project_id": str,
     },
