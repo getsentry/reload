@@ -1509,6 +1509,15 @@ VALID_EVENTS = {
         "conditions": list,
         "project_id": str,
     },
+    'sampling.settings.modal.specify.client.rate_cancel': {
+        "project_id": str,
+    },
+    'sampling.settings.modal.specify.client.rate_next': {
+        "project_id": str,
+    },
+    'sampling.settings.modal.specify.client.rate_read_docs': {
+        "project_id": str,
+    },
     'sampling.settings.modal.uniform.rate_cancel': {
         "project_id": str,
     },
