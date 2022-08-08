@@ -1652,7 +1652,7 @@ VALID_EVENTS = {
         "is_commit_correlated": bool, 
         "resolved_issue_release_ids": list, 
         "candidate_issue_release_ids": list, 
-    }
+    },
     "team_insights.viewed": {
         "org_id": int,
     },
