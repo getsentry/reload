@@ -938,6 +938,10 @@ VALID_EVENTS = {
         "assigned_suggestion_reason": str,
         "assigned_type": str,
     },
+    "issues_stream.realtime_clicked": {
+        "org_id": int,
+        "enabled": bool,
+    },
     "join_request.viewed": {
         "org_slug": str,
     },
