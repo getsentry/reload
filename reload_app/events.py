@@ -1648,6 +1648,18 @@ VALID_EVENTS = {
         "org_id": int,
         "selection": str,
     },
+    'suspect_resolution.evaluation': {
+        "resolved_group_id": int,
+        "candidate_group_id": int,
+        "resolved_group_resolution_type": str,
+        "pearson_r_coefficient": float,
+        "pearson_r_start_time": str,
+        "pearson_r_end_time": str,
+        "pearson_r_resolution_time": str,
+        "is_commit_correlated": bool,
+        "resolved_issue_release_ids": list,
+        "candidate_issue_release_ids": list,
+    },
     "team_insights.viewed": {
         "org_id": int,
     },
