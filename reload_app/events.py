@@ -942,6 +942,10 @@ VALID_EVENTS = {
         "org_id": int,
         "enabled": bool,
     },
+    "issues_stream.sort_changed": {
+        "org_id": int,
+        "sort": str,
+    },
     "join_request.viewed": {
         "org_slug": str,
     },
