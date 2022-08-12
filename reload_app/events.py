@@ -1653,6 +1653,7 @@ VALID_EVENTS = {
         "selection": str,
     },
     'suspect_resolution.evaluation': {
+        "algo_version": str,
         "resolved_group_id": int,
         "candidate_group_id": int,
         "resolved_group_resolution_type": str,
