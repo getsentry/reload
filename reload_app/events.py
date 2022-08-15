@@ -886,6 +886,12 @@ VALID_EVENTS = {
     "issue.search_sidebar_clicked": {
         "org_id": int,
     },
+    "issue_search.empty": {
+        "org_id": int,
+        "search_type": str,
+        "search_source": str,
+        "query": str,
+    },
     "issue_search.failed": {
         "org_id": int,
         "search_type": str,
@@ -937,6 +943,9 @@ VALID_EVENTS = {
         "did_assign_suggestion": bool,
         "assigned_suggestion_reason": str,
         "assigned_type": str,
+    },
+    "issues_stream.paginate": {
+        "direction": str,
     },
     "issues_stream.realtime_clicked": {
         "org_id": int,
@@ -1768,11 +1777,31 @@ VALID_EVENTS = {
     "search.display_changed": {
         "org_id": int,
     },
+    "search.invalid_field": {
+        "org_id": int,
+        "search_type": str, # "issues" or "events"
+        "search_source": str, # "recent_search", "search_builder", "main_search",
+        "attempted_field_name": str,
+    },
+    "search.search_with_invalid": {
+        "org_id": int,
+        "query": str,
+        "search_type": str, # "issues" or "events"
+        "search_source": str, # "recent_search", "search_builder", "main_search",
+    },
     "search.searched": {
         "org_id": int,
         "query": str,
         "search_type": str,  # "issues" or "events"
         "search_source": str,  # "recent_search", "search_builder", "main_search",
+    },
+    "search.shortcut_used": {
+        "org_id": int,
+        "query": str,
+        "search_type": str, # "issues" or "events"
+        "search_source": str, # "recent_search", "search_builder", "main_search",
+        "shortcut_method": str, # "click" or "hotkey"
+        "shortcut_type": str, # "previous", "next", "negate", "delete"
     },
     "search.operator_autocompleted": {
         "org_id": int,
