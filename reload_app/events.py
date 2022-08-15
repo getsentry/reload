@@ -1780,26 +1780,26 @@ VALID_EVENTS = {
     "search.invalid_field": {
         "org_id": int,
         "search_type": str, # "issues" or "events"
-        "search_source": str, # "recent_search", "search_builder", "main_search",
+        "search_source": str, # "recent_search", "search_builder", "main_search"
         "attempted_field_name": str,
     },
     "search.search_with_invalid": {
         "org_id": int,
         "query": str,
         "search_type": str, # "issues" or "events"
-        "search_source": str, # "recent_search", "search_builder", "main_search",
+        "search_source": str, # "recent_search", "search_builder", "main_search"
     },
     "search.searched": {
         "org_id": int,
         "query": str,
-        "search_type": str,  # "issues" or "events"
-        "search_source": str,  # "recent_search", "search_builder", "main_search",
+        "search_type": str, # "issues" or "events"
+        "search_source": str, # "recent_search", "search_builder", "main_search",
     },
     "search.shortcut_used": {
         "org_id": int,
         "query": str,
         "search_type": str, # "issues" or "events"
-        "search_source": str, # "recent_search", "search_builder", "main_search",
+        "search_source": str, # "recent_search", "search_builder", "main_search"
         "shortcut_method": str, # "click" or "hotkey"
         "shortcut_type": str, # "previous", "next", "negate", "delete"
     },
