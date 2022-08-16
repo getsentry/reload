@@ -218,7 +218,7 @@ VALID_EVENTS = {
     },
     "dashboards2.delete": {
         "org_id": int,
-        "dashboard_id": int,
+        "dashboard_id": str,
     },
     "dashboards2.widget.change_source": {
         "org_id": int,
@@ -226,7 +226,7 @@ VALID_EVENTS = {
     },
     "dashboards2.view": {
         "org_id": int,
-        "dashboard_id": int,
+        "dashboard_id": str,
     },
     "dashboards2.tablewidget.open_in_discover": {
         "org_id": int,
@@ -243,11 +243,11 @@ VALID_EVENTS = {
     },
     "dashboards_manage.delete": {
         "org_id": int,
-        "dashboard_id": int,
+        "dashboard_id": str,
     },
     "dashboards_manage.duplicate": {
         "org_id": int,
-        "dashboard_id": int,
+        "dashboard_id": str,
     },
     "dashboards_manage.create.start": {
         "org_id": int,
