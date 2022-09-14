@@ -860,6 +860,7 @@ VALID_EVENTS = {
     "issue_details.action_clicked": {
         "org_id": int,
         "group_id": int,
+        "issue_category": str,
         "project_id": int,
         "action_type": str,
         "alert_date": str,
@@ -875,13 +876,31 @@ VALID_EVENTS = {
         "org_id": int,
         "group_id": int,
     },
+    "issue_details.tab_changed": {
+        "org_id": int,
+        "group_id": int,
+        "issue_category": str,
+        "tab": str,
+        "project_id": int,
+        "action_type": str,
+        "alert_date": str,
+        "alert_rule_id": str,
+        "alert_type": str,
+    },
     "issue_details.viewed": {
         "org_id": int,
         "group_id": int,
+        "issue_category": str,
         "project_id": int,
         "alert_date": str,
         "alert_rule_id": str,
         "alert_type": str,
+    },
+    "issue_details.performance.autogrouped_siblings_toggle": {
+        "org_id": int,
+    },
+    "issue_details.performance.hidden_spans_expanded": {
+        "org_id": int,
     },
     "issue.search_sidebar_clicked": {
         "org_id": int,
