@@ -881,9 +881,8 @@ VALID_EVENTS = {
         "org_id": int,
         "group_id": int,
         "issue_category": str,
-        "tab": str,
         "project_id": int,
-        "action_type": str,
+        "count": int,
     },
     "issue_details.tab_changed": {
         "org_id": int,
