@@ -863,6 +863,7 @@ VALID_EVENTS = {
         "issue_category": str,
         "project_id": int,
         "action_type": str,
+        "assigned_suggestion_reason": str,
         "alert_date": str,
         "alert_rule_id": str,
         "alert_type": str,
@@ -875,6 +876,14 @@ VALID_EVENTS = {
     "issue_details.event_json_clicked": {
         "org_id": int,
         "group_id": int,
+    },
+    "issue_details.suspect_commits": {
+        "org_id": int,
+        "group_id": int,
+        "issue_category": str,
+        "tab": str,
+        "project_id": int,
+        "action_type": str,
     },
     "issue_details.tab_changed": {
         "org_id": int,
