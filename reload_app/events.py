@@ -900,15 +900,6 @@ VALID_EVENTS = {
         "alert_rule_id": str,
         "alert_type": str,
     },
-    "issue_details.viewed": {
-        "org_id": int,
-        "group_id": int,
-        "issue_category": str,
-        "project_id": int,
-        "alert_date": str,
-        "alert_rule_id": str,
-        "alert_type": str,
-    },
     "issue_details.performance.autogrouped_siblings_toggle": {
         "org_id": int,
     },
