@@ -810,6 +810,11 @@ VALID_EVENTS = {
         "feature": str,
         "plan": str,
     },
+    "integrations.stacktrace_link_viewed": {
+        "org_id": int,
+        "view": str,
+        "state": str,
+    },
     "install_prompt.banner_viewed": {
         "org_id": int, "page": str,
     },
