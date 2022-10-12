@@ -814,6 +814,8 @@ VALID_EVENTS = {
         "org_id": int,
         "view": str,
         "state": str,
+        "project_id": str,
+        "platform": str,
     },
     "install_prompt.banner_viewed": {
         "org_id": int, "page": str,
