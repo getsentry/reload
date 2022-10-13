@@ -1005,6 +1005,9 @@ VALID_EVENTS = {
         "org_id": int,
         "plan": str,
     },
+    "monitors.page_viewed": {
+        "org_id": int,
+    },
     "new_project.visited": {
         "org_id": int,
         "alert_defaults_experiment_variant": str,
