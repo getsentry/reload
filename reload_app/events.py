@@ -937,6 +937,9 @@ VALID_EVENTS = {
     "issues_tab.viewed": {
         "org_id": int,
         "num_issues": int,
+        "num_perf_issues": int,
+        "page": int,
+        "query": str,
         "tab": str,
     },
     "inbox_tab.clicked": {
@@ -979,13 +982,6 @@ VALID_EVENTS = {
     "issues_stream.sort_changed": {
         "org_id": int,
         "sort": str,
-    },
-    "issues_stream.count_perf_issues": {
-        "org_id": int,
-        "num_perf_issues": int,
-        "num_total_issues": int,
-        "page": int,
-        "query": str
     },
     "join_request.viewed": {
         "org_slug": str,
