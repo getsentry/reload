@@ -1001,6 +1001,11 @@ VALID_EVENTS = {
         "org_id": int,
         "plan": str,
     },
+    "monitor.mark_failed": {
+        "org_id": int,
+        "monitor_id": int,
+        "project_id": int,
+    },
     "monitors.page_viewed": {
         "org_id": int,
     },
