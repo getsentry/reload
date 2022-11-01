@@ -1819,6 +1819,14 @@ VALID_EVENTS = {
         "search_source": str,  # "recent_search", "search_builder", "main_search",
         "attempted_field_name": str,
     },
+    "search.saved_search_create": {
+        "org_id": int,
+        "name": str,
+        "query": str,
+        "search_type": str, # "issues" or "events"
+        "sort": str,
+        "visibility": str, # "organization", "owner", "owner_pin"
+    },
     "search.search_with_invalid": {
         "org_id": int,
         "query": str,
