@@ -1827,6 +1827,9 @@ VALID_EVENTS = {
         "sort": str,
         "visibility": str,  # "organization", "owner", "owner_pin"
     },
+    "search.saved_search_open_create_modal": {
+        "org_id": int,
+    },
     "search.search_with_invalid": {
         "org_id": int,
         "query": str,
