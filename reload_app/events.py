@@ -1823,9 +1823,9 @@ VALID_EVENTS = {
         "org_id": int,
         "name": str,
         "query": str,
-        "search_type": str, # "issues" or "events"
+        "search_type": str,  # "issues" or "events"
         "sort": str,
-        "visibility": str, # "organization", "owner", "owner_pin"
+        "visibility": str,  # "organization", "owner", "owner_pin"
     },
     "search.search_with_invalid": {
         "org_id": int,
