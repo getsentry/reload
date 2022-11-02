@@ -1864,6 +1864,8 @@ VALID_EVENTS = {
         "query": str,
         "search_type": str,  # "issues" or "events"
         "id": int,  # saved search id
+        "is_global": bool,
+        "visibility": str,  # "organization", "owner", "owner_pin"
     },
     "platformpicker.search": {
         "query": str,
