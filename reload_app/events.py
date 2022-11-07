@@ -1419,6 +1419,7 @@ VALID_EVENTS = {
     "performance_views.event_details.open_span_details": {
         "org_id": int,
         "operation": str,
+        "project_platform": str,
     },
     "performance_views.event_details.anchor_span": {
         "org_id": int,
