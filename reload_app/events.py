@@ -1,7 +1,5 @@
 # fmt: off
 
-from typing import Union
-
 VALID_EVENTS = {
     # Core product analytics
     #
@@ -1549,115 +1547,6 @@ VALID_EVENTS = {
     "releases.tab_viewed": {
         "org_id": int,
         "project_id": int,
-    },
-    'sampling.settings.modal.recommended.next.steps_back': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.recommended.next.steps_cancel': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.recommended.next.steps_done': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.recommended.next.steps_read_docs': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.specific.rule.condition_add': {
-        "conditions": list,
-        "project_id": str,
-    },
-    'sampling.settings.modal.specify.client.rate_cancel': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.specify.client.rate_next': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.specify.client.rate_read_docs': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.uniform.rate_cancel': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.uniform.rate_done': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.uniform.rate_next': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.uniform.rate_read_docs': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.uniform.rate_switch_current': {
-        "project_id": str,
-    },
-    'sampling.settings.modal.uniform.rate_switch_recommended': {
-        "project_id": str,
-    },
-    'sampling.settings.rule.specific_activate': {
-        "conditions": list,
-        "conditions_stringified": str,
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-    },
-    'sampling.settings.rule.specific_create': {
-        "conditions": list,
-        "conditions_stringified": str,
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-    },
-    'sampling.settings.rule.specific_deactivate': {
-        "conditions": list,
-        "conditions_stringified": str,
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-    },
-    'sampling.settings.rule.specific_delete': {
-        "conditions": list,
-        "conditions_stringified": str,
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-    },
-    'sampling.settings.rule.specific_save': {
-        "conditions": list,
-        "conditions_stringified": str,
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-    },
-    'sampling.settings.rule.specific_update': {
-        "conditions": list,
-        "conditions_stringified": str,
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-        "old_conditions": list,
-        "old_conditions_strified": str,
-        "old_sampling_rate": Union[str, None],
-    },
-    'sampling.settings.rule.uniform_activate': {
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-    },
-    'sampling.settings.rule.uniform_create': {
-        "old_sampling_rate": Union[str, None],
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-    },
-    'sampling.settings.rule.uniform_deactivate': {
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-    },
-    'sampling.settings.rule.uniform_update': {
-        "old_sampling_rate": Union[str, None],
-        "project_id": str,
-        "sampling_rate": Union[str, None],
-    },
-    'sampling.settings.view': {
-        "project_id": str
-    },
-    'sampling.settings.view_get_started': {
-        "project_id": str,
-    },
-    'sampling.settings.view_read_docs': {
-        "project_id": str,
     },
     "sample_event.created": {
         "org_id": int,
