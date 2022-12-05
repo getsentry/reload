@@ -1720,6 +1720,10 @@ VALID_EVENTS = {
     "search.saved_search_open_create_modal": {
         "org_id": int,
     },
+    "search.saved_search_sidebar_toggle_clicked": {
+        "org_id": int,
+        "open": bool,
+    },
     "search.search_with_invalid": {
         "org_id": int,
         "query": str,
