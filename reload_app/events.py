@@ -1,7 +1,5 @@
 # fmt: off
 
-from typing import Union
-
 VALID_EVENTS = {
     # Core product analytics
     #
