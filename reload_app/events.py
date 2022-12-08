@@ -1152,6 +1152,7 @@ VALID_EVENTS = {
         "from_widget": str,
         "to_widget": str,
         "from_default": bool,
+        "is_new_menu": bool,
     },
     "performance_views.landingv3.widget.add_to_dashboard": {
         "org_id": int,
