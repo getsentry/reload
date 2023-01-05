@@ -1008,6 +1008,10 @@ VALID_EVENTS = {
         "org_id": int,
         "empty_state": bool,
     },
+    "monitors.details_page_viewed": {
+        "org_id": int,
+        "empty_state": bool,
+    },
     "new_project.visited": {
         "org_id": int,
         "alert_defaults_experiment_variant": str,
