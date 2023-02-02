@@ -1,4 +1,4 @@
-Werkzeug==0.15.3
+Werkzeug==0.15.5
 datadog==0.28.0
 click==8.0.4
 google-cloud-bigquery==1.11.2
