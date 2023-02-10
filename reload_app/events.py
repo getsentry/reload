@@ -84,6 +84,23 @@ VALID_EVENTS = {
         "useful": bool,
         "org_id": int,
     },
+    "billing_failure.button_clicked": {
+        "referrer": str,
+    },
+    "billing_failure.displayed_banner": {
+        "referrer": str,
+    },
+    "billing_failure.paid_now": {
+        "referrer": str,
+    },
+    "billing_failure.sent_email": {
+        "organization_id": int,
+        "email_type": str,
+        "referrer": str,
+    },
+    "billing_failure.updated_cc": {
+        "referrer": str,
+    },
     "business_landing.viewed": {
         "org_id": int,
         "plan": str,
