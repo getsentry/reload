@@ -85,12 +85,15 @@ VALID_EVENTS = {
         "org_id": int,
     },
     "billing_failure.button_clicked": {
+        "org_id": int,
         "referrer": str,
     },
     "billing_failure.displayed_banner": {
+        "org_id": int,
         "referrer": str,
     },
     "billing_failure.paid_now": {
+        "org_id": int,
         "referrer": str,
     },
     "billing_failure.sent_email": {
@@ -99,6 +102,7 @@ VALID_EVENTS = {
         "referrer": str,
     },
     "billing_failure.updated_cc": {
+        "org_id": int,
         "referrer": str,
     },
     "business_landing.viewed": {
