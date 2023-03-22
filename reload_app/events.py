@@ -972,6 +972,10 @@ VALID_EVENTS = {
         "assigned_suggestion_reason": str,
         "assigned_type": str,
     },
+    "issues_stream.issue_category_dropdown_changed": {
+        "org_id": int,
+        "category": str,
+    },
     "issues_stream.paginate": {
         "direction": str,
     },
