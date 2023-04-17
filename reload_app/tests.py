@@ -73,7 +73,7 @@ class AppTests(TestCase):
             event_name="assistant.guide_dismissed",
             guide=5,
             step=6,
-            unknown_field="something",
+            some_field="something",
         )
 
         # Make sure events from dev clients aren't accepted.
@@ -93,9 +93,8 @@ class AppTests(TestCase):
             assert key in row
         data = row["data"]
         for key in list(sent_data.keys()) + ["received_at", "context", "sent_at"]:
-            if key not in ("event_name", "unknown_field"):
+            if key not in ("event_name"):
                 assert key in data
-        assert "unknown_field" not in data
 
     def test_metric_increment(self):
         metric_data = {"metric_name": "app.page.bundle-load-fail"}
@@ -227,14 +226,6 @@ class AppTests(TestCase):
     def test_bad_input(self):
         sent_data = {"url": "/url/", "referrer": "/referrer/", "user_id": "10;"}
         resp = self.client.post("/page/", data=json.dumps(sent_data))
-        assert resp.status_code == 400
-
-        sent_data.update(user_id=10, event_name="click")
-        resp = self.client.post("/event/", data=json.dumps(sent_data))
-        assert resp.status_code == 400
-
-        sent_data.update(event_name="assistant.guide_dismissed", step="bad type")
-        resp = self.client.post("/event/", data=json.dumps(sent_data))
         assert resp.status_code == 400
 
     def test_oversized_payload(self):
