@@ -22,7 +22,6 @@ pipelines:
             - checks:
                   approval:
                       type: manual
-                  fetch_materials: true
                   jobs:
                       checks:
                           timeout: 1200
@@ -34,9 +33,6 @@ pipelines:
                                     internal-sentry \
                                     "us.gcr.io/internal-sentry/github-getsentry-reload"
             - deploy:
-                  approval:
-                      type: manual
-                  fetch_materials: true
                   jobs:
                       deploy:
                           timeout: 1200
