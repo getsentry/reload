@@ -6,23 +6,6 @@ let endpoint = "";
 // so we should trim any fields to this length or less
 const MAX_FIELD_LENGTH = 2000;
 
-//http://stackoverflow.com/a/8809472/3842656
-const generateUUID = () => {
-  var d = new Date().getTime();
-  if (window.performance && typeof window.performance.now === "function") {
-    d += performance.now(); //use high-precision timer if available
-  }
-  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-    /[xy]/g,
-    function (c) {
-      var r = (d + Math.random() * 16) % 16 | 0;
-      d = Math.floor(d / 16);
-      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-    }
-  );
-  return uuid;
-};
-
 const assign =
   Object.assign ||
   function (target) {
@@ -59,13 +42,8 @@ const getTLD = () => {
 };
 
 const getAnonId = () => {
-  let anonId = get("anonId");
-  if (!anonId) {
-    anonId = generateUUID();
-
-    set("anonId", anonId, { domain: getTLD() });
-  }
-  return anonId;
+  console.warn("getAnonId is deprecated");
+  return "";
 };
 
 // we want to use the referrer from the site that
@@ -75,14 +53,11 @@ const getOriginalReferrer = () => {
   try {
     const params = new URLSearchParams(window.location.search);
     const originalReferrer = params.get("original_referrer");
-    if (originalReferrer) {
-      set("origRef", originalReferrer);
-      return originalReferrer;
-    }
+    return originalReferrer || document.referrer;
   } catch (err) {
     console.error(err);
   }
-  return get("origRef") || document.referrer;
+  return document.referrer;
 };
 
 const getContext = () => {
@@ -142,10 +117,8 @@ const batchSend = (endpoint, data) => {
 
 const send = (path, extraData, batch) => {
   const user_id = get("gsID");
-  const anonymous_id = getAnonId();
   let data = {
     user_id,
-    anonymous_id,
   };
 
   assign(data, getContext(), extraData);
