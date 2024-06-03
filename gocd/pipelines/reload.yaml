@@ -30,7 +30,7 @@ pipelines:
                               - script: |
                                     /devinfra/scripts/checks/googlecloud/checkcloudbuild.py \
                                     ${GO_REVISION_RELOAD_REPO} \
-                                    internal-sentry \
+                                    sentryio \
                                     "us-central1-docker.pkg.dev/sentryio/reload/image"
             - deploy:
                   jobs:
