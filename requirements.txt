@@ -8,3 +8,4 @@ geoip2==2.9.0
 ua-parser==0.8.0
 pyuwsgi==2.0.18.post0
 mywsgi==1.0.0
+six==1.16.0
