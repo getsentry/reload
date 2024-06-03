@@ -1,19 +1,29 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'bash'
-  args: [
-    '-c',
-    'docker pull us.gcr.io/$PROJECT_ID/$REPO_NAME:latest || true',
-  ]
-- name: 'gcr.io/cloud-builders/docker'
-  args: [
-            'build',
-            '-t', 'us.gcr.io/$PROJECT_ID/$REPO_NAME:latest',
-            '-t', 'us.gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA',
-            '--cache-from', 'us.gcr.io/$PROJECT_ID/$REPO_NAME:latest',
-            '.'
-        ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'us-central1-docker.pkg.dev/$PROJECT_ID/reload/image:latest',
+        '-t',
+        'us-central1-docker.pkg.dev/$PROJECT_ID/reload/image:$COMMIT_SHA',
+        '--build-arg',
+        'BUILDKIT_INLINE_CACHE=1',
+        '--cache-from',
+        'us-central1-docker.pkg.dev/$PROJECT_ID/reload/image:latest',
+        '.',
+      ]
+    env: [DOCKER_BUILDKIT=1]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Only push "latest" tag when building on "main"
+        [ "$BRANCH_NAME" != "main" ] && exit 0
+        docker push us-central1-docker.pkg.dev/$PROJECT_ID/reload/image:latest
+
 images: [
-  'us.gcr.io/$PROJECT_ID/$REPO_NAME:latest',
-  'us.gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA',
-  ]
+  'us-central1-docker.pkg.dev/$PROJECT_ID/reload/image:$COMMIT_SHA',
+]

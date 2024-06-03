@@ -31,7 +31,7 @@ pipelines:
                                     /devinfra/scripts/checks/googlecloud/checkcloudbuild.py \
                                     ${GO_REVISION_RELOAD_REPO} \
                                     internal-sentry \
-                                    "us.gcr.io/internal-sentry/github-getsentry-reload"
+                                    "us-central1-docker.pkg.dev/sentryio/reload/image"
             - deploy:
                   jobs:
                       deploy:
@@ -42,5 +42,5 @@ pipelines:
                                     /devinfra/scripts/k8s/k8stunnel \
                                     && /devinfra/scripts/k8s/k8s-deploy.py \
                                     --label-selector="service=reload" \
-                                    --image="us.gcr.io/internal-sentry/github-getsentry-reload:${GO_REVISION_RELOAD_REPO}" \
+                                    --image="us-central1-docker.pkg.dev/sentryio/reload/image:${GO_REVISION_RELOAD_REPO}" \
                                     --container-name="reload"
