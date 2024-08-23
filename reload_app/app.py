@@ -49,7 +49,9 @@ def ok_response():
 
 
 def error_response(text, status):
-    return Response(text, status=status, headers=(("Access-Control-Allow-Origin", "*"),))
+    return Response(
+        text, status=status, headers=(("Access-Control-Allow-Origin", "*"),)
+    )
 
 
 def validate_user_id(uid):
@@ -158,8 +160,7 @@ class App(Router):
             data = load(request.stream)
         except Exception:
             return error_response(
-                f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n",
-                status=400
+                f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n", status=400
             )
 
         # pop off allow_no_schema since we don't want to pass it
@@ -191,7 +192,9 @@ class App(Router):
 
         # every schema-less event needs a user_id or organization_id
         if not data.get("user_id") and not data.get("organization_id"):
-            return error_response("bad request no user_id or organization_id", status=400)
+            return error_response(
+                "bad request no user_id or organization_id", status=400
+            )
 
         # blindly pass fields from the API to the event
         clean_data.update(data)
