@@ -47,6 +47,7 @@ MAX_PAYLOAD_SIZE = 8_000
 def ok_response():
     return Response(status=201, headers=(("Access-Control-Allow-Origin", "*"),))
 
+
 def error_response(text, status):
     return Response(text, status=status, headers=(("Access-Control-Allow-Origin", "*"),))
 
@@ -156,7 +157,10 @@ class App(Router):
         try:
             data = load(request.stream)
         except Exception:
-            return error_response(f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n", status=400)
+            return error_response(
+                f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n",
+                status=400
+            )
 
         # pop off allow_no_schema since we don't want to pass it
         data.pop("allow_no_schema", None)
