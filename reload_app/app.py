@@ -47,6 +47,9 @@ MAX_PAYLOAD_SIZE = 8_000
 def ok_response():
     return Response(status=201, headers=(("Access-Control-Allow-Origin", "*"),))
 
+def error_response(text, status):
+    return Response(text, status=status, headers=(("Access-Control-Allow-Origin", "*"),))
+
 
 def validate_user_id(uid):
     if uid not in (None, "undefined"):
@@ -97,14 +100,14 @@ class App(Router):
     def page_view(self, request):
         # Make sure we only get POST requests
         if request.method != "POST":
-            return Response("method not allowed\n", status=405)
+            return error_response("method not allowed\n", status=405)
 
         start = datetime.utcnow()
 
         try:
             data = load(request.stream)
         except Exception:
-            return Response("bad request expecting json\n", status=400)
+            return error_response("bad request expecting json\n", status=400)
 
         row = {
             "id": uuid1().hex,
@@ -125,7 +128,7 @@ class App(Router):
 
         for field in COMMON_FIELDS:
             if field == "user_id" and not validate_user_id(data.get(field)):
-                return Response("bad request user id not valid\n", status=400)
+                return error_response("bad request user id not valid\n", status=400)
             if field == "url" and re.match(URL_FILTER_REGEX, data.get(field, "")):
                 return ok_response()
             try:
@@ -140,7 +143,7 @@ class App(Router):
     def event(self, request):
         # Make sure we only get POST requests
         if request.method != "POST":
-            return Response("method not allowed\n", status=405)
+            return error_response("method not allowed\n", status=405)
 
         start = datetime.utcnow()
 
@@ -148,14 +151,12 @@ class App(Router):
         if request.content_length > MAX_PAYLOAD_SIZE:
             message = f"event exceeds max payload size of {MAX_PAYLOAD_SIZE}\n"
             sentry_sdk.capture_message(message)
-            return Response(message, status=400)
+            return error_response(message, status=400)
 
         try:
             data = load(request.stream)
         except Exception:
-            return Response(
-                f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n", status=400
-            )
+            return error_response(f"bad request expecting json under {MAX_PAYLOAD_SIZE}\n", status=400)
 
         # pop off allow_no_schema since we don't want to pass it
         data.pop("allow_no_schema", None)
@@ -176,7 +177,7 @@ class App(Router):
 
         for field in COMMON_FIELDS:
             if field == "user_id" and not validate_user_id(data.get(field)):
-                return Response("bad request user id not valid\n", status=400)
+                return error_response("bad request user id not valid\n", status=400)
             if field == "url" and re.match(URL_FILTER_REGEX, data.get(field, "")):
                 return ok_response()
             try:
@@ -186,7 +187,7 @@ class App(Router):
 
         # every schema-less event needs a user_id or organization_id
         if not data.get("user_id") and not data.get("organization_id"):
-            return Response("bad request no user_id or organization_id", status=400)
+            return error_response("bad request no user_id or organization_id", status=400)
 
         # blindly pass fields from the API to the event
         clean_data.update(data)
@@ -259,12 +260,12 @@ class App(Router):
     def metric(self, request):
         # Make sure we only get POST requests
         if request.method != "POST":
-            return Response("method not allowed\n", status=405)
+            return error_response("method not allowed\n", status=405)
 
         try:
             data = load(request.stream)
         except Exception:
-            return Response("bad request expecting json\n", status=400)
+            return error_response("bad request expecting json\n", status=400)
 
         metric_objects = data if isinstance(data, list) else [data]
 
@@ -275,7 +276,7 @@ class App(Router):
                 errors.append(error)
 
         if errors:
-            return Response("\n".join(errors), status=400)
+            return error_response("\n".join(errors), status=400)
 
         return ok_response()
 

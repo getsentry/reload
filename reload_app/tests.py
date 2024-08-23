@@ -139,6 +139,7 @@ class AppTests(TestCase):
         assert (
             resp.data == b"invalid_metric_name: bad request check if valid metric name"
         )
+        assert "Access-Control-Allow-Origin" in resp.headers
 
     def test_invalid_metric_tags(self):
         metric_data = {
@@ -149,6 +150,7 @@ class AppTests(TestCase):
         resp = self.client.post("/metric/", data=json.dumps(metric_data))
         assert resp.status_code == 400
         assert resp.data == b"app.page.body-load: bad request check if valid tag name"
+        assert "Access-Control-Allow-Origin" in resp.headers
 
     def test_globally_allowed_tags(self):
         metric_data = {
@@ -179,6 +181,7 @@ class AppTests(TestCase):
 
         resp = self.client.post("/metric/", data=data)
         assert resp.status_code == 400
+        assert "Access-Control-Allow-Origin" in resp.headers
 
         assert self.mock_dogstatsd.timing.call_count == 1
         assert self.mock_dogstatsd.timing.mock_calls[0] == call(
@@ -227,6 +230,7 @@ class AppTests(TestCase):
         sent_data = {"url": "/url/", "referrer": "/referrer/", "user_id": "10;"}
         resp = self.client.post("/page/", data=json.dumps(sent_data))
         assert resp.status_code == 400
+        assert "Access-Control-Allow-Origin" in resp.headers
 
     def test_oversized_payload(self):
         sent_data = {
@@ -241,6 +245,7 @@ class AppTests(TestCase):
         # Make sure oversized events aren't accepted.
         resp = self.client.post("/event/", data=json.dumps(sent_data))
         assert resp.status_code == 400
+        assert "Access-Control-Allow-Origin" in resp.headers
         assert resp.data == b"event exceeds max payload size of 8000\n"
         assert self.mock_publisher.publish.call_count == 0
 
@@ -272,3 +277,4 @@ class AppTests(TestCase):
         resp = self.client.post("/event/", data=json.dumps(sent_data))
         assert resp.status_code == 400
         assert self.mock_publisher.publish.call_count == 0
+        assert "Access-Control-Allow-Origin" in resp.headers
