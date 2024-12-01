@@ -3,7 +3,7 @@ datadog==0.28.0
 click==8.0.4
 google-cloud-bigquery==1.11.2
 google-cloud-pubsub==0.40.0
-sentry-sdk==1.4.3
+sentry-sdk==2.8.0
 geoip2==2.9.0
 ua-parser==0.8.0
 pyuwsgi==2.0.18.post0
