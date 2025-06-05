@@ -4,7 +4,7 @@ from uuid import UUID
 from unittest import TestCase
 from unittest.mock import patch, Mock, call
 from werkzeug.test import Client
-from werkzeug.wrappers import BaseResponse
+from werkzeug.wrappers import Response
 
 from .app import make_app_from_environ
 
@@ -53,7 +53,7 @@ class AppTests(TestCase):
 
         if not getattr(self, "client", None):
             app = make_app_from_environ()
-            self.client = Client(app, BaseResponse)
+            self.client = Client(app, Response)
 
     def test_good_input(self):
         sent_data = {
