@@ -28,10 +28,12 @@ pipelines:
                           elastic_profile_id: reload
                           tasks:
                               - script: |
-                                    /devinfra/scripts/checks/googlecloud/checkcloudbuild.py \
-                                    ${GO_REVISION_RELOAD_REPO} \
+                                    checks-googlecloud-check-cloudbuild \
                                     sentryio \
-                                    "us-central1-docker.pkg.dev/sentryio/reload/image"
+                                    reload \
+                                    build-reload \
+                                    ${GO_REVISION_RELOAD_REPO} \
+                                    master
             - deploy:
                   jobs:
                       deploy:
@@ -39,8 +41,8 @@ pipelines:
                           elastic_profile_id: reload
                           tasks:
                               - script: |
-                                    /devinfra/scripts/k8s/k8stunnel \
-                                    && /devinfra/scripts/k8s/k8s-deploy.py \
+                                    /devinfra/scripts/get-cluster-credentials \
+                                    && k8s-deploy \
                                     --label-selector="service=reload" \
                                     --image="us-central1-docker.pkg.dev/sentryio/reload/image:${GO_REVISION_RELOAD_REPO}" \
                                     --container-name="reload"
