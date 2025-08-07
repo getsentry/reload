@@ -1,4 +1,4 @@
-FROM python:3.11-slim-buster
+FROM python:3.11-slim-bookworm
 
 RUN groupadd -r reload && useradd -r -g reload reload
 
