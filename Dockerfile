@@ -28,7 +28,7 @@ RUN set -x \
     && apt-get purge -y --auto-remove $fetchDeps
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        libmaxminddb-dev \
+        libexpat1 libmaxminddb-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /usr/src/reload
