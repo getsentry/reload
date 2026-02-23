@@ -24,7 +24,7 @@ class BigQueryWorker(object):
             if self.thread:
                 return
             self.thread = Thread(target=self.target)
-            self.thread.setDaemon(True)
+            self.thread.daemon = True
             self.thread.start()
         finally:
             self.lock.release()
