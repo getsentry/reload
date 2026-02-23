@@ -1,39 +1,41 @@
-FROM python:3.13-slim-trixie
+FROM python:3.13-slim-trixie AS build
 
-RUN groupadd -r reload && useradd -r -g reload reload
-
-ENV PIP_NO_CACHE_DIR off
-ENV PIP_DISABLE_PIP_VERSION_CHECK on
+ENV PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        libexpat1 libmaxminddb-dev \
+        gcc libc6-dev libmaxminddb-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /usr/src/reload
 WORKDIR /usr/src/reload
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY requirements.txt /usr/src/reload
+# Normalize libmaxminddb.so.0 to an arch-independent path for the COPY below
+RUN cp $(find /usr/lib -name 'libmaxminddb.so.0' | head -1) /usr/local/lib/libmaxminddb.so.0
 
-RUN set -ex \
-    \
-    && buildDeps=' \
-        gcc \
-        libc6-dev \
-    ' \
-    && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-    \
-    && pip install --no-cache-dir -r requirements.txt \
-    \
-    && apt-get purge -y --auto-remove $buildDeps
+
+FROM gcr.io/distroless/python3-debian13
+
+# Make installed packages and libmaxminddb discoverable
+ENV PYTHONPATH=/usr/local/lib/python3.13/site-packages \
+    LD_LIBRARY_PATH=/usr/local/lib
+
+# Python packages installed in the build stage
+COPY --from=build /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
+
+# mywsgi console script (invoked via /usr/bin/python3 to bypass the build-stage shebang)
+COPY --from=build /usr/local/bin/mywsgi /usr/local/bin/mywsgi
+
+# libmaxminddb is not included in distroless but is needed by geoip2
+COPY --from=build /usr/local/lib/libmaxminddb.so.0 /usr/local/lib/libmaxminddb.so.0
 
 COPY reload_app /usr/src/reload/reload_app
-COPY docker-entrypoint.sh /usr/src/reload
 
-RUN chown -R reload:reload /usr/src/reload
+WORKDIR /usr/src/reload
 
 EXPOSE 8000
 
-USER reload
+USER nonroot
 
-ENTRYPOINT ["/usr/src/reload/docker-entrypoint.sh"]
-CMD [ "mywsgi", "reload_app.wsgi:application", "0.0.0.0:8000" ]
+CMD ["/usr/bin/python3", "/usr/local/bin/mywsgi", "reload_app.wsgi:application", "0.0.0.0:8000"]
