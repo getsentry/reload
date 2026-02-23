@@ -1,6 +1,5 @@
 Werkzeug==3.1.6
 datadog==0.51.0
-click==8.2.1
 google-cloud-bigquery==3.34.0
 google-cloud-pubsub==2.30.0
 sentry-sdk==2.29.1
@@ -8,4 +7,3 @@ geoip2==5.1.0
 ua-parser==1.0.1
 pyuwsgi==2.0.29
 mywsgi==1.0.3
-six==1.17.0
