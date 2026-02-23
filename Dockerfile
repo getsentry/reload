@@ -29,7 +29,11 @@ RUN set -ex \
 COPY reload_app /usr/src/reload/reload_app
 COPY docker-entrypoint.sh /usr/src/reload
 
+RUN chown -R reload:reload /usr/src/reload
+
 EXPOSE 8000
+
+USER reload
 
 ENTRYPOINT ["/usr/src/reload/docker-entrypoint.sh"]
 CMD [ "mywsgi", "reload_app.wsgi:application", "0.0.0.0:8000" ]
