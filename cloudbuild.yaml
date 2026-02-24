@@ -13,7 +13,7 @@ steps:
         'us-central1-docker.pkg.dev/$PROJECT_ID/reload/image:latest',
         '.',
       ]
-    env: [DOCKER_BUILDKIT=1]
+    env: [DOCKER_BUILDKIT=1, DOCKER_API_VERSION=1.41]
 
   - name: 'docker:29'
     entrypoint: 'bash'
