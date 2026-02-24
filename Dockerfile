@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN cp $(find /usr/lib -name 'libmaxminddb.so.0' | head -1) /tmp/libmaxminddb.so.0
 
 
-FROM dhi.io/python:3.13-debian13
+FROM us-docker.pkg.dev/sentryio/dhi/python:3.13-debian13
 
 # Python packages installed in the build stage
 COPY --from=build /usr/local/lib/python3.13/site-packages /opt/python/lib/python3.13/site-packages
