@@ -1,5 +1,5 @@
 steps:
-  - name: 'docker:29'
+  - name: 'gcr.io/cloud-builders/docker'
     args:
       [
         'build',
@@ -13,9 +13,9 @@ steps:
         'us-central1-docker.pkg.dev/$PROJECT_ID/reload/image:latest',
         '.',
       ]
-    env: [DOCKER_BUILDKIT=1, DOCKER_API_VERSION=1.41]
+    env: [DOCKER_BUILDKIT=1]
 
-  - name: 'docker:29'
+  - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args:
       - '-c'
