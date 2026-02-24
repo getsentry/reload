@@ -17,10 +17,6 @@ RUN cp $(find /usr/lib -name 'libmaxminddb.so.0' | head -1) /tmp/libmaxminddb.so
 
 FROM us-docker.pkg.dev/sentryio/dhi/python:3.13-debian13
 
-# Restore OS metadata stripped by distroless so vulnerability scanners can identify the OS
-COPY --from=build /etc/os-release /etc/os-release
-COPY --from=build /var/lib/dpkg/status /var/lib/dpkg/status
-
 # Python packages installed in the build stage
 COPY --from=build /usr/local/lib/python3.13/site-packages /opt/python/lib/python3.13/site-packages
 
