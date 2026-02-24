@@ -4,15 +4,16 @@ ENV PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        gcc libc6-dev libmaxminddb-dev \
+        libexpat1 libmaxminddb0 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/reload
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Normalize libmaxminddb.so.0 to an arch-independent path for the COPY below
-RUN cp $(find /usr/lib -name 'libmaxminddb.so.0' | head -1) /tmp/libmaxminddb.so.0
+# Normalize runtime libs to an arch-independent path for the COPY below
+RUN cp $(find /usr/lib -name 'libmaxminddb.so.0' | head -1) /tmp/libmaxminddb.so.0 \
+    && cp $(find /usr/lib -name 'libexpat.so.1' | head -1) /tmp/libexpat.so.1
 
 
 FROM us-docker.pkg.dev/sentryio/dhi/python:3.13-debian13
@@ -23,8 +24,9 @@ COPY --from=build /usr/local/lib/python3.13/site-packages /opt/python/lib/python
 # mywsgi console script
 COPY --from=build /usr/local/bin/mywsgi /opt/python/bin/mywsgi
 
-# libmaxminddb is not bundled in the base image but is needed by geoip2
+# these libs are not bundled in the base image
 COPY --from=build /tmp/libmaxminddb.so.0 /opt/python/lib/libmaxminddb.so.0
+COPY --from=build /tmp/libexpat.so.1 /opt/python/lib/libexpat.so.1
 
 COPY reload_app /usr/src/reload/reload_app
 
