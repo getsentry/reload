@@ -5,5 +5,4 @@ google-cloud-pubsub==2.30.0
 sentry-sdk==2.29.1
 geoip2==5.1.0
 ua-parser==1.0.1
-pyuwsgi==2.0.29
-mywsgi==1.0.3
+granian==2.7.2
