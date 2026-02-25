@@ -6,7 +6,7 @@ ENV PIP_NO_CACHE_DIR off
 ENV PIP_DISABLE_PIP_VERSION_CHECK on
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        libexpat1 libmaxminddb-dev \
+        libmaxminddb-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /usr/src/reload
@@ -36,4 +36,4 @@ EXPOSE 8000
 USER reload
 
 ENTRYPOINT ["/usr/src/reload/docker-entrypoint.sh"]
-CMD [ "mywsgi", "reload_app.wsgi:application", "0.0.0.0:8000" ]
+CMD [ "granian", "--interface", "wsgi", "--host", "0.0.0.0", "--port", "8000", "reload_app.wsgi:application" ]
