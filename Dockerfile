@@ -1,39 +1,25 @@
-FROM python:3.13-slim-trixie
+FROM us-docker.pkg.dev/sentryio/dhi/python:3.13-debian13-dev AS build
 
-RUN groupadd -r reload && useradd -r -g reload reload
+ENV PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on
 
-ENV PIP_NO_CACHE_DIR off
-ENV PIP_DISABLE_PIP_VERSION_CHECK on
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        libmaxminddb-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /usr/src/reload
 WORKDIR /usr/src/reload
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY requirements.txt /usr/src/reload
 
-RUN set -ex \
-    \
-    && buildDeps=' \
-        gcc \
-        libc6-dev \
-    ' \
-    && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-    \
-    && pip install --no-cache-dir -r requirements.txt \
-    \
-    && apt-get purge -y --auto-remove $buildDeps
+FROM us-docker.pkg.dev/sentryio/dhi/python:3.13-debian13
+
+# Python packages installed in the build stage
+COPY --from=build /opt/python/lib/python3.13/site-packages /opt/python/lib/python3.13/site-packages
+COPY --from=build /opt/python/bin/granian /opt/python/bin/granian
 
 COPY reload_app /usr/src/reload/reload_app
-COPY docker-entrypoint.sh /usr/src/reload
 
-RUN chown -R reload:reload /usr/src/reload
+WORKDIR /usr/src/reload
 
 EXPOSE 8000
 
-USER reload
+USER nonroot
 
-ENTRYPOINT ["/usr/src/reload/docker-entrypoint.sh"]
-CMD [ "granian", "--interface", "wsgi", "--host", "0.0.0.0", "--port", "8000", "reload_app.wsgi:application" ]
+CMD ["/opt/python/bin/granian", "--interface", "wsgi", "--host", "0.0.0.0", "--port", "8000", "reload_app.wsgi:application"]
