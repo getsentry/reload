@@ -3,7 +3,7 @@
 set -e
 
 if [ "${1:0:1}" = '-' ]; then
-    set -- mywsgi "$@"
+    set -- granian "$@"
 fi
 
 # Write credentials JSON to disk for google.auth to pick it up
