@@ -10,6 +10,8 @@ jobs:
   test:
     name: lint and test
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
