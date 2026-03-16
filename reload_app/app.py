@@ -218,7 +218,7 @@ class App(Router):
         if metric_name not in VALID_METRICS:
             return f"{metric_name}: bad request check if valid metric name"
 
-        (metric_type, valid_tags) = VALID_METRICS[metric_name]
+        metric_type, valid_tags = VALID_METRICS[metric_name]
 
         # validate tags
         for tag in tags.keys():
