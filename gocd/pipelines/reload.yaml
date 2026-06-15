@@ -24,16 +24,17 @@ pipelines:
                       type: manual
                   jobs:
                       checks:
+                          environment_variables:
+                              # Required for checkruns.
+                              GITHUB_TOKEN: "{{SECRET:[devinfra-github][token]}}"
                           timeout: 1200
                           elastic_profile_id: reload
                           tasks:
                               - script: |
-                                    checks-googlecloud-check-cloudbuild \
-                                    sentryio \
-                                    reload \
-                                    build-reload-image \
+                                    checks-githubactions-checkruns \
+                                    getsentry/reload \
                                     ${GO_REVISION_RELOAD_REPO} \
-                                    master
+                                    "Build and push production image"
             - deploy:
                   jobs:
                       deploy:
