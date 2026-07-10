@@ -196,6 +196,10 @@ class App(Router):
                 "bad request no user_id or organization_id", status=400
             )
 
+        # event_name is required to build the event type
+        if "event_name" not in data:
+            return error_response("bad request missing event_name\n", status=400)
+
         # blindly pass fields from the API to the event
         clean_data.update(data)
 
