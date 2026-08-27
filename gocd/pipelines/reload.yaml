@@ -32,7 +32,7 @@ pipelines:
                           elastic_profile_id: reload
                           tasks:
                               - script: |
-                                    checks-githubactions-checkruns \
+                                    checks-githubactions-checkruns2 \
                                     getsentry/reload \
                                     ${GO_REVISION_RELOAD_REPO} \
                                     "Build and push production image"
