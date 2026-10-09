@@ -5,9 +5,6 @@ format_version: 10
 pipelines:
     deploy-reload:
         environment_variables:
-            # k8s-deploy dispatches GitHub workflows using these App credentials.
-            GITHUB_APP_ID: "{{SECRET:[devinfra-github][app_id]}}"
-            GITHUB_APP_PRIVATE_KEY: "{{SECRET:[devinfra-github][private_key]}}"
             GCP_PROJECT: internal-sentry
             GKE_CLUSTER: zdpwkxst
             GKE_REGION: us-central1
@@ -41,6 +38,10 @@ pipelines:
             - deploy:
                   jobs:
                       deploy:
+                          environment_variables:
+                              # k8s-deploy dispatches GitHub workflows using these App credentials.
+                              GITHUB_APP_ID: "{{SECRET:[devinfra-github][app_id]}}"
+                              GITHUB_APP_PRIVATE_KEY: "{{SECRET:[devinfra-github][private_key]}}"
                           timeout: 1200
                           elastic_profile_id: reload
                           tasks:
