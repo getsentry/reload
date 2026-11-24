@@ -9,6 +9,7 @@ from datetime import datetime
 from geoip2.errors import AddressNotFoundError
 from google.cloud import pubsub_v1
 from json import load, dumps
+from sentry_sdk.integrations.logging import LoggingIntegration
 from werkzeug.wrappers import Response
 from ua_parser import user_agent_parser
 from uuid import uuid1
@@ -20,7 +21,29 @@ from .worker import BigQueryWorker
 from .utils import format_datetime, ip_from_request
 from .geo import geo_by_addr
 
-sentry_sdk.init()
+_PII_TERMS = ["forwarded", "-ip", "remote-", "via", "-user"]
+
+sentry_sdk.init(
+    # SDK 3.x no longer auto-enables logging. Keep the 2.x error events and
+    # breadcrumbs, without sending Sentry logs.
+    integrations=[LoggingIntegration(level=None, event_level=logging.ERROR)],
+    # SDK 3.x attaches stack traces to messages by default, which would regroup issues.
+    attach_stacktrace=False,
+    # SDK 3.x collects more by default. This matches 2.x with send_default_pii off.
+    data_collection={
+        "user_info": False,
+        "http_bodies": ["incoming_request"],
+        "graphql": {"document": False, "variables": False},
+        "gen_ai": {"inputs": False, "outputs": False},
+        "mcp": {"inputs": False, "outputs": False},
+        "database_query_data": False,
+        "queues": False,
+        "http_headers": {"request": {"mode": "denylist", "terms": _PII_TERMS}},
+        "cookies": {"mode": "denylist", "terms": _PII_TERMS},
+        "url_query_params": {"mode": "denylist", "terms": _PII_TERMS},
+        "stack_frame_variables": {"mode": "denylist"},
+    },
+)
 
 logger = logging.getLogger(__name__)
 
